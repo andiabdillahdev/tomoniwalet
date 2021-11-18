@@ -102,16 +102,6 @@
                 });
             }
 
-            // $('#tb_general_persediaan').DataTable().row.add([
-            //      data.id,
-            //      data.nama,
-            //      `<input type="number" class="form-control form-control-sm" value="0">`,
-            //      `<input type="text" class="form-control form-control-sm" placeholder="Masukkan Satuan">`,
-            //      `<input type="text" class="form-control form-control-sm currency_format harga" value="0">`,
-            //      `<input type="text" class="form-control form-control-sm currency_format" readonly>`,
-            //      `<i class="ti-trash delete-table"></i>`
-            //  ]).draw(); 
-
         })
     </script>
  @endpush

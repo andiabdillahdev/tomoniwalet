@@ -53,7 +53,7 @@
               </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
-                                    </form>
+              </form>
             </div>
           </li>
           
@@ -128,6 +128,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ route('owner.retail_penjualan') }}">
+              <i class="icon-paper menu-icon"></i>
+              <span class="menu-title">Penjualan Retail</span>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#transaksi" aria-expanded="false" aria-controls="transaksi">
             <i class="icon-layout menu-icon"></i>
               <span class="menu-title">Persediaan</span>
@@ -136,10 +142,10 @@
             <div class="collapse" id="transaksi">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.pesanan_pembelian.index') }}">Pesanan Pembelian</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Pengiriman Pesanan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.pengiriman.index') }}">Pengiriman Pesanan</a></li>
                 <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.barangmasuk.index') }}">Barang Masuk</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Barang Keluar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Stok</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.barangkeluar.index') }}">Barang Keluar</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.stok.index') }}">Stok</a></li>
               </ul>
             </div>
           </li>

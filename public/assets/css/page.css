@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+.tm_button{
+    font-size: 16px;
+    padding: 10px 47px;
+    margin-bottom: 0;
+    font-family: 'Mulish', sans-serif;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 8px;
+}
+
+.tm_button:hover{
+    color: #FFFFFF;
+}
+
+.tm_primary{
+    background: #23A7E0;
+    color: #FFFFFF;
+}
+
+#header{
+    background: red;
+}
+
+#header .logo{
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-menu > ul{
+    display: flex;
+}
+
+.nav-menu > ul > li{
+    position: relative;
+    white-space : nowrap;
+    padding: 10px 0 10px 22px;
+}
+
+.nav-menu a{
+    display: block;
+    position: relative;
+    transition: 0.3s;
+    font-size: 16px;
+    font-family: 'Mulish', sans-serif;
+    font-weight: bold;
+    color: #23A7E0;
+    text-decoration:none;
+    padding: 0 4px;
+}

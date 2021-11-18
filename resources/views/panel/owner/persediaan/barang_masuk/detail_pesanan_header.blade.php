@@ -13,5 +13,5 @@
 </table>
 <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="rowaddcontrolbarang('owner/pesanan-pembelian/getAll/getDetail')">Send message</button>
+        <button type="button" class="btn btn-primary" onclick="rowaddcontrolbarang('owner/pesanan-pembelian/getAll/getDetail','barang_masuk')">Send message</button>
 </div>

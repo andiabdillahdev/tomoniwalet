@@ -1,20 +1,21 @@
 $(function(){
     let host = $('meta[name="host_url"]').attr("content");
     overlayForm = (url, title,other) => {
-     
+     console.log(other);
         $.ajax({
             url: host + "/" + url,
             dataType: "html",
             success: function(response) {
                 if (other != undefined) {
-                    $("#exampleModalLabel").html(title);
-                    $("#modal-body").html(response);
-                    $("#exampleModal").modal('show');
-                } else {
                     $("#modalTabelTitle").html(title);
                     $("#modal-body-table").html(response);
                     $("#exampleModalTable").modal('show');
                     dataTableDetailModal('owner/produk/getall','tb_detail_persediaan','produk');
+              
+                } else {
+                    $("#exampleModalLabel").html(title);
+                    $("#modal-body").html(response);
+                    $("#exampleModal").modal('show');
                 }
                     
             },
@@ -25,26 +26,45 @@ $(function(){
 
     };
 
-    overlayTransaksiVendor = (elementsupplier,url,title) =>{
-        let supplier = $(`#${elementsupplier}`).val();
-        if(supplier !== ''){
+    overlayTransaksiVendor = (elementsupplier,url,title,mode) =>{
+        console.log(url);
+        if (mode != 'barang_keluar') {
+            let supplier = $(`#${elementsupplier}`).val();
+            if(supplier !== ''){
+                $.ajax({
+                    url: host + "/" + url,
+                    dataType: "html",
+                    success: function(response) {
+                    
+                        $("#modalTabelTitle").html(title);
+                        $("#modal-body-table").html(response);
+                        $("#exampleModalTable").modal('show');
+                        dataTableDetailModal(`owner/pesanan-pembelian/getAll/bySupplier/${supplier}`,'tb_detail_persanan_barang','pesanan_pembelian');
+                            
+                    },
+                    error: function() {
+                        notif("warning", 'Gagal');
+                    }
+                });
+            }else{
+                notif("warning", 'Supplier / Pemasok Belum di pilih');
+            }
+        }else{
             $.ajax({
                 url: host + "/" + url,
                 dataType: "html",
                 success: function(response) {
-                   
+                
                     $("#modalTabelTitle").html(title);
                     $("#modal-body-table").html(response);
                     $("#exampleModalTable").modal('show');
-                    dataTableDetailModal(`owner/pesanan-pembelian/getAll/bySupplier/${supplier}`,'tb_detail_persanan_barang','transaksi');
+                    dataTableDetailModal(`owner/pengiriman-pesanan/belum-selesai`,'tb_detail_persanan_barang','pengiriman_pesanan');
                         
                 },
                 error: function() {
                     notif("warning", 'Gagal');
                 }
             });
-        }else{
-            notif("warning", 'Supplier / Pemasok Belum di pilih');
         }
 
     }

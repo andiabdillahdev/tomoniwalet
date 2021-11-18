@@ -88,13 +88,56 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
       // Barang Masuk 
       Route::get('barang-masuk', 'module\persediaan\barangmasukController@index')->name('owner.persediaan.barangmasuk.index');
       Route::get('barang-masuk/create', 'module\persediaan\barangmasukController@create')->name('owner.persediaan.barangmasuk.create');
+      Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
       Route::post('barang-masuk/store', 'module\persediaan\barangmasukController@store')->name('owner.persediaan.barangmasuk.store');
+      Route::post('barang-masuk/update/{params}', 'module\persediaan\barangmasukController@update')->name('owner.persediaan.barangmasuk.update');
       Route::get('barang-masuk/getAll', 'module\persediaan\barangmasukController@getAll')->name('owner.persediaan.barangmasuk.getAll');
       Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
       Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
       Route::get('barang-masuk/bysupplier', 'module\persediaan\barangmasukController@bysupplier')->name('owner.persediaan.barangmasuk.bysupplier');
+
+    //   Stok
+    Route::get('stok', 'module\persediaan\stokController@index')->name('owner.persediaan.stok.index');
+    Route::get('stok/getAll', 'module\persediaan\stokController@getAll')->name('owner.persediaan.stok.getAll');
+
+    // Pengiriman Pesanan
+    Route::get('pengiriman-pesanan', 'module\persediaan\pengirimanPesananController@index')->name('owner.persediaan.pengiriman.index');
+    Route::get('pengiriman-pesanan/getAll', 'module\persediaan\pengirimanPesananController@getAll')->name('owner.persediaan.pengiriman.getAll');
+    Route::get('pengiriman-pesanan/create', 'module\persediaan\pengirimanPesananController@create')->name('owner.persediaan.pengiriman.create');
+    Route::post('pengiriman-pesanan/store', 'module\persediaan\pengirimanPesananController@store')->name('owner.persediaan.pengiriman.store');
+    Route::get('pengiriman-pesanan/edit/{params}', 'module\persediaan\pengirimanPesananController@edit')->name('owner.persediaan.pengiriman.edit');
+    Route::post('pengiriman-pesanan/update/{params}', 'module\persediaan\pengirimanPesananController@update')->name('owner.persediaan.pengiriman.update');
+    Route::get('pengiriman-pesanan/belum-selesai', 'module\persediaan\pengirimanPesananController@belum_selesai')->name('owner.persediaan.pengiriman.belum_selesai');
+    Route::get('pengiriman-pesanan/detail-pesanan', 'module\persediaan\pengirimanPesananController@detail_pesanan')->name('owner.persediaan.pengiriman.detail_pesanan');
+    Route::post('pengiriman-pesanan/getDetail', 'module\persediaan\pengirimanPesananController@getDetail')->name('owner.persediaan.pengiriman.getDetail');
+    Route::delete('pengiriman-pesanan/destroy/{params}', 'module\persediaan\pengirimanPesananController@destroy')->name('owner.persediaan.pengiriman.destroy');
+
+    // Barang keluar
+    Route::get('barang-keluar', 'module\persediaan\barangkeluarController@index')->name('owner.persediaan.barangkeluar.index');
+    Route::get('barang-keluar/create', 'module\persediaan\barangkeluarController@create')->name('owner.persediaan.barangkeluar.create');
+    Route::get('barang-keluar/detailPengiriman', 'module\persediaan\barangkeluarController@detailPengiriman')->name('owner.persediaan.barangmasuk.detailPengiriman');
+    Route::get('barang-keluar/edit/{params}', 'module\persediaan\barangkeluarController@edit')->name('owner.persediaan.barangkeluar.edit');
+    Route::post('barang-keluar/store', 'module\persediaan\barangkeluarController@store')->name('owner.persediaan.barangkeluar.store');
+    Route::post('barang-keluar/update/{params}', 'module\persediaan\barangkeluarController@update')->name('owner.persediaan.barangkeluar.update');
+    Route::get('barang-keluar/getAll', 'module\persediaan\barangkeluarController@getAll')->name('owner.persediaan.barangkeluar.getAll');
+
+    // Retail Penjualan
+    Route::get('retail-penjualan', 'module\retail_penjualan\retailPenjualanController@index')->name('owner.retail_penjualan');
+    Route::get('retail-penjualan/getAll', 'module\retail_penjualan\retailPenjualanController@getAll')->name('owner.retail_penjualan.getAll');
+    Route::get('retail-penjualan/detail_transaksi/{params}', 'module\retail_penjualan\retailPenjualanController@detail_transaksi')->name('owner.retail_penjualan.detail_transaksi');
+
+    // Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
+    // Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
+
+
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {
     Route::get('dashboard', 'staffController@index')->name('staff.dashboard');
+    Route::get('kasir', 'staffController@kasir')->name('staff.kasir');
+    Route::get('kasir/getByIDProduk/{params}', 'staffController@getByIDProduk')->name('staff.getByIDProduk');
+    Route::post('kasir/store', 'staffController@store')->name('staff.store');
+    Route::get('kasir/riwayat', 'staffController@riwayat')->name('staff.riwayat');
+    Route::get('kasir/riwayat/getAll', 'staffController@getRiwayat')->name('staff.getRiwayat');
+    Route::get('kasir/riwayat/detail/{params}', 'staffController@getRiwayatdetail')->name('staff.getRiwayatdetail');
 });

@@ -1,88 +1,54 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!doctype html>
+<html lang="en">
 
-        <title>Tomoniwalet</title>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('vendors/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/page.css') }}">
+    <title>Tomoniwalet</title>
+</head>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <img src="{{ asset('assets/images/BOS.jpg') }}" style="width: 50%" alt="">
-                    </div>
-                </div>
-                <h3>Tomoniwalet</h3>
+<body>
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <div class="logo">
+                <img src="{{ asset('assets/img/logo_tm.png') }}" alt="" srcset="">
             </div>
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class="active">
+                        <a href="#">BERANDA</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">TENTANG KAMI</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">BELANJA</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">KONTAK</a>
+                    </li>
+                </ul>
+            </nav>
+            <a href="#" class="tm_button tm_primary">Masuk</a>
         </div>
-    </body>
+    </header>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="{{ asset('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+</body>
+
 </html>

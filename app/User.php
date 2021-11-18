@@ -37,4 +37,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function retail_penjualan_header(){
+        return $this->hasMany('App\retail_penjualan_header', 'id_staff', 'id');
+    }
 }

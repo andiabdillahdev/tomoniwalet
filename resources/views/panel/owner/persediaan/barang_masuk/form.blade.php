@@ -31,7 +31,7 @@
                         </div> 
                         
                         <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('supplier_','owner/barang-masuk/bysupplier','Pilih Pesanan Pembelian')">Tambah Produk/Barang</button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('supplier_','owner/barang-masuk/bysupplier','Pilih Pesanan Pembelian','barang_masuk')">Tambah Produk/Barang</button>
                             </div>
 
 

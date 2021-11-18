@@ -284,9 +284,9 @@ $(function () {
                 targets : 4,
                 render: function (data, type, row) {
                     console.log(data);
-                    if (data === 'Selesai') {
-                        return '<p class="font-weight-bold text-primary>Valid</p>';
-                    }
+                    // if (data === 'Selesai') {
+                    //     return '<p class="font-weight-bold text-primary>Valid</p>';
+                    // }
 
                     // if(data == 'Belum Selesai'){
                     //     return '<p class="font-weight-bold text-primary">Valid</p>';
@@ -313,6 +313,73 @@ $(function () {
                 sClass: "text-center",
                 render: function (data) {
                     return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/pesanan-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pesanan-pembelian/destroy/${data.id}','tb_pesanan_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
+                },
+            },
+        ],
+    });
+
+    tb_pengiriman_pesanan = $("#tb_pengiriman_pesanan").DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/pengiriman-pesanan/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "kode" },
+            { data: "tanggal" },
+            { data: "pelanggan" },
+            { data : "lokasi_tujuan" },
+            { data: null },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets : 5,
+                render: function (data, type, row) {
+                    let total = 0;
+                    $.each(data.pengiriman_pesanan_detail, function (indexInArray, valueOfElement) { 
+                         total += valueOfElement.total;
+                    });
+                    return total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                }
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                width: "250px",
+                sClass: "text-center",
+                render: function (data) {
+                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/pengiriman-pesanan/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pengiriman-pesanan/destroy/${data.id}','tb_pengiriman_pesanan')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
@@ -373,6 +440,115 @@ $(function () {
         ],
     });
 
+    tb_barang_keluar = $("#tb_barang_keluar").DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/barang-keluar/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "kode" },
+            { data: "tanggal" },
+            { data: "keterangan" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                width: "250px",
+                sClass: "text-center",
+                render: function (data) {
+                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/barang-keluar/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-keluar/destroy/${data.id}','tb_barang_keluar')"><i class="fa fa-trash"></i> Hapus</button>`;
+                },
+            },
+        ],
+    });
+
+    tb_stok = $("#tb_stok").DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/stok/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "produk" },
+            { data: "jumlah" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                width: "250px",
+                sClass: "text-center",
+                render: function (data) {
+                    return `<a role="button"  href="${host}/owner/barang-masuk/edit/${data.id}" class="btn btn-info mr-2" ><i class="fa fa-edit"></i> Riwayat</a>`;
+                },
+            },
+        ],
+    });
+
 
     tb_general_persediaan = $('#tb_general_persediaan').DataTable({
         dom: 't',
@@ -401,6 +577,157 @@ $(function () {
         ],
     });
 
+    tb_kasir = $('#tb_kasir').DataTable({
+        dom: 't',
+        pageLength: -1,
+        responsive: true,
+        colReorder: !0,
+        stateSave: !1,
+        lengthMenu: [
+          [10, 20, 50, 100],
+          [10, 20, 50, 100]
+        ],
+        language: {
+          "lengthMenu": " _MENU_ ",
+          "zeroRecords": "Belum ada data",
+        },
+        order: [],
+        columnDefs: [{
+            "defaultContent": "-",
+            targets: "_all",
+          },
+          {
+            targets: 0,
+            className: "text-center",
+            visible: false
+          },
+        ],
+    });
+
+    tb_riwayat_kasir = $('#tb_riwayat_kasir').DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/staff/kasir/riwayat/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "kode" },
+            { data: "staff" },
+            { data: "tanggal" },
+            { data: "total" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: 4,
+                render: function (data) {
+                    return 'Rp. '+data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                },
+                
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                sClass: "text-center",
+                render: function (data) {
+                    return `<a onclick="overlayForm('staff/kasir/riwayat/detail/${data.id}','Detail Transaksi Retail')" class="btn btn-info mr-2" ><i class="fa fa-edit"></i> Lihat Transaksi</a>`;
+                },
+            },
+        ],
+    });
+
+    tb_retail_penjualan_owner = $('#tb_retail_penjualan_owner').DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/retail-penjualan/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "staff" },
+            { data: "kode" },
+            { data: "tanggal" },
+            { data: "total" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: 4,
+                render: function (data) {
+                    return 'Rp. '+data.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+                },
+                
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                sClass: "text-center",
+                render: function (data) {
+                    return `<a href="${host}/owner/retail-penjualan/detail_transaksi/${data.id}" class="badge badge-primary">Lihat Transaksi</a>`;
+                },
+            },
+        ],
+    });
+
     dataTableDetailModal = (url,table,type) =>{
         let columns = {};
         if (type == 'produk') {
@@ -412,12 +739,21 @@ $(function () {
                     { data: "nama" },
                 ],   
             }
-        } else if(type == 'transaksi') {
+        } else if(type == 'pesanan_pembelian') {
             columns = {
                 data: [
                     { data: "id" },
                     { data: "kode" },
                     { data: "supplier" },
+                    { data: "tanggal" },
+                ],   
+            }
+        } else if(type == 'pengiriman_pesanan'){
+            columns = {
+                data: [
+                    { data: "id" },
+                    { data: "kode" },
+                    { data: "pelanggan" },
                     { data: "tanggal" },
                 ],   
             }
@@ -488,8 +824,8 @@ $(function () {
  
      }
 
-     rowaddcontrolbarang = (url) =>{
-       
+     rowaddcontrolbarang = (url,type) =>{
+        console.log(url);
         let data = $('#tb_detail_persanan_barang').DataTable().row(".selected").data();
         console.log(data);
        
@@ -507,9 +843,10 @@ $(function () {
                     'id_header' : data.id
                 },
                 success: function(res) {
+                    console.log(res);
                     $('#id_header_transaksi').val(res.header_id);
                     $('#tb_general_persediaan').DataTable().clear().draw();
-                    $.each(res.detail, function (indexInArray, valueOfElement) { 
+                    $.each(res.detail, function (indexInArray, valueOfElement) {
                         $('#tb_general_persediaan').DataTable().row.add([
                             valueOfElement.id,
                             valueOfElement.produk['nama'],
@@ -519,9 +856,12 @@ $(function () {
                             valueOfElement.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
                         ]).draw(); 
                         notif("success", 'Produk/Barang di Tambahkan');
+                        if (type == 'barang_keluar') {
+                            $('#pelanggan').val(res.pelanggan);
+                        }
                         currency('currency_format');
                     });
-                   
+                    
                 },
                 error: function(xhr) {
                     notif("warning", 'Gagal');
