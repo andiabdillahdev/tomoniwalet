@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'homepageController@index')->name('homepage.index');
+Route::get('/tentang', 'homepageController@tentang')->name('homepage.tentang');
+Route::get('/belanja/list', 'homepageController@belanja_list')->name('homepage.belanja_list');
 
 
 

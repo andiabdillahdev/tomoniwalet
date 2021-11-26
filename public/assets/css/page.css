@@ -1,7 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Mulish&display=swap');
+body{
+    margin: 0;
+    padding: 0;
+}
 .tm_button{
-    font-size: 16px;
-    padding: 10px 47px;
+    font-size: 15px;
+    padding: 10px 35px;
     margin-bottom: 0;
     font-family: 'Mulish', sans-serif;
     font-weight: bold;
@@ -32,7 +36,9 @@
 }
 
 #header{
-    background: red;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    background: #FFFFFF;
+    padding: 16px 0px;
 }
 
 #header .logo{
@@ -41,7 +47,7 @@
 }
 
 .nav-menu ul{
-    margin: 0;
+    margin: 0 94px 0px 0px;
     padding: 0;
     list-style: none;
 }
@@ -53,7 +59,7 @@
 .nav-menu > ul > li{
     position: relative;
     white-space : nowrap;
-    padding: 10px 0 10px 22px;
+    padding: 10px 0 10px 64px;
 }
 
 .nav-menu a{
@@ -63,7 +69,475 @@
     font-size: 16px;
     font-family: 'Mulish', sans-serif;
     font-weight: bold;
-    color: #23A7E0;
+    color: #333333;
     text-decoration:none;
     padding: 0 4px;
 }
+
+
+.second_nav{
+    width: 100%;
+    position: relative;
+    left: 55px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-search{
+    border: 1px solid #798A96;
+    box-sizing: border-box;
+    border-radius: 24px;
+    font-family: 'Mulish', sans-serif;
+    font-size:12px;
+    padding: 8px 17px;
+}
+
+.form-search:focus{
+    border: 1px solid rgba(35, 167, 224, 1);
+    box-shadow: 0 0 5px rgba(35, 167, 224, 1);   
+    outline: none;
+}
+
+.form-select-sub-header{
+    border: 1px solid #798A96;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 12px;
+    padding: 4px 11px;
+    width: 9rem;
+
+}
+
+.form-select-sub-header:focus{
+    border: 1px solid rgba(35, 167, 224, 1);
+    box-shadow: 0 0 5px rgba(35, 167, 224, 1);   
+    outline: none;
+}
+
+.icon-search{
+    position: absolute;
+    bottom: 12px;
+    right: 192px;
+}
+
+#form-search{
+    margin-top: 4px;
+}
+
+.cart_icon{
+    margin-top: 8px;
+}
+
+.wrapper-content{
+ margin-top: 6rem;   
+}
+
+#hero-section{
+    height: 740px;
+    width: 100%;
+    background: #E7F5FB;
+}
+
+.banner-hero{
+    padding-top: 12rem;
+}
+
+#hero-section h1{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 64px;
+line-height: 80px;
+
+/* Primary */
+
+color: #23A7E0;
+}
+
+#hero-section p{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 26px;
+/* identical to box height */
+
+
+color: #333333;
+}
+
+.button{
+    box-sizing: border-box;
+    padding: 10px 24px;
+    border-radius: 8px;
+}
+
+.button-sm{
+    box-sizing: border-box;
+    padding: 5px 12px;
+    border-radius: 8px;
+}
+
+.button-primary{
+    background : #23A7E0;
+    color: #FCFCFC;
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
+    
+    
+    color: #FCFCFC;
+}
+
+.button-light{
+    background: #FFFFFF;
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    /* identical to box height */
+    
+    
+    color: #798A96;
+}
+
+#hero-section img{
+    margin-top: 8rem;
+    width:100%;
+}
+
+#hero-section svg{
+    position: relative;
+    bottom: 2px;
+    right: 5px;
+}
+
+.card-kategori{
+    border-radius: 24px;
+    height: auto;
+    padding: 30px 20px 30px 20px;
+    width: 100%;
+}
+
+.bg-blue-old{
+    background: #23A7E0;
+}
+
+.bg-blue-kid{
+    background: #56CCF2;
+}
+
+#kategori_area{
+    position: relative;
+    bottom: 10rem;
+}
+
+.custom-position{
+    position: absolute;
+}
+
+.card-kategori h1{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: 900;
+font-size: 40px;
+line-height: 50px;
+
+color: rgba(255, 255, 255, 0.8);
+position: relative;
+    bottom: 9rem;
+}
+
+.custom-position-button{
+    position: relative;
+    bottom: 8rem;
+}
+
+.section-first{
+    margin-bottom: 5rem;
+}
+
+.section-list-other{
+    margin-top: 10rem;   
+    margin-bottom: 6rem;
+}
+
+.section-list-belanja{
+    margin-top: 3rem;   
+    margin-bottom: 6rem;
+}    
+
+.section-first h1{
+    /* Title */
+
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 40px;
+
+    /* Tertiary */
+
+    color: #333333;
+}
+
+.section-first h3{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 4px;
+    
+    /* Tertiary */
+    
+    color: #333333;
+}
+
+.card-tml{
+    background: #FFFFFF;
+    box-shadow: 0px 12.0455px 37.5967px rgba(0, 0, 0, 0.0551985), 0px 5.84789px 18.2525px rgba(0, 0, 0, 0.0445033), 0px 2.86674px 8.94771px rgba(0, 0, 0, 0.0354967), 0px 1.13351px 3.53794px rgba(0, 0, 0, 0.0248015);
+    border-radius: 24px;
+    padding: 26px 20px;
+}
+
+.header_content{
+    margin-bottom: 4rem;
+}
+
+.content-card span{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    color: #23A7E0;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.content-card h1{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    
+    color: #333333;
+    text-align: center;
+}
+
+.content-card p{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+text-align: center;
+line-height: 16px;
+
+color: #333333;
+}
+
+.readmore{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height */
+
+
+/* Primary */
+
+color: #23A7E0;
+}
+
+.card-area{
+margin-bottom: 3rem;    
+}
+
+#tentang h1{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 64px;
+line-height: 80px;
+
+/* Primary */
+
+color: #23A7E0;
+}
+
+#tentang p{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 26px;
+/* or 32px */
+
+text-align: justify;
+
+color: #000000;
+}
+
+.sub-header{
+    background: #E7F5FB;
+    padding-top: 17px;
+    padding-bottom: 14px;
+}
+
+.sub-header-item-1 span{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height */
+
+
+color: #23A7E0;
+}
+
+footer{
+    background: #E7F5FB;
+    padding: 30px 10px;
+}
+
+footer h1{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+
+    /* Tertiary */
+
+    color: #333333;
+}
+
+footer ul{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height */
+
+
+/* Tertiary */
+
+color: #333333;
+list-style: none;
+position: relative;
+right: 2rem;
+}
+
+footer ul li{
+    margin-top: 20px;
+}
+
+footer p{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 20px;
+/* identical to box height */
+
+
+/* Tertiary */
+
+color: #333333;
+text-align: center;
+}
+
+.follow-medsos{
+    position: relative;
+    right: 30px;
+    margin-top: 20px;
+}
+
+.follow-medsos svg{
+    margin-left: 2rem;
+}
+
+.title-produk-list{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 40px;
+
+/* Secondary */
+
+color: #798A96;
+margin-bottom: 1rem;
+}
+
+.title-produk-list span{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 40px;
+    color: #23A7E0;
+}
+@media screen and (max-width: 768px){
+
+}
+
+@media screen and (max-width: 576px){
+
+    #header{
+        height: 8rem;
+    }
+    
+
+    .second_nav{
+        width: 100%;
+        position: relative;
+        left: 0px;
+        display: block;
+    }
+
+    #form-search {   
+        position: absolute;
+        top: 38px;
+        right: 72px;
+    }
+
+    #header .logo img{
+        width: 92%;
+    }
+
+    .cart_icon{
+        position: absolute;
+        left: 15rem;
+        top: 38px;
+    }
+
+    .tm_button{
+        padding: 5px 18px;
+        font-size: 12px;
+    }
+    
+    #sign_in{
+        position: relative;
+        left: 12rem;
+    }
+    .icon-search {
+        bottom: 8px;
+        right: 12px;
+    }
+
+    .nav-menu > ul{
+        display: block;
+    }
+}
+
+
+
