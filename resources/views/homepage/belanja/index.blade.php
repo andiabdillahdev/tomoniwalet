@@ -86,7 +86,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <div class="readmore">Tambah ke Cart Lebih Banyak <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    <div class="readmore">Read More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M12.172 8.99995L5.92552e-07 8.99995L7.67397e-07 6.99995L12.172 6.99995L6.808 1.63595L8.222 0.221954L16 7.99995L8.222 15.778L6.808 14.364L12.172 8.99995Z"

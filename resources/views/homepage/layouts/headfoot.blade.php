@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/solid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/brands.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
     <title>Tomoniwalet</title>
 </head>
 
@@ -148,9 +149,10 @@
     </footer>
 
     <!-- Optional JavaScript; choose one of the two! -->
-
+    <script src="{{ asset('vendors/jquery/jquery-3.6.0.min.js') }}"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="{{ asset('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendors/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

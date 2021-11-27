@@ -246,6 +246,15 @@
             </div>
         </section>
 
+        <!-- Testimoni -->
+
+        <section class="section-first">
+            <div class="header_content text-center">
+                <h1>Testimonial</h1>
+                <h3>Lihat apa yang mereka katakan tentang kami</h3>
+            </div>
+        </section>
+
     </div>
     @endsection
  
