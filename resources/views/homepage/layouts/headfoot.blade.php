@@ -5,14 +5,16 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="host_url" content="{{ url('/') }}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/page.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/solid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/brands.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendors/OwlCarousel/dist/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/OwlCarousel/dist/assets/owl.carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/toastr/toastr.min.css') }}">
     <title>Tomoniwalet</title>
 </head>
 
@@ -37,7 +39,7 @@
                             <a href="{{ route('homepage.belanja_list') }}">Belanja</a>
                         </li>
                         <li>
-                            <a href="#">Kontak</a>
+                            <a href="{{ route('homepage.kontak') }}">Kontak</a>
                         </li>
                     </ul>
                 </nav>
@@ -63,7 +65,7 @@
                     <img src="{{ asset('assets/img/keranjang.png') }}" alt="" srcset="">
                 </div>
                 <div id="sign_in">
-                    <a href="#" class="tm_button tm_primary">Masuk</a>
+                    <a href="{{ route('homepage.page_login') }}" class="tm_button tm_primary">Masuk</a>
                 </div>
                 <!-- </div> -->
             </div>
@@ -153,6 +155,9 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="{{ asset('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('vendors/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/page.js') }}"></script>
+    @stack('page_script')
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

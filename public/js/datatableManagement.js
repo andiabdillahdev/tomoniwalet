@@ -54,6 +54,68 @@ $(function () {
         ],
     });
 
+    tb_testi = $("#tb_testi").DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/pengaturan-website/getAllTestimonial",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "image" },
+            { data: "nama" },
+            { data: "text" },
+            { data: "status" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: 1,
+                render: function (data) {
+                    return `<img src="${host}/uploads/testimonial/${data}" alt="" srcset="" style="width:100px;height:100px;">`;     
+                }
+            },  
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                width: "250px",
+                sClass: "text-center",
+                render: function (data) {
+                    return `<button class="btn btn-warning mr-2" onclick="overlayForm('owner/pengaturan-website/edit-testimoni/${data.id}','Update Data Supplier')" ><i class="fa fa-edit"></i> Edit</button><button class="btn btn-danger mr-2" onclick="delete_data('owner/pengaturan-website/delete-testimoni/${data.id}','tb_testi')"><i class="fa fa-trash"></i> Hapus</button>`;
+                },
+            },
+        ],
+    });
+
     tb_supplier = $("#tb_supplier").DataTable({
         bLengthChange: true,
         bFilter: true,

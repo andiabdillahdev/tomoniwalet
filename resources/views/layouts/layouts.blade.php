@@ -109,12 +109,13 @@
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#landing-page" aria-expanded="false" aria-controls="landing-page">
             <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Landing Page</span>
+              <span class="menu-title">Pengaturan Website</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="landing-page">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Slider</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.pengaturan_website.jumbotron') }}">Jumbotron</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.pengaturan_website.testimonial') }}">Testimonial</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Tentang</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Media Sosial</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Cara Pemesanan</a></li>

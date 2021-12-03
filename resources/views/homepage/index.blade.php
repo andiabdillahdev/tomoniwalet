@@ -5,9 +5,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7 banner-hero">
-                        <h1>TWEETER AUDAX</h1>
-                        <p>Perlengkapan Terbaik Untuk Usaha Walet Semua <br> Jenis Perlengkapan Walet Tersedia di
-                            Tomoniwalet</p>
+                        <h1></h1>
+                        <p></p>
                         <button class="btn button button-primary"> <svg width="16" height="18" viewBox="0 0 16 18"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -17,7 +16,7 @@
                             Belanja Sekarang</button>
                     </div>
                     <div class="col-lg-5">
-                        <img src="{{ asset('assets/img/img-banner.png') }}" alt="" srcset="">
+                        <img src="{{ asset('assets/img/img-banner.png') }}" id="img-banner-hero">
                     </div>
                 </div>
             </div>
@@ -106,59 +105,8 @@
                 <h3>Produk terbaru minggu ini</h3>
             </div>
             <div class="container">
-                <div class="row card-area">
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Lihat</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Lihat</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Lihat</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Lihat</button>
-                            </div>
-                        </div>
-                    </div>
+                <div id="produk_terbaru" class="row card-area">
+                    
                 </div>
                 <div class="d-flex justify-content-end">
                     <div class="readmore">Lihat Selengkapnya <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -248,13 +196,60 @@
 
         <!-- Testimoni -->
 
-        <section class="section-first">
+        <section id="testimoni" class="section-first">
             <div class="header_content text-center">
                 <h1>Testimonial</h1>
                 <h3>Lihat apa yang mereka katakan tentang kami</h3>
+            </div>
+            <div class="container owl-carousel">
+                <div class="testimonial-content text-center">
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset('assets/img/testi.png') }}" alt="" srcset="">
+                    </div>
+
+                    <h1>Rival Harfah S.kom</h1>
+                    <span>Juragan Walet Makassar</span>
+                    <div class="d-flex justify-content-center">
+                        <div class="hr_line"></div>
+                    </div>
+                    <p>“is simply dummy text of the printing and typesetting industry. Lorem Ipsum “</p>
+                </div>
+                <div class="testimonial-content text-center">
+                    <div class="d-flex justify-content-center">
+                        <img src="{{ asset('assets/img/testi2.png') }}" alt="" srcset="">
+                    </div>
+                    <h1>Andi Abdillah</h1>
+                    <span>Web Developer</span>
+                    <div class="d-flex justify-content-center">
+                        <div class="hr_line"></div>
+                    </div>
+                    <p>“is simply dummy text of the printing and typesetting industry. Lorem Ipsum “</p>
+                </div>
             </div>
         </section>
 
     </div>
     @endsection
- 
+    @push('page_script')
+        <script>
+            $(function() {
+                let owl = $('.owl-carousel');
+                owl.owlCarousel({
+                    items:1,
+                    loop:true,
+                    margin:10,
+                    autoplay:true,
+                    autoplayTimeout:1800,
+                    autoplayHoverPause:true
+                });
+
+                let loadData = new homepage();
+
+                loadData.hero_section();
+                loadData.produk_terlaris();
+                loadData.testimonial();
+
+            })
+           
+        </script>
+    @endpush

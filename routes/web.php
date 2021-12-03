@@ -16,8 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'homepageController@index')->name('homepage.index');
 Route::get('/tentang', 'homepageController@tentang')->name('homepage.tentang');
 Route::get('/belanja/list', 'homepageController@belanja_list')->name('homepage.belanja_list');
+Route::get('/produk/detail/{paramas}', 'homepageController@produk_detail')->name('homepage.produk_detail');
+Route::get('/page-login', 'homepageController@page_login')->name('homepage.page_login');
+Route::get('/page-register', 'homepageController@page_register')->name('homepage.page_register');
+Route::post('/page-login-post', 'homepageController@page_login_post')->name('homepage.page_login_post');
+Route::post('/page-register-post', 'homepageController@page_register_post')->name('homepage.page_register_post');
+Route::get('/kontak', 'homepageController@kontak')->name('homepage.kontak');
 
+// Home page resource
+Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
+Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru')->name('homepage.getProdukTerbaru');
+Route::get('/source/get-testimonial', 'sourcePageController@getTestimonial')->name('homepage.getTestimonial');
 
+// GOOGLE
+Route::get('/auth/google', 'googleController@redirectToProvider')->name('google.auth');
+Route::get('/auth/google/callback', 'googleController@handleGoogleCallback')->name('google.auth.callback');
+// 
 
 Auth::routes();
 
@@ -44,6 +58,22 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::post('kategori/update/{id}', 'module\masterdata\kategoriController@update')->name('owner.masterdata.kategori.update');
     Route::delete('kategori/destroy/{id}', 'module\masterdata\kategoriController@destroy')->name('owner.masterdata.kategori.destroy');
     //
+
+    // Pengaturan Website
+    Route::get('pengaturan-website/jumbotron', 'module\pengaturanWebsiteController@jumbotron')->name('owner.pengaturan_website.jumbotron');
+    Route::post('pengaturan-website/jumbotronStore/{params}', 'module\pengaturanWebsiteController@jumbotronStore')->name('owner.pengaturan_website.jumbotronStore');
+    Route::post('pengaturan-website/hero-kategori', 'module\pengaturanWebsiteController@hero_kategori')->name('owner.pengaturan_website.hero_kategori');
+    
+
+    // Testimonial
+    Route::get('pengaturan-website/testimonial', 'module\pengaturanWebsiteController@testimonial')->name('owner.pengaturan_website.testimonial');   
+    Route::get('pengaturan-website/form_testimonial', 'module\pengaturanWebsiteController@form_testimonial')->name('owner.pengaturan_website.form_testimonial');
+    Route::post('pengaturan-website/post_testimonial', 'module\pengaturanWebsiteController@post_testimonial')->name('owner.pengaturan_website.post_testimonial'); 
+    Route::post('pengaturan-website/update_testimonial/{params}', 'module\pengaturanWebsiteController@update_testimonial')->name('owner.pengaturan_website.update_testimonial');  
+    Route::get('pengaturan-website/getAllTestimonial', 'module\pengaturanWebsiteController@getAllTestimonial')->name('owner.pengaturan_website.getAllTestimonial'); 
+    Route::get('pengaturan-website/edit-testimoni/{params}', 'module\pengaturanWebsiteController@editTestimoni')->name('owner.pengaturan_website.editTestimoni'); 
+    Route::delete('pengaturan-website/delete-testimoni/{params}', 'module\pengaturanWebsiteController@deleteTestimoni')->name('owner.pengaturan_website.deleteTestimoni'); 
+    // 
     
     // Supplier
     Route::get('supplier/getall', 'module\masterdata\supplierController@getAll')->name('owner.masterdata.supplier.getAll');

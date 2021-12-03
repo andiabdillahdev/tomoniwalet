@@ -80,7 +80,10 @@ $(function(){
             type: "POST",
             timeout: 50000,
             url: host + "/" + url,
-            data: $(`#${form}`).serialize(),
+            data: new FormData($(`#${form}`)[0]),
+            contentType: false,
+            cache: false,
+            processData: false,
             success: function(res) {
 
                 if (res.status_code == 200) {
@@ -250,5 +253,7 @@ $(function(){
           allowNegative: true
         });
     }
+
+   
 
 });
