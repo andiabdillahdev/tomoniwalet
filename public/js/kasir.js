@@ -15,16 +15,39 @@ $('#produk_kasir_get').on('change',function () {
                 res.id,
                 res.kode,
                 res.nama,
-                `<input type="number" class="form-control form-control-sm" value="1" data-val="${res.id}">`,
+                `<div class="d-flex">
+                <button class="number_inc" data-ref="plus"><i class="mdi mdi-plus"></i></button><input type="number" class="form-control size-custom-input" value="1" data-val="${res.id}" readonly><button class="number_inc" data-ref="minus"><i class="mdi mdi-minus"></i></button>
+                </div>`,
                 res.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"),
                 `<i class="mdi mdi-delete delete" data-val="${res.id}" style="font-size:22px;color:#ff1414;cursor:pointer;"></i>`
             ]).draw();
+            
 
-            myArray[res.id] = res.harga;
+            let status = '';
+            $.each(myArray, function (indexInArray, valueOfElement) { 
+                console.log(indexInArray);
+                if (res.id == indexInArray) {
+                    alert('produk sudah ada');
+                    status = true;
+                }else{
+                    status = false;
+                }
+            });
+
+            if (status != false) {
+                alert('ada');
+            } else {
+                myArray[res.id] = {
+                    'kuantitas' : 1,
+                    'harga' : res.harga
+                };
+            }
+
+            
             
             html += `<div class="d-flex justify-content-between item${res.id}">
             <p class="text-dark">${res.nama}</p>
-             <small class="font-weight-medium">${res.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</small>
+             <small class="font-weight-medium">Rp. ${res.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</small>
          </div>`;
          $('#list_checkout').append(html);
 
@@ -43,28 +66,43 @@ $('#tb_kasir tbody').on("click", 'td .delete', function () {
     calculate(myArray);
 });
 
-$('#tb_kasir tbody').on("keyup", 'td input', function () {
-    // $('#tb_kasir').DataTable().row($(this).parents('tr')).remove().draw(false);
-    let value = $(this).val();
-    console.log(value);
-});
+$('#tb_kasir tbody').on("click", 'td .number_inc', function () {
+    let inc = $(this).attr('data-ref');
+    let value_input = $(this).parent().find('input').val();
+    let uniq = $(this).parent().find('input').attr('data-val');
+    let result = 0;
+    if (inc == "plus") {
+        result = parseInt(value_input) + 1;
+        $(this).parent().find('input').val(result);
+        
+    }else{
+        result = parseInt(value_input) - 1;
+        $(this).parent().find('input').val(result);
+    }
 
-$('#tb_kasir tbody').on("change", 'td input', function () {
-    // $('#tb_kasir').DataTable().row($(this).parents('tr')).remove().draw(false);
-    let value = $(this).val();
-    let index = $(this).attr('data-val');
-    let price = myArray[index];
+    myArray[uniq]['kuantitas'] = result;
+
+    // let value = $(this).val();
+    // let index = $(this).attr('data-val');
+    // let price = myArray[index];
     
-    myArray[index] = parseInt(value) * price;
+    // myArray[index] = parseInt(value) * price;
     calculate(myArray);
 });
 
 calculate = (val) =>{
-    
+    console.log(val);
+    total = 0;
+    let sub_total = 0;
     if (val) {
-        total = val.reduce(function (accumulator,current) {
-            return accumulator + current;
-        })
+        $.each(val, function (indexInArray, valueOfElement) { 
+            if (valueOfElement != undefined) {
+                sub_total = valueOfElement['kuantitas'] * valueOfElement['harga'];
+                $(`.item${indexInArray} small`).html(sub_total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,"));
+                total += sub_total;   
+            }
+              
+        });
     }else{
         total = 0;
     }
@@ -116,8 +154,10 @@ $('#saveKasir').on('click',function () {
 })
 
 $('#nominal_cash input').on('keyup', function () {
+    console.log(total);
     let value = $(this).val().replace(/,/g, '');
     let kembalian = 0;
+
     kembalian = value - total;
     // console.log(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","))
     // console.log(kembalian);
