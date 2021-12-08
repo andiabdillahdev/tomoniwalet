@@ -64,9 +64,21 @@
                 <div class="cart_icon">
                     <img src="{{ asset('assets/img/keranjang.png') }}" alt="" srcset="">
                 </div>
+                @if(Auth::user() && Auth::user()->role == '3')
+                <div id="user_auth">
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Profil Saya</a></li>
+                            <li><a class="dropdown-item" href="{{ route('homepage.page_logout') }}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                @else
                 <div id="sign_in">
                     <a href="{{ route('homepage.page_login') }}" class="tm_button tm_primary">Masuk</a>
                 </div>
+                @endif
                 <!-- </div> -->
             </div>
 
@@ -151,9 +163,10 @@
     </footer>
 
     <!-- Optional JavaScript; choose one of the two! -->
-    <script src="{{ asset('vendors/jquery/jquery-3.6.0.min.js') }}"></script>
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="{{ asset('vendors/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('vendors/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('vendors/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/page.js') }}"></script>

@@ -19,9 +19,11 @@ Route::get('/belanja/list', 'homepageController@belanja_list')->name('homepage.b
 Route::get('/produk/detail/{paramas}', 'homepageController@produk_detail')->name('homepage.produk_detail');
 Route::get('/page-login', 'homepageController@page_login')->name('homepage.page_login');
 Route::get('/page-register', 'homepageController@page_register')->name('homepage.page_register');
+Route::get('/page-logout', 'homepageController@page_logout')->name('homepage.page_logout');
 Route::post('/page-login-post', 'homepageController@page_login_post')->name('homepage.page_login_post');
 Route::post('/page-register-post', 'homepageController@page_register_post')->name('homepage.page_register_post');
 Route::get('/kontak', 'homepageController@kontak')->name('homepage.kontak');
+Route::post('/store-kontak', 'homepageController@storekontak');
 
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');

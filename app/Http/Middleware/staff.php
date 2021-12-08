@@ -24,7 +24,7 @@ class staff
         }
 
         if (Auth::user()->role == 2) {
-            return $next($request);  
+            return $next($request);
         }
     }
 }

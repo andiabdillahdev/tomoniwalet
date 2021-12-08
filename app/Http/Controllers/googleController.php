@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+
 use App\User;
 use Hash;
 class googleController extends Controller
@@ -23,27 +24,27 @@ class googleController extends Controller
         try {
             $user = Socialite::driver('google')->user();
             $finduser = User::where('google_id',$user->id)->first();
-            // dd($user);
+
             if ($finduser) {
                 Auth::login($finduser);
-                return redirect()->intended('/');
+                return redirect('/');
             }else{
-                // dd($user->id);
                 $newUser = User::create([
-                    'name'=>$user->name,
-                    'email'=>$user->email,
-                    'google_id'=>$user->id,
-                    'password'=>  Hash::make('password')
+                    'name'=> $user->name,
+                    'email'=> $user->email,
+                    'google_id'=> $user->id,
+                    'role'=> '3',
+                    'password'=> ''
                 ]);
 
-                Auth::login($finduser);
-                return redirect()->intended('/');
+                Auth::login($newUser);
+                return redirect('/');
 
             }
 
 
         } catch (\Throwable $th) {
-            
+            dd($th);
         }
     }
 

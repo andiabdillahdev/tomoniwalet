@@ -43,7 +43,7 @@
                                     </div>
                                 </form>
                                 <div class="mt-5">
-                                    <button onclick="post_auth('regis-form','page-register-post')" class="btn button button-primary" >SIGN UP</button>
+                                    <button onclick="post_auth('regis-form','page-register-post', 'page-login')" class="btn button button-primary" >SIGN UP</button>
                                 </div>
 
                                 <div class="auth-social">
