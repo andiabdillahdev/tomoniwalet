@@ -24,11 +24,14 @@ Route::post('/page-login-post', 'homepageController@page_login_post')->name('hom
 Route::post('/page-register-post', 'homepageController@page_register_post')->name('homepage.page_register_post');
 Route::get('/kontak', 'homepageController@kontak')->name('homepage.kontak');
 Route::post('/store-kontak', 'homepageController@storekontak');
+Route::post('/store-cart', 'homepageController@storecart');
 
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
 Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru')->name('homepage.getProdukTerbaru');
 Route::get('/source/get-testimonial', 'sourcePageController@getTestimonial')->name('homepage.getTestimonial');
+Route::get('/source/get-belanja', 'sourcePageController@getBelanja');
+Route::get('/source/get-kategori', 'sourcePageController@getKategori');
 
 // GOOGLE
 Route::get('/auth/google', 'googleController@redirectToProvider')->name('google.auth');
