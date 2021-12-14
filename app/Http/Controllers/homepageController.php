@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\kontak;
+use App\keranjang;
 
 use Hash;
 
@@ -119,5 +120,21 @@ class homepageController extends Controller
 
     public function keranjang(){
         return view('homepage.keranjang');
+    }
+    
+    public function storecart(Request $request)
+    {
+        $cek = keranjang::where('user_id', $request->user_id)->where('produk_id', $request->produk_id)->where('status', 'invalid')->first();
+        if ($cek) {
+            $cek->kuantitas = $cek->kuantitas+1;
+            $cek->save();
+        } else {
+            keranjang::create($request->all());
+        }
+
+        return response()->json([
+            'status_code' => 200,
+            'message' => 'Produk berhasil ditambahkan ke keranjang'
+        ]);
     }
 }

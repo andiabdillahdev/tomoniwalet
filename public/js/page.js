@@ -154,11 +154,86 @@ function homepage(){
 
         
     }
+    // End Testimoni
 
-    this.produk_belanja = function () {
-            
+    // Belnja
+    this.belanja = function () {
+        let html = '';
+        $.ajax({
+            type: "GET",
+            url: host + "/source/get-belanja",
+            success: function(response) {
+                console.log(response);
+                $.each(response, function (key, val) {
+                    html += `
+                    <div class="col-lg-3 mb-3">
+                    <div class="card-tml content-card">
+                    <img src="${host}/uploads/produk/${val.foto}" alt="" srcset="" height="200" width="220">
+                    <div class="d-flex justify-content-center">
+                    <span>${val.nama_kategori}</span>
+                    </div>
+                    <h1>${val.nama}</h1>
+                    <p>${val.harga}</p>
+                    <div class="d-flex justify-content-center">
+                    <button class="btn button-sm button-primary add-cart" produk-id="${val.id}">Tambah ke Cart</button>
+                    </div>
+                    </div>
+                    </div>
+                    `;
+                });
+
+                $('#contentBelanja').html(html);
+
+            },
+            error: function() {
+                notif("warning", 'Gagal');
+            }
+        });
     }
 
+    // Belnja
+    this.get_kategori = function () {
+        let html = '';
+        $.ajax({
+            type: "GET",
+            url: host + "/source/get-kategori",
+            success: function(response) {
+                $('.kategoriContent').html(response);
+            }
+        });
+    }
+
+    // Add Cart 
+    this.add_cart = function(user_id, produk_id, kuantitas) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: host + "/store-cart",
+            data: {
+                user_id: user_id,
+                produk_id: produk_id,
+                kuantitas: kuantitas,
+                status: 'invalid'
+            },
+            success: function(res) {
+                notif("success", res.message);
+
+            },
+            error: function(xhr) {
+                $('.error-notif').html('');
+                $.each(xhr.responseJSON["errors"],function (key, value) {
+                    console.log(key);
+                    $(`#${key}`).html(value);
+                }
+                );
+            }
+        });
+    }
 }
 
 
