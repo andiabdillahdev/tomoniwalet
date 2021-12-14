@@ -7,6 +7,7 @@ use App\hero_section;
 use App\produk;
 use App\testimonial;
 use App\kategori;
+use App\keranjang;
 
 class sourcePageController extends Controller
 {
@@ -46,6 +47,18 @@ class sourcePageController extends Controller
         foreach ($data as $dta) {
             $html .= '<option value="'.$dta->id.'">'.$dta->nama.'</option>';
         }
+        return response()->json($html);
+    }
+
+    public function getCountCart(Request $request) {
+        $data = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
+
+        if (count($data) > 0) {
+            $html = '<span class="position-absolute top-5 start-80 translate-middle badge rounded-pill bg-danger" style="font-size: 10px;">'.count($data).'</span>';
+        } else {
+            $html = '';
+        }
+        
         return response()->json($html);
     }
 }

@@ -137,4 +137,47 @@ class homepageController extends Controller
             'message' => 'Produk berhasil ditambahkan ke keranjang'
         ]);
     }
+
+    public function setcart(Request $request)
+    {
+        $data = keranjang::where('id', $request->keranjang_id)->first();
+        $data->kuantitas = $request->kuantitas;
+        $data->save();
+
+        $total = 'Rp'.number_format($data->produk->harga * $data->kuantitas);
+
+        $get_total = 0;
+        $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
+
+        foreach ($get_keranjang as $dta) {
+            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+        }
+
+        $harga_total = 'Rp'.number_format($get_total);
+
+        return response()->json([
+            'total' => $total,
+            'harga_total' => $harga_total
+        ]);
+    }
+
+    public function delcart(Request $request)
+    {
+        $data = keranjang::where('id', $request->keranjang_id)->first();
+        $data->delete();
+
+        $get_total = 0;
+        $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
+
+        foreach ($get_keranjang as $dta) {
+            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+        }
+
+        $harga_total = 'Rp'.number_format($get_total);
+
+        return response()->json([
+            'total_keranjang' => count($get_keranjang),
+            'harga_total' => $harga_total
+        ]);
+    }
 }

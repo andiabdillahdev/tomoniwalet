@@ -26,6 +26,8 @@ Route::get('/kontak', 'homepageController@kontak')->name('homepage.kontak');
 Route::get('/keranjang', 'homepageController@keranjang')->name('homepage.keranjang');
 Route::post('/store-kontak', 'homepageController@storekontak');
 Route::post('/store-cart', 'homepageController@storecart');
+Route::post('/set-cart', 'homepageController@setcart');
+Route::post('/del-cart', 'homepageController@delcart');
 
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
@@ -33,6 +35,7 @@ Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru'
 Route::get('/source/get-testimonial', 'sourcePageController@getTestimonial')->name('homepage.getTestimonial');
 Route::get('/source/get-belanja', 'sourcePageController@getBelanja');
 Route::get('/source/get-kategori', 'sourcePageController@getKategori');
+Route::post('/source/get-count-cart', 'sourcePageController@getCountCart');
 
 // GOOGLE
 Route::get('/auth/google', 'googleController@redirectToProvider')->name('google.auth');

@@ -62,7 +62,10 @@
                     </div>
                 </div>
                 <div class="cart_icon">
-                    <a href=""><img src="{{ asset('assets/img/keranjang.png') }}" alt="" srcset=""></a>
+                    <a href="{{ url('/keranjang') }}">
+                        <img src="{{ asset('assets/img/keranjang.png') }}" alt="" srcset="">
+                        <span id="countCart"></span>
+                    </a>
                 </div>
                 @if(Auth::user() && Auth::user()->role == '3')
                 <div id="user_auth">
@@ -171,6 +174,14 @@
     <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/page.js') }}"></script>
     @stack('page_script')
+    <script>
+        $(function() {
+            let loadData = new homepage();
+            @if(Auth::user())
+            loadData.get_count_cart("{{ Auth::user()->id }}");
+            @endif
+        });
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

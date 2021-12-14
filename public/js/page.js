@@ -14,14 +14,14 @@ post_auth = (form,url,redirect) =>{
         success: function(res) {
             console.log(res)
             if (res.status_code == 200) {
-               notif("success", res.message);
-               setTimeout(function () {
+             notif("success", res.message);
+             setTimeout(function () {
                 window.location.href = host + "/" + redirect;
             }, 1500);
-           } 
+         } 
 
-       },
-       error: function(xhr) {
+     },
+     error: function(xhr) {
                 // console.log(xhr.responseJSON["errors"])
                 $('.error-notif').html('');
                 $.each(xhr.responseJSON["errors"],function (key, value) {
@@ -56,6 +56,7 @@ notif = (type, message) => {
 };
 
 function homepage(){
+    let _this = this;
 
     // Hero Section
     this.hero_section = function () {
@@ -221,8 +222,8 @@ function homepage(){
                 status: 'invalid'
             },
             success: function(res) {
+                _this.get_count_cart(user_id);
                 notif("success", res.message);
-
             },
             error: function(xhr) {
                 $('.error-notif').html('');
@@ -233,6 +234,68 @@ function homepage(){
                 );
             }
         });
+    }
+
+    // Get Count Cart
+    this.get_count_cart = function(user_id) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            }
+        });
+
+        $.ajax({
+            type: "POST",
+            url: host + "/source/get-count-cart",
+            data: { user_id: user_id },
+            success: function(response) {
+                $('#countCart').html(response);
+            }
+        });
+    }
+
+    this.set_cart = function(user_id, produk_id, keranjang_id, kuantitas) {
+        $.ajaxSetup({
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            }
+        });
+
+        var result = false;
+
+        $.ajax({
+            type: "POST",
+            url: host + "/set-cart",
+            data: {
+                user_id: user_id,
+                produk_id: produk_id,
+                keranjang_id: keranjang_id,
+                kuantitas: kuantitas
+            },
+            async: false,
+            success: function(res) {
+                result = res;
+            }
+        });
+
+        return result;
+    }
+
+    this.del_cart = function(user_id, keranjang_id) {
+        $.ajax({
+            type: "POST",
+            url: host + "/del-cart",
+            data: {
+                user_id: user_id,
+                keranjang_id: keranjang_id,
+            },
+            async: false,
+            success: function(res) {
+                result = res;
+            }
+        });
+
+        return result;
     }
 }
 
