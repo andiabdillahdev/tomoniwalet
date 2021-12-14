@@ -624,6 +624,16 @@ color: #23A7E0;
     top: 11px;
 }
 
+.delete_{
+    position: relative;
+    left: 9rem;
+    top: 1rem;
+}
+
+.delete_ i{
+    color: #e80000;
+}
+
 footer{
     background: #E7F5FB;
     padding: 30px 10px;

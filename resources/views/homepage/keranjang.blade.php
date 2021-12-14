@@ -35,6 +35,9 @@
                                 </div>
                             </div>
                             <div class="sub_total_keranjang">Rp100.000,-</div>
+                            <div class="delete_">
+                            <i class="fas fa-trash"></i>
+                            </div>
                         </div>
 
                     </div>
@@ -62,6 +65,7 @@
                         <button class="btn button button-primary text-left">Checkout</button>
                     </div>
 
+                    
 
                 </div>
 
