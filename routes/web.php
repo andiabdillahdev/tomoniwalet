@@ -23,6 +23,7 @@ Route::get('/page-logout', 'homepageController@page_logout')->name('homepage.pag
 Route::post('/page-login-post', 'homepageController@page_login_post')->name('homepage.page_login_post');
 Route::post('/page-register-post', 'homepageController@page_register_post')->name('homepage.page_register_post');
 Route::get('/kontak', 'homepageController@kontak')->name('homepage.kontak');
+Route::get('/keranjang', 'homepageController@keranjang')->name('homepage.keranjang');
 Route::post('/store-kontak', 'homepageController@storekontak');
 
 // Home page resource

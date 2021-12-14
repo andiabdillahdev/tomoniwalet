@@ -45,45 +45,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Tambah ke Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Tambah ke Cart</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card-tml content-card">
-                            <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
-                            <div class="d-flex justify-content-center">
-                                <span>Kategori Produk</span>
-                            </div>
-                            <h1>Nama Produk</h1>
-                            <p>Rp 10.000</p>
-                            <div class="d-flex justify-content-center">
-                                <button class="btn button-sm button-primary">Tambah ke Cart</button>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="d-flex justify-content-end">
                     <div class="readmore">Read More <svg width="16" height="16" viewBox="0 0 16 16" fill="none"

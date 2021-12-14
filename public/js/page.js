@@ -154,8 +154,14 @@ function homepage(){
 
         
     }
-    // End Testimoni
+
+    this.produk_belanja = function () {
+            
+    }
+
 }
+
+
 
 // notif = (type, message) => {
 //     Command: toastr[`${type}`](`${message}`);

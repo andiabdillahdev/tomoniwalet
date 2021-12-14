@@ -171,7 +171,6 @@ text-decoration: none;
     font-size: 12px;
     padding: 4px 11px;
     width: 9rem;
-
 }
 
 .form-select-sub-header:focus{
@@ -336,7 +335,76 @@ position: relative;
 .section-list-belanja{
     margin-top: 3rem;   
     margin-bottom: 6rem;
-}    
+}   
+
+.section-list-keranjang{
+    margin-top: 9rem;
+    margin-bottom: 6rem;
+}   
+
+#detail_produk{
+    background: #F6F8F9;
+    border-radius: 8px 0px 0px 8px;
+    padding-top: 2rem;
+}
+
+#ringkasan_pesanan{
+    background: #E7F5FB;
+    border-radius: 0px 8px 8px 0px;
+    padding: 28px 13px 17px 28px;
+}
+
+#ringkasan_pesanan p, #ringkasan_pesanan span, #ringkasan_pesanan label{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 200%;
+
+    color: #333333;
+}
+
+#ringkasan_pesanan select{
+    border: 1px solid #798A96;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 12px;
+    padding: 8px 11px;
+}
+
+#ringkasan_pesanan select:focus{
+    border: 1px solid rgba(35, 167, 224, 1);
+    box-shadow: 0 0 5px rgba(35, 167, 224, 1);   
+    outline: none;
+}
+
+#detail_produk span{
+    margin-left: 8rem;
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 200%;
+    /* or 32px */
+
+
+    /* Tertiary */
+
+    color: #333333;
+}
+
+.section-list-keranjang h1{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+
+    /* Tertiary */
+
+    color: #333333;
+}
 
 .section-first h1{
     /* Title */
@@ -466,6 +534,94 @@ line-height: 20px;
 
 
 color: #23A7E0;
+}
+
+.note_item_detail p{
+    font-family: 'Mulish',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 200%;
+
+    color: #333333;
+}
+
+.item_detail{
+    display: flex;
+}
+
+.item_detail ul{
+    list-style: none;
+    font-family: 'Mulish',sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 200%;
+
+
+    color: #333333;
+}
+
+.note_item_detail{
+    width: 14rem;
+}
+
+#list-item-keranjang input{
+    border: 1px solid #798A96;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 12px;
+    padding: 3px 5px;
+    width: 4rem;
+}
+
+#list-item-keranjang input:focus{
+    border: 1px solid rgba(35, 167, 224, 1);
+    box-shadow: 0 0 5px rgba(35, 167, 224, 1);   
+    outline: none;
+}
+
+.kuantiti{
+    /* display : flex; */
+    margin-top: 1rem;
+}
+
+.group-auto{
+    border: 1px solid #798A96;
+    box-sizing: border-box;
+    border-radius: 4px;
+    width: 2rem;
+    padding: 1px 3px 1px 9px;
+}
+
+.plus_grid{
+    position: relative;
+    left: -35px;
+}
+
+.minus_grid{
+    position: relative;
+    left: 68px;
+    bottom: 26px;
+}
+
+
+.custom_pos{
+    position: absolute;
+}
+
+.sub_total_keranjang{
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 200%;
+
+    color: #333333;
+    position: relative;
+    left: 7rem;
+    top: 11px;
 }
 
 footer{
@@ -617,7 +773,9 @@ margin-top: 8px;
 }
 
 #detail_produk img{
-    width :100%
+    position: relative;
+    bottom: 5px;
+    width: 30%;
 }
 
 #detail_produk h1{

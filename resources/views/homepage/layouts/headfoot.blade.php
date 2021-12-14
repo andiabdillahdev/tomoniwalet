@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div class="cart_icon">
-                    <img src="{{ asset('assets/img/keranjang.png') }}" alt="" srcset="">
+                    <a href=""><img src="{{ asset('assets/img/keranjang.png') }}" alt="" srcset=""></a>
                 </div>
                 @if(Auth::user() && Auth::user()->role == '3')
                 <div id="user_auth">

@@ -116,4 +116,8 @@ class homepageController extends Controller
             ],422); 
         }
     }
+
+    public function keranjang(){
+        return view('homepage.keranjang');
+    }
 }
