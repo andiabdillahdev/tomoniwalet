@@ -68,7 +68,7 @@ class produkController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'harga' => 'required',
-            'estimasi_pengiriman' => 'required',
+            'berat' => 'required',
             'garansi' => 'required',
             'deskripsi' => 'required',
             'status' => 'required',
@@ -80,7 +80,7 @@ class produkController extends Controller
         $data->kode = $kode;
         $data->nama = $request->nama;
         $data->harga = str_replace(',', '', $request->harga);
-        $data->estimasi_pengiriman = $request->estimasi_pengiriman;
+        $data->berat = $request->berat;
         $data->garansi = $request->garansi;
         $data->deskripsi = $request->deskripsi;
         $data->status = $request->status;

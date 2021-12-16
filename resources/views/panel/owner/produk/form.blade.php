@@ -49,15 +49,15 @@
 
                                 <div class="row mb-3">
                                     <div class="col-lg-6">
-                                        <label for="exampleInputEmail1">Estimasi Pengiriman</label>
+                                        <label for="exampleInputEmail1">Berat</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" name="estimasi_pengiriman" placeholder="Recipient's username"
-                                                aria-label="Recipient's username">
+                                            <input type="number" class="form-control" name="berat" placeholder="Berat"
+                                                aria-label="Berat">
                                             <div class="input-group-append">
-                                                <button class="btn btn-sm btn-secondary" type="button">Hari</button>
+                                                <button class="btn btn-sm btn-secondary" type="button">Gram</button>
                                             </div>
                                         </div>
-                                        <small class="text-danger error-notif" id="estimasi_pengiriman"></small>
+                                        <small class="text-danger error-notif" id="berat"></small>
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="exampleInputEmail1">Garansi</label>
