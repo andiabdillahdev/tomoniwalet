@@ -61,4 +61,28 @@ class sourcePageController extends Controller
         
         return response()->json($html);
     }
+
+    public function getLocation(Request $request) {
+        if ($request->id) $url = "https://api.rajaongkir.com/starter/city?province=".$request->id;
+        else $url = "https://api.rajaongkir.com/starter/province";
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => [
+                "key: 35fbb9c26760769e9a5874c20ad90004"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+
+        return response()->json(json_decode($response));
+    }
 }

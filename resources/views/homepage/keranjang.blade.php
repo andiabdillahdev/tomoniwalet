@@ -73,13 +73,46 @@ $total = 0;
                         <p class="jumlah_item">{{ count($keranjang) }} item</p>
                         <span class="harga_total">Rp{{ number_format($total) }}</span>
                     </div>
-                    <div class="mb-3">
-                        <label for="jasa_kirim" class="form-label">Jasa Kirim</label>
-                        <select class="form-control">
-                            <option value="JNT">JNT</option>
-                            <option value="POS">POS</option>
+                    <h1>Pengiriman</h1>
+                    <div class="">
+                        <label for="jasa_kirim" class="form-label">Provinsi Tujuan</label>
+                        <select class="form-control" id="provinsi">
+                            <option value="null">.::Pilih Provinsi::.</option>
                         </select>
                     </div>
+                    <div class="">
+                        <label for="jasa_kirim" class="form-label">Kota Tujuan</label>
+                        <select class="form-control" id="kota">
+                            <option value="">.::Pilih provinsi terlebih dahulu::.</option>
+                        </select>
+                    </div>
+                    <div class="">
+                        <label for="jasa_kirim" class="form-label">Jasa Kirim</label>
+                        <select class="form-control">
+                            <option value="">.::Pilih Jasa Kirim::.</option>
+                            <option value="jne">JNE</option>
+                            <option value="pos">POS</option>
+                            <option value="tiki">TIKI</option>
+                        </select>
+                    </div>
+                    {{-- <div class="mb-3 row">
+                        <div class="col-sm-6">
+                            <label for="jasa_kirim" class="form-label">Jasa Kirim</label>
+                            <select class="form-control">
+                                <option value="">.::Pilih Jasa Kirim::.</option>
+                                <option value="jne">JNE</option>
+                                <option value="pos">POS</option>
+                                <option value="tiki">TIKI</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="jasa_kirim" class="form-label">Layanan</label>
+                            <select class="form-control">
+                                <option value="JNT">JNT</option>
+                                <option value="POS">POS</option>
+                            </select>
+                        </div>
+                    </div> --}}
                     <div class="d-flex justify-content-between">
                         <p>Harga Total</p>
                         <span class="harga_total">Rp{{ number_format($total) }}</span>
@@ -135,6 +168,42 @@ $total = 0;
 
             loadData.get_count_cart("{{ $user_id }}");
         });
+
+        // get provinsi
+        getLocation();
+
+        // get kota
+        $('#provinsi').click(function(event) {
+            event.preventDefault();
+            $('#kota').html('<option value="">.::Pilih Kota::.</option>');
+            var province_id = $(this).val();
+            getLocation(province_id);
+
+        });
+
+        function getLocation(id=null) {
+            $.ajax({
+                type: "GET",
+                url: "{{ url('/') }}/source/get-location",
+                data: { id: id },
+                success: function(response) {
+                    var data = response.rajaongkir.results;
+                    var provinsi, kota;
+
+                    if (!id) provinsi = `<option value="null">.::Pilih Provinsi::.</option>`;
+                    else kota = `<option value="">.::Pilih Kota::.</option>`;
+                    $.each(data, function (key, val) {
+                        if (!id)
+                            provinsi += `<option value="${val.province_id}">${val.province}</option>`;
+                        else
+                            kota += `<option value="${val.city_id}">${val.city_name}</option>`;
+                    });
+
+                    if (!id) $('#provinsi').html(provinsi);
+                    else $('#kota').html(kota);
+                }
+            });
+        }
     });
 </script>
 @endpush

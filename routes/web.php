@@ -35,6 +35,7 @@ Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru'
 Route::get('/source/get-testimonial', 'sourcePageController@getTestimonial')->name('homepage.getTestimonial');
 Route::get('/source/get-belanja', 'sourcePageController@getBelanja');
 Route::get('/source/get-kategori', 'sourcePageController@getKategori');
+Route::get('/source/get-location', 'sourcePageController@getLocation');
 Route::post('/source/get-count-cart', 'sourcePageController@getCountCart');
 
 // GOOGLE
