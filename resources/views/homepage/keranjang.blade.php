@@ -11,122 +11,122 @@ $total = 0;
     <section class="section-list-keranjang">
         <div class="container">
             <div class="title-produk-list"> Keranjang <span class="jumlah_item">{{ count($keranjang) }} item</span> </div>
-            <div class="row">
-
-                <div class="col-lg-8" id="detail_produk">
-                    <div class="d-flex">
-                        <span>Detail Produk</span>
-                        <span>Kuantiti</span>
-                        <span>Total</span>
-                    </div>
-                    <div id="list-item-keranjang">
-                        @foreach ($keranjang as $res)
+            <form id="formCheckout">
+                <div class="row">
+                    <div class="col-lg-8" id="detail_produk">
                         <div class="d-flex">
-                            <div class="item_detail">
-                                <img src="{{ asset('uploads/produk/'.$res->produk->gambar_detail[0]->gambar) }}" alt="" style="height: 80px; width: 80px; margin-left: 25px;">
-                                <div class="note_item_detail">
-                                    <ul>
-                                        <li>{{ $res->produk->nama }}</li>
-                                        <li><b>Rp{{ number_format($res->produk->harga) }}</b></li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="kuantiti">
-                                <div class="custom_pos">
-                                    <a href="#" class="text-dark btn-action" data-action="minus" produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
-                                        <div class="group-auto plus_grid">
-                                            <i class="fas fa-minus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                                <input type="text" class="form-control val-kuantitas" value="{{ $res->kuantitas }}" readonly="">
-                                <div class="custom_pos">
-                                    <a href="#" class="text-dark btn-action" data-action="plus" produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
-                                        <div class="group-auto minus_grid">
-                                            <i class="fas fa-plus"></i>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="sub_total_keranjang">Rp{{ number_format($res->produk->harga*$res->kuantitas) }}</div>
-                            <a href="#" class="del-keranjang" data-id="{{ $res->id }}">
-                                <div class="delete_">
-                                    <i class="fas fa-trash"></i>
-                                </div>
-                            </a>
+                            <span>Detail Produk</span>
+                            <span>Kuantiti</span>
+                            <span>Total</span>
                         </div>
-                        @php
-                        $total = $total + $res->produk->harga*$res->kuantitas;
-                        @endphp
-                        @endforeach
+                        <div id="list-item-keranjang">
+                            @foreach ($keranjang as $res)
+                            <div class="d-flex">
+                                <input type="hidden" name="keranjang_id[]" class="keranjang-id" value="{{ $res->id }}">
+                                <div class="item_detail">
+                                    <img src="{{ asset('uploads/produk/'.$res->produk->gambar_detail[0]->gambar) }}" alt="" style="height: 80px; width: 80px; margin-left: 25px;">
+                                    <div class="note_item_detail">
+                                        <ul>
+                                            <li>{{ $res->produk->nama }}</li>
+                                            <li><b>Rp{{ number_format($res->produk->harga) }}</b></li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                        @if(!isset($res))
-                        <h5 class="text-center mt-5"><i>Belum ada keranjang ditmbahkan</i></h5>
-                        @endif
-                    </div>
-                </div>
+                                <div class="kuantiti">
+                                    <div class="custom_pos">
+                                        <a href="#" class="text-dark btn-action" data-action="minus" produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
+                                            <div class="group-auto plus_grid">
+                                                <i class="fas fa-minus"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <input type="text" class="form-control val-kuantitas" value="{{ $res->kuantitas }}" readonly="">
+                                    <div class="custom_pos">
+                                        <a href="#" class="text-dark btn-action" data-action="plus" produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
+                                            <div class="group-auto minus_grid">
+                                                <i class="fas fa-plus"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="sub_total_keranjang">Rp{{ number_format($res->produk->harga*$res->kuantitas) }}</div>
+                                <a href="#" class="del-keranjang" data-id="{{ $res->id }}">
+                                    <div class="delete_">
+                                        <i class="fas fa-trash"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            @php
+                            $total = $total + $res->produk->harga*$res->kuantitas;
+                            @endphp
+                            @endforeach
 
-                <div class="col-lg-4" id="ringkasan_pesanan">
-                    <h1>Ringkasan Pesanan</h1>
-                    <div class="d-flex justify-content-between">
-                        <p class="jumlah_item">{{ count($keranjang) }} item</p>
-                        <span class="harga_total">Rp{{ number_format($total) }}</span>
+                            @if(!isset($res))
+                            <h5 class="text-center mt-5"><i>Belum ada keranjang ditmbahkan</i></h5>
+                            <input type="hidden" class="keranjang-id" value="">
+                            @endif
+                        </div>
                     </div>
-                    <h1>Pengiriman</h1>
-                    <div class="">
-                        <label for="jasa_kirim" class="form-label">Provinsi Tujuan</label>
-                        <select class="form-control" id="provinsi">
-                            <option value="null">.::Pilih Provinsi::.</option>
-                        </select>
-                    </div>
-                    <div class="">
-                        <label for="jasa_kirim" class="form-label">Kota Tujuan</label>
-                        <select class="form-control" id="kota">
-                            <option value="">.::Pilih provinsi terlebih dahulu::.</option>
-                        </select>
-                    </div>
-                    <div class="">
-                        <label for="jasa_kirim" class="form-label">Jasa Kirim</label>
-                        <select class="form-control">
-                            <option value="">.::Pilih Jasa Kirim::.</option>
-                            <option value="jne">JNE</option>
-                            <option value="pos">POS</option>
-                            <option value="tiki">TIKI</option>
-                        </select>
-                    </div>
-                    {{-- <div class="mb-3 row">
-                        <div class="col-sm-6">
-                            <label for="jasa_kirim" class="form-label">Jasa Kirim</label>
-                            <select class="form-control">
-                                <option value="">.::Pilih Jasa Kirim::.</option>
-                                <option value="jne">JNE</option>
-                                <option value="pos">POS</option>
-                                <option value="tiki">TIKI</option>
+
+                    <div class="col-lg-4" id="ringkasan_pesanan">
+                        <h1>Ringkasan Pesanan</h1>
+                        <div class="d-flex justify-content-between">
+                            <p class="jumlah_item">{{ count($keranjang) }} item</p>
+                            <span class="harga_total">Rp{{ number_format($total) }}</span>
+                        </div>
+                        <h1>Pengiriman</h1>
+                        <div class="mb-3">
+                            <label for="provinsi" class="form-label">Provinsi Tujuan</label>
+                            <select class="form-control" id="provinsi" name="provinsi" required>
+                                <option value="null">.::Pilih Provinsi::.</option>
                             </select>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="jasa_kirim" class="form-label">Layanan</label>
-                            <select class="form-control">
-                                <option value="JNT">JNT</option>
-                                <option value="POS">POS</option>
+                        <div class="mb-3">
+                            <label for="kota" class="form-label">Kota Tujuan</label>
+                            <select class="form-control" id="kota" name="kota" required>
+                                <option value="">.::Pilih provinsi terlebih dahulu::.</option>
                             </select>
                         </div>
-                    </div> --}}
-                    <div class="d-flex justify-content-between">
-                        <p>Harga Total</p>
-                        <span class="harga_total">Rp{{ number_format($total) }}</span>
+                        <div class="mb-3">
+                            <label class="form-label">Alamat Lengkap</label>
+                            <textarea class="form-control" required="" placeholder="Alamat Lengkap.." name="alamat"></textarea>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-sm-6">
+                                <label for="jasa_kirim" class="form-label">Jasa Kirim</label>
+                                <select class="form-control" required id="jasa_kirim" name="jasa_kirim">
+                                    <option value="">.::Pilih Jasa Kirim::.</option>
+                                    <option value="jne">JNE</option>
+                                    <option value="pos">POS</option>
+                                    {{-- <option value="tiki">TIKI</option> --}}
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="jasa_kirim" class="form-label">No. Telepon/WA</label>
+                                <input type="number" class="form-control" name="telepon" required placeholder="No. Telepon/WA.." autocomplete="off">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <p>Biaya Ongkir</p>
+                            <span class="biaya_ongkir">Rp{{ number_format($total) }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Estimasi Waktu Pengiriman</p>
+                            <span class="waktu_kirim">12-14 hari</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <p>Harga Total</p>
+                            <span class="harga_total">Rp{{ number_format($total) }}</span>
+                        </div>
+
+                        <div class="d-flex">
+                            <button type="submit" class="button button-primary btn" style="width: 100%;">Checkout</button>
+                        </div>
                     </div>
-
-                    <div class="d-flex justify-content-end">
-                        <button class="btn button button-primary text-left">Checkout</button>
-                    </div>
-
-                    
-
                 </div>
-
-            </div>
+            </form>
         </div>
     </section>
 </div>
@@ -149,6 +149,7 @@ $total = 0;
             this_q.val(value);
 
             let res = loadData.set_cart("{{ $user_id }}", produk_id, keranjang_id, value);
+            getOngkir();
 
             $(this).parents('.d-flex').find('.sub_total_keranjang').text(res.total);
             $('.harga_total').text(res.harga_total);
@@ -167,18 +168,26 @@ $total = 0;
             }
 
             loadData.get_count_cart("{{ $user_id }}");
+            getOngkir();
         });
 
         // get provinsi
         getLocation();
 
         // get kota
-        $('#provinsi').click(function(event) {
+        $('#provinsi').change(function(event) {
             event.preventDefault();
             $('#kota').html('<option value="">.::Pilih Kota::.</option>');
             var province_id = $(this).val();
             getLocation(province_id);
 
+        });
+
+        // get ongkir
+        $('#kota, #provinsi, #jasa_kirim').change(function(event) {
+            event.preventDefault();
+
+            getOngkir();
         });
 
         function getLocation(id=null) {
@@ -203,6 +212,28 @@ $total = 0;
                     else $('#kota').html(kota);
                 }
             });
+        }
+
+        function getOngkir() {
+            var provinsi = $('#provinsi').val();
+            var kota = $('#kota').val();
+            var jasa_kirim = $('#jasa_kirim').val();
+            var keranjang = $('.keranjang-id').val();
+
+            if(provinsi && kota && jasa_kirim && keranjang) {
+                var data = $('#formCheckout').serialize();
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('/') }}/get-ongkir",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+                    },
+                    data: data,
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            }
         }
     });
 </script>

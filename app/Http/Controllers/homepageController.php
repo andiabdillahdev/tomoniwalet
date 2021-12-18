@@ -181,4 +181,39 @@ class homepageController extends Controller
             'harga_total' => $harga_total
         ]);
     }
+
+    public function getongkir(Request $request) {
+        $berat = 0;
+        foreach ($request->keranjang_id as $krj) {
+            $krj = keranjang::where('id', $krj)->first();
+            $berat += ($krj->produk->berat * $krj->kuantitas);
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=245&destination=".$request->kota."&weight=".$berat."&courier=".$request->jasa_kirim,
+            CURLOPT_HTTPHEADER => [
+                "content-type: application/x-www-form-urlencoded",
+                "key: 35fbb9c26760769e9a5874c20ad90004"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $result = json_decode($response);
+        $result = $result->rajaongkir->results[0]->costs[0]->cost[0];
+
+        return response()->json($result);
+    }
 }

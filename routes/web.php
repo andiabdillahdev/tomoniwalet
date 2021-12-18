@@ -28,6 +28,7 @@ Route::post('/store-kontak', 'homepageController@storekontak');
 Route::post('/store-cart', 'homepageController@storecart');
 Route::post('/set-cart', 'homepageController@setcart');
 Route::post('/del-cart', 'homepageController@delcart');
+Route::post('/get-ongkir', 'homepageController@getongkir');
 
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
