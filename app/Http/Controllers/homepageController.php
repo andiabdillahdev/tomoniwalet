@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\kontak;
 use App\keranjang;
+use App\transaksi;
+use App\transaksi_detail;
 
 use Hash;
 
@@ -186,18 +188,46 @@ class homepageController extends Controller
         $ongkir = $this->getongkir($request);
         $estimasi = str_replace(' HARI', '', $ongkir['etd']);
 
-        $get_total = 0;
-        $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
-        foreach ($get_keranjang as $dta) {
-            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
-        }
-        $harga_total = $ongkir['ongkir'] + $get_total;
-
         return response()->json([
             'ongkir' => "Rp".number_format($ongkir['ongkir']),
             'estimasi' => $estimasi." Hari",
-            'harga_total' => "Rp".number_format($harga_total),
+            'harga_total' => "Rp".number_format($ongkir["harga_total"]),
         ]);
+    }
+
+    public function checkout(Request $request) {
+        $data = $request->all();
+        $ongkir = $this->getongkir($request);
+        $trs = transaksi::orderBy('id', 'desc')->first();
+        $last_id = $trs ? $trs->id : '0';
+        $data['kode'] = "TML-".sprintf('%03s', $last_id).date('-d-Y');
+        $data["tanggal"] = date('Y-m-d');
+        $data["biaya_ongkir"] = $ongkir["ongkir"];
+        $data["total_harga"] = $ongkir["harga_total"];
+        $data["provinsi"] = $request->provinsi_val;
+        $data["kota"] = $request->kota_val;
+        $data["status"] = 'baru';
+        unset($data["keranjang_id"]);
+        unset($data["provinsi_val"]);
+        unset($data["kota_val"]);
+
+        $crt = transaksi::create($data);
+        foreach ($request->keranjang_id as $krj) {
+            transaksi_detail::create([
+                "id_transaksi_header" => $crt->id,
+                "id_keranjang" => $krj
+            ]);
+
+            $updt = keranjang::where('id', $krj)->first();
+            $updt->status = "valid";
+            $updt->save();
+        }
+
+        return $crt->id;
+    }
+
+    public function transaksi_view($id) {
+        dd($id);
     }
 
     protected function getongkir($request) {
@@ -232,9 +262,17 @@ class homepageController extends Controller
         $result = json_decode($response);
         $result = $result->rajaongkir->results[0]->costs[0]->cost[0];
 
+        $get_total = 0;
+        $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
+        foreach ($get_keranjang as $dta) {
+            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+        }
+        $harga_total = $result->value + $get_total;
+
         $return = [
             "ongkir" => $result->value,
             "etd" => $result->etd,
+            "harga_total" => $harga_total
         ];
 
         return $return;

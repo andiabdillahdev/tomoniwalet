@@ -171,6 +171,7 @@
     <script src="{{ asset('vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('vendors/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('vendors/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/page.js') }}"></script>
     @stack('page_script')

@@ -198,8 +198,19 @@ $total = 0;
         // get ongkir
         $('#kota, #provinsi, #jasa_kirim').change(function(event) {
             event.preventDefault();
-
             getOngkir();
+        });
+
+        // checkout
+        $('#formCheckout').submit(function (e) { 
+            e.preventDefault();
+
+            var provinsi = $("#provinsi option:selected").text();
+            var kota = $("#kota option:selected").text();
+            var data = $(this).serialize();
+            data = data+"&provinsi_val="+provinsi+"&kota_val="+kota;
+            let loadData = new homepage();
+            loadData.checkout(data);
         });
 
         function getLocation(id=null) {

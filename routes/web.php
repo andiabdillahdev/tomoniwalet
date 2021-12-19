@@ -29,6 +29,9 @@ Route::post('/store-cart', 'homepageController@storecart');
 Route::post('/set-cart', 'homepageController@setcart');
 Route::post('/del-cart', 'homepageController@delcart');
 Route::post('/get-ongkir-view', 'homepageController@getongkirview');
+Route::post('/checkout', 'homepageController@checkout');
+Route::get('/transaksi/{id}', 'homepageController@transaksi_view');
+Route::post('/transaksi', 'homepageController@transaksi');
 
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
