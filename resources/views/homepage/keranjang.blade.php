@@ -73,7 +73,7 @@ $total = 0;
                         <h1>Ringkasan Pesanan</h1>
                         <div class="d-flex justify-content-between">
                             <p class="jumlah_item">{{ count($keranjang) }} item</p>
-                            <span class="harga_total">Rp{{ number_format($total) }}</span>
+                            <span class="harga_produk">Rp{{ number_format($total) }}</span>
                         </div>
                         <h1>Pengiriman</h1>
                         <div class="mb-3">
@@ -110,11 +110,11 @@ $total = 0;
                         <hr>
                         <div class="d-flex justify-content-between">
                             <p>Biaya Ongkir</p>
-                            <span class="biaya_ongkir">Rp{{ number_format($total) }}</span>
+                            <span class="biaya_ongkir">Rp0</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Estimasi Waktu Pengiriman</p>
-                            <span class="waktu_kirim">12-14 hari</span>
+                            <span class="waktu_kirim">-</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <p>Harga Total</p>
@@ -122,6 +122,7 @@ $total = 0;
                         </div>
 
                         <div class="d-flex">
+                            <input type="hidden" name="user_id" value="{{ $user_id }}">
                             <button type="submit" class="button button-primary btn" style="width: 100%;">Checkout</button>
                         </div>
                     </div>
@@ -149,10 +150,16 @@ $total = 0;
             this_q.val(value);
 
             let res = loadData.set_cart("{{ $user_id }}", produk_id, keranjang_id, value);
-            getOngkir();
-
+            
             $(this).parents('.d-flex').find('.sub_total_keranjang').text(res.total);
-            $('.harga_total').text(res.harga_total);
+            $('.harga_produk').text(res.harga_total);
+            
+            var provinsi = $('#provinsi').val();
+            var kota = $('#kota').val();
+            var jasa_kirim = $('#jasa_kirim').val();
+            if(!provinsi || !kota || !jasa_kirim) $('.harga_total').text(res.harga_total);
+
+            getOngkir();
         });
 
         $(document).on('click', '.del-keranjang', function(event) {
@@ -161,7 +168,12 @@ $total = 0;
             let res = loadData.del_cart("{{ $user_id }}", keranjang_id);
             $(this).parents('.d-flex').remove();
             $('.jumlah_item').text(res.total_keranjang+' item');
-            $('.harga_total').text(res.harga_total);
+            $('.harga_produk').text(res.harga_total);
+
+            var provinsi = $('#provinsi').val();
+            var kota = $('#kota').val();
+            var jasa_kirim = $('#jasa_kirim').val();
+            if(provinsi || kota || jasa_kirim) $('.harga_total').text(res.harga_total);
             
             if (res.total_keranjang == 0) {
                 $('#list-item-keranjang').html('<h5 class="text-center mt-5"><i>Belum ada keranjang ditmbahkan</i></h5>');
@@ -224,13 +236,16 @@ $total = 0;
                 var data = $('#formCheckout').serialize();
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('/') }}/get-ongkir",
+                    url: "{{ url('/') }}/get-ongkir-view",
                     headers: {
                         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
                     },
                     data: data,
-                    success: function(response) {
-                        console.log(response);
+                    success: function(res) {
+                        console.log(res);
+                        $('.biaya_ongkir').text(res.ongkir);
+                        $('.waktu_kirim').text(res.estimasi);
+                        $('.harga_total').text(res.harga_total);
                     }
                 });
             }

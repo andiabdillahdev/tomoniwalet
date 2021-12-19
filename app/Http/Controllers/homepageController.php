@@ -182,7 +182,25 @@ class homepageController extends Controller
         ]);
     }
 
-    public function getongkir(Request $request) {
+    public function getongkirview(Request $request) {
+        $ongkir = $this->getongkir($request);
+        $estimasi = str_replace(' HARI', '', $ongkir['etd']);
+
+        $get_total = 0;
+        $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
+        foreach ($get_keranjang as $dta) {
+            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+        }
+        $harga_total = $ongkir['ongkir'] + $get_total;
+
+        return response()->json([
+            'ongkir' => "Rp".number_format($ongkir['ongkir']),
+            'estimasi' => $estimasi." Hari",
+            'harga_total' => "Rp".number_format($harga_total),
+        ]);
+    }
+
+    protected function getongkir($request) {
         $berat = 0;
         foreach ($request->keranjang_id as $krj) {
             $krj = keranjang::where('id', $krj)->first();
@@ -214,6 +232,11 @@ class homepageController extends Controller
         $result = json_decode($response);
         $result = $result->rajaongkir->results[0]->costs[0]->cost[0];
 
-        return response()->json($result);
+        $return = [
+            "ongkir" => $result->value,
+            "etd" => $result->etd,
+        ];
+
+        return $return;
     }
 }
