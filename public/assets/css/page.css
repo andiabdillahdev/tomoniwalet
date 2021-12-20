@@ -337,10 +337,24 @@ position: relative;
     margin-bottom: 6rem;
 }   
 
+.section-list-tagihan{
+    margin-top: 10rem;   
+    margin-bottom: 6rem;
+}   
+
 .section-list-keranjang{
     margin-top: 9rem;
     margin-bottom: 6rem;
-}   
+} 
+
+.section-list-keranjang p {
+    font-family: 'Mulish', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 4px;
+    color: #333333;
+}
 
 #detail_produk{
     background: #F6F8F9;
@@ -922,6 +936,10 @@ color: #000000;
     border: 1px solid rgba(35, 167, 224, 1);
     box-shadow: 0 0 5px rgba(35, 167, 224, 1);   
     outline: none;
+}
+
+.detail_tagihan_item{
+    display: none;
 }
 @media screen and (max-width: 768px){
 

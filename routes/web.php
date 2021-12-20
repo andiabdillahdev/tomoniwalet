@@ -28,7 +28,8 @@ Route::post('/store-kontak', 'homepageController@storekontak');
 Route::post('/store-cart', 'homepageController@storecart');
 Route::post('/set-cart', 'homepageController@setcart');
 Route::post('/del-cart', 'homepageController@delcart');
-
+Route::get('/tagihan-order', 'homepageController@tagihanOrder')->name('homepage.tagihan');
+Route::get('/tagihan/bukti-pembayaran/{params}', 'homepageController@buktiPembayaran')->name('homepage.tagihan.buktipembayaran');
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
 Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru')->name('homepage.getProdukTerbaru');
@@ -111,6 +112,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('produk/detail/{id}', 'module\produk\produkController@detail')->name('owner.produk.detail');
     Route::post('produk/store', 'module\produk\produkController@store')->name('owner.produk.store');
     Route::get('produk/edit/{id}', 'module\produk\produkController@edit')->name('owner.produk.edit');
+    Route::post('produk/update/{params}', 'module\produk\produkController@update')->name('owner.produk.update');
     // 
 
     // Pesanan Pembelian
@@ -181,4 +183,5 @@ Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {
     Route::get('kasir/riwayat', 'staffController@riwayat')->name('staff.riwayat');
     Route::get('kasir/riwayat/getAll', 'staffController@getRiwayat')->name('staff.getRiwayat');
     Route::get('kasir/riwayat/detail/{params}', 'staffController@getRiwayatdetail')->name('staff.getRiwayatdetail');
+    Route::get('kasir/nota/penjualan', 'staffController@nota')->name('staff.nota');
 });

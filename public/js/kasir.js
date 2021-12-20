@@ -134,6 +134,7 @@ $('#saveKasir').on('click',function () {
         },
         success: function(res) {
             console.log(res);
+            window.open(host+'/staff/kasir/nota/penjualan', '_blank');
             // if (res.status_code == 200) {
             //     notif("success", res.message);
             //     setTimeout(function () {

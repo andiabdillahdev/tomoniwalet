@@ -132,4 +132,57 @@ class produkController extends Controller
         $data = produk::with('kategori','gambar_detail')->where('id',$id)->first();
         return view('panel.owner.produk.edit',compact('data','kategori'));
     }
+
+    public function update(Request $request,$id){
+        $this->validate($request, [
+            'nama' => 'required',
+            'harga' => 'required',
+            'berat' => 'required',
+            'garansi' => 'required',
+            'deskripsi' => 'required',
+            'status' => 'required'
+        ]);
+
+        $data = produk::where('id',$id)->first();
+        $data->kategori_id = $request->kategori_id;
+        $data->nama = $request->nama;
+        $data->harga = str_replace(',', '', $request->harga);
+        $data->berat = $request->berat;
+        $data->garansi = $request->garansi;
+        $data->deskripsi = $request->deskripsi;
+        $data->status = $request->status;
+        $data->save();
+
+        $images = [];
+        if (isset($request->images)) {
+            $gambar_delete = gambar_detail::where('id_produk',$data->id)->delete();
+            if ($gambar_delete) {
+                if ($request->hasFile('images')) {
+                    $files = $request->file('images');
+                    foreach ($files as $file) {
+                        $name = $file->getClientOriginalName();
+                        $file->move(public_path('uploads/produk'), $name);
+                        $images = $name;
+        
+                        $gambar = new gambar_detail();
+                        $gambar->id_produk = $data->id;
+                        $gambar->gambar = $name;
+                        $gambar->save();
+                    }
+                }
+            }
+        }
+
+        if ($data) {
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Data Produk berhasil di Update'
+            ]);
+       }else{
+           return response()->json([
+               'status_code' => 422,
+               'message' => 'Data Produk Gagal di Proses'
+           ]); 
+       }
+    }
 }

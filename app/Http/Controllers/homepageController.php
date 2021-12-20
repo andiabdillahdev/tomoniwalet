@@ -180,4 +180,12 @@ class homepageController extends Controller
             'harga_total' => $harga_total
         ]);
     }
+
+    public function tagihanOrder(){
+        return view('homepage.tagihan.tagihan');
+    }
+
+    public function buktiPembayaran(){
+        return view('homepage.tagihan.bukti_pembayaran');
+    }
 }

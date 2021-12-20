@@ -48,15 +48,15 @@
 
                                 <div class="row mb-3">
                                     <div class="col-lg-6">
-                                        <label for="exampleInputEmail1">Estimasi Pengiriman</label>
+                                        <label for="exampleInputEmail1">Berat</label>
                                         <div class="input-group">
-                                            <input type="number" class="form-control" name="estimasi_pengiriman" placeholder="Recipient's username"
-                                                aria-label="Recipient's username" value="{{$data['estimasi_pengiriman']}}">
+                                            <input type="number" class="form-control" name="berat"
+                                                value="{{$data['berat']}}">
                                             <div class="input-group-append">
-                                                <button class="btn btn-sm btn-secondary" type="button">Hari</button>
+                                                <button class="btn btn-sm btn-secondary" type="button">Gram</button>
                                             </div>
                                         </div>
-                                        <small class="text-danger error-notif" id="estimasi_pengiriman"></small>
+                                        <small class="text-danger error-notif" id="berat"></small>
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="exampleInputEmail1">Garansi</label>
@@ -115,7 +115,7 @@
                                 </div>
 
                                 <button type="button" class="btn btn-primary mr-2"
-                                    onclick="store_page('form_produk','owner/produk/store','owner/produk')">Submit</button>
+                                    onclick="store_page('form_produk','owner/produk/update/{{$data->id}}','owner/produk')">Submit</button>
                                 <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
                             </form>
                         </div>
