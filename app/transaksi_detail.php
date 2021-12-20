@@ -10,6 +10,6 @@ class transaksi_detail extends Model
 
     public function detail()
     {
-        return $this->belongsTo(transaksi::class);
+        return $this->belongsTo(keranjang::class, 'keranjang_id', 'id');
     }
 }

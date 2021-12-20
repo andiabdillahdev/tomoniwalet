@@ -214,8 +214,8 @@ class homepageController extends Controller
         $crt = transaksi::create($data);
         foreach ($request->keranjang_id as $krj) {
             transaksi_detail::create([
-                "id_transaksi_header" => $crt->id,
-                "id_keranjang" => $krj
+                "transaksi_header_id" => $crt->id,
+                "keranjang_id" => $krj
             ]);
 
             $updt = keranjang::where('id', $krj)->first();
@@ -282,7 +282,7 @@ class homepageController extends Controller
         return view('homepage.tagihan.tagihan');
     }
 
-    public function buktiPembayaran(){
-        return view('homepage.tagihan.bukti_pembayaran');
+    public function buktiPembayaran($params){
+        return view('homepage.tagihan.bukti_pembayaran', compact('params'));
     }
 }

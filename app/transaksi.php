@@ -10,6 +10,6 @@ class transaksi extends Model
 
     public function item()
     {
-        return $this->belongsTo(transaksi_detail::class);
+        return $this->hasMany(transaksi_detail::class, 'transaksi_header_id', 'id');
     }
 }
