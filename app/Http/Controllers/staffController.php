@@ -64,6 +64,19 @@ class staffController extends Controller
 
         }
 
+        if ($data) {
+            return response()->json([
+                'status_code' => 200,
+                'data' => $data,
+                'detail' => $detail
+            ]);
+       }else{
+           return response()->json([
+               'status_code' => 422,
+               'message' => 'Data Produk Gagal di Proses'
+           ]); 
+       }
+
     }
 
     public function getRiwayat(){
@@ -74,6 +87,10 @@ class staffController extends Controller
         })
         ->rawColumns([])
         ->make(true);
+    }
+
+    public function nota(){
+        return view('panel.staff.kasir.nota');
     }
 
     public function getRiwayatdetail($params){

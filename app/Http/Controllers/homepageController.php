@@ -277,4 +277,12 @@ class homepageController extends Controller
 
         return $return;
     }
+    
+    public function tagihanOrder(){
+        return view('homepage.tagihan.tagihan');
+    }
+
+    public function buktiPembayaran(){
+        return view('homepage.tagihan.bukti_pembayaran');
+    }
 }

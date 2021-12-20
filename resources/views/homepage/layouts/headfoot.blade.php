@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/fontawesome/css/brands.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/OwlCarousel/dist/assets/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendors/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <title>Tomoniwalet</title>
 </head>
 
@@ -73,6 +74,7 @@
                         <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item" href="#">Profil Saya</a></li>
+                            <li><a class="dropdown-item" href="{{ route('homepage.tagihan') }}">Tagihan</a></li>
                             <li><a class="dropdown-item" href="{{ route('homepage.page_logout') }}">Logout</a></li>
                         </ul>
                     </div>
@@ -173,6 +175,7 @@
     <script src="{{ asset('vendors/OwlCarousel/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="{{ asset('js/page.js') }}"></script>
     @stack('page_script')
     <script>
