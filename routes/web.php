@@ -32,6 +32,7 @@ Route::post('/get-ongkir-view', 'homepageController@getongkirview');
 Route::post('/checkout', 'homepageController@checkout');
 Route::get('/transaksi/{id}', 'homepageController@transaksi_view');
 Route::post('/transaksi', 'homepageController@transaksi');
+Route::post('/upload-foto-bayar', 'homepageController@upload_foto_bayar');
 
 Route::get('/tagihan-order', 'homepageController@tagihanOrder')->name('homepage.tagihan');
 Route::get('/tagihan/bukti-pembayaran/{params}', 'homepageController@buktiPembayaran')->name('homepage.tagihan.buktipembayaran');

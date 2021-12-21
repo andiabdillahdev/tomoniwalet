@@ -1,3 +1,11 @@
+@php
+$user_id = Auth::user() ? Auth::user()->id : null;
+$transaksi = new App\transaksi();
+$transaksi = $transaksi
+    ->where('user_id', $user_id)
+    ->where('status', 'baru')
+    ->get();
+@endphp
 <!doctype html>
 <html lang="en">
 
@@ -68,21 +76,37 @@
                         <span id="countCart"></span>
                     </a>
                 </div>
-                @if(Auth::user() && Auth::user()->role == '3')
-                <div id="user_auth">
-                    <div class="dropdown">
-                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Profil Saya</a></li>
-                            <li><a class="dropdown-item" href="{{ route('homepage.tagihan') }}">Tagihan</a></li>
-                            <li><a class="dropdown-item" href="{{ route('homepage.page_logout') }}">Logout</a></li>
-                        </ul>
+                @if (Auth::user() && Auth::user()->role == '3')
+                    <div id="user_auth">
+                        <div class="dropdown">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">{{ Auth::user()->name }}
+                                @if ($transaksi && count($transaksi) > 0)
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle">
+                                    </span>
+                                @endif
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Profil Saya</a></li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('homepage.tagihan') }}">
+                                        Tagihan
+                                        @if ($transaksi && count($transaksi) > 0)
+                                            <span class="top-5 translate-middle badge rounded-pill bg-danger"
+                                                style="font-size: 10px;">1</span>;
+                                        @endif
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('homepage.page_logout') }}">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
                 @else
-                <div id="sign_in">
-                    <a href="{{ route('homepage.page_login') }}" class="tm_button tm_primary">Masuk</a>
-                </div>
+                    <div id="sign_in">
+                        <a href="{{ route('homepage.page_login') }}" class="tm_button tm_primary">Masuk</a>
+                    </div>
                 @endif
                 <!-- </div> -->
             </div>
@@ -181,16 +205,20 @@
     <script>
         $(function() {
             let loadData = new homepage();
-            @if(Auth::user())
-            loadData.get_count_cart("{{ Auth::user()->id }}");
+            @if (Auth::user())
+                loadData.get_count_cart("{{ Auth::user()->id }}");
             @endif
         });
     </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
     -->
 </body>
 

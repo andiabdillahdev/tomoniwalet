@@ -283,6 +283,27 @@ class homepageController extends Controller
     }
 
     public function buktiPembayaran($params){
-        return view('homepage.tagihan.bukti_pembayaran', compact('params'));
+        $id = null;
+        $kode = null;
+        $total_harga = null;
+        $trs = transaksi::where('kode', $params)->first();
+        if ($trs) {
+            $id = $trs->id;
+            $kode = $trs->kode;
+            $total_harga = $trs->total_harga;
+        }
+        return view('homepage.tagihan.bukti_pembayaran', compact('id', 'kode', 'total_harga'));
+    }
+
+    public function upload_foto_bayar(Request $request) {
+        $file = $request->file('foto_pembayaran');
+        $nama_file = $request->kode.'-'.date('m-d-his').'.'.$file->extension();
+        $file->move(public_path('uploads/bukti_pembayaran'), $nama_file);
+
+        $trs = transaksi::where('id', $request->id)->first();
+        $trs->status = 'upload';
+        $trs->save();
+
+        return back()->with('success', true);
     }
 }

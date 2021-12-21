@@ -297,7 +297,7 @@ function homepage() {
                     text: 'Pemesanan berhasil. Silahkan selesaikan pembayaran sesuai dengan intruksi yang diberikan!',
                     confirmButtonText: 'Transaksi Sekarang',
                 }).then(function () {
-                    location.href = host + "/transaksi/" + res;
+                    location.href = host + "/tagihan-order";
                 });
             }
         });

@@ -95,6 +95,10 @@ $transaksi = $transaksi
                             <hr>
                         @endforeach
 
+                        @empty($dta)
+                            <h4 class="text-center"><i>Belum ada tagihan</i></h4>
+                        @endempty
+
                     </div>
                 </div>
         </section>
@@ -109,10 +113,6 @@ $transaksi = $transaksi
                 e.preventDefault();
                 $(this).parents('.tagihan-item').find('.detail-tagihan').slideToggle(500);
             });
-
-            // detail_toogle = (params) => {
-            //     $(`#detail_${params}`).slideToggle(500);
-            // }
         });
     </script>
 @endpush
