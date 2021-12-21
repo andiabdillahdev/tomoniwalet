@@ -28,6 +28,11 @@ Route::post('/store-kontak', 'homepageController@storekontak');
 Route::post('/store-cart', 'homepageController@storecart');
 Route::post('/set-cart', 'homepageController@setcart');
 Route::post('/del-cart', 'homepageController@delcart');
+Route::post('/get-ongkir-view', 'homepageController@getongkirview');
+Route::post('/checkout', 'homepageController@checkout');
+Route::get('/transaksi/{id}', 'homepageController@transaksi_view');
+Route::post('/transaksi', 'homepageController@transaksi');
+
 Route::get('/tagihan-order', 'homepageController@tagihanOrder')->name('homepage.tagihan');
 Route::get('/tagihan/bukti-pembayaran/{params}', 'homepageController@buktiPembayaran')->name('homepage.tagihan.buktipembayaran');
 // Home page resource
@@ -36,6 +41,7 @@ Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru'
 Route::get('/source/get-testimonial', 'sourcePageController@getTestimonial')->name('homepage.getTestimonial');
 Route::get('/source/get-belanja', 'sourcePageController@getBelanja');
 Route::get('/source/get-kategori', 'sourcePageController@getKategori');
+Route::get('/source/get-location', 'sourcePageController@getLocation');
 Route::post('/source/get-count-cart', 'sourcePageController@getCountCart');
 
 // GOOGLE

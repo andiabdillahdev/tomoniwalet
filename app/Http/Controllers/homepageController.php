@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\kontak;
 use App\keranjang;
+use App\transaksi;
+use App\transaksi_detail;
 
 use Hash;
 
@@ -75,6 +77,7 @@ class homepageController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->role = '3';
         $user->password =  Hash::make($request->password);
         $user->save();
 
@@ -181,11 +184,105 @@ class homepageController extends Controller
         ]);
     }
 
+    public function getongkirview(Request $request) {
+        $ongkir = $this->getongkir($request);
+        $estimasi = str_replace(' HARI', '', $ongkir['etd']);
+
+        return response()->json([
+            'ongkir' => "Rp".number_format($ongkir['ongkir']),
+            'estimasi' => $estimasi." Hari",
+            'harga_total' => "Rp".number_format($ongkir["harga_total"]),
+        ]);
+    }
+
+    public function checkout(Request $request) {
+        $data = $request->all();
+        $ongkir = $this->getongkir($request);
+        $trs = transaksi::orderBy('id', 'desc')->first();
+        $last_id = $trs ? $trs->id : '0';
+        $data['kode'] = "TML-".sprintf('%03s', $last_id).date('-d-Y');
+        $data["tanggal"] = date('Y-m-d');
+        $data["biaya_ongkir"] = $ongkir["ongkir"];
+        $data["total_harga"] = $ongkir["harga_total"];
+        $data["provinsi"] = $request->provinsi_val;
+        $data["kota"] = $request->kota_val;
+        $data["status"] = 'baru';
+        unset($data["keranjang_id"]);
+        unset($data["provinsi_val"]);
+        unset($data["kota_val"]);
+
+        $crt = transaksi::create($data);
+        foreach ($request->keranjang_id as $krj) {
+            transaksi_detail::create([
+                "transaksi_header_id" => $crt->id,
+                "keranjang_id" => $krj
+            ]);
+
+            $updt = keranjang::where('id', $krj)->first();
+            $updt->status = "valid";
+            $updt->save();
+        }
+
+        return $crt->id;
+    }
+
+    public function transaksi_view($id) {
+        dd($id);
+    }
+
+    protected function getongkir($request) {
+        $berat = 0;
+        foreach ($request->keranjang_id as $krj) {
+            $krj = keranjang::where('id', $krj)->first();
+            $berat += ($krj->produk->berat * $krj->kuantitas);
+        }
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "origin=245&destination=".$request->kota."&weight=".$berat."&courier=".$request->jasa_kirim,
+            CURLOPT_HTTPHEADER => [
+                "content-type: application/x-www-form-urlencoded",
+                "key: 35fbb9c26760769e9a5874c20ad90004"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $result = json_decode($response);
+        $result = $result->rajaongkir->results[0]->costs[0]->cost[0];
+
+        $get_total = 0;
+        $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
+        foreach ($get_keranjang as $dta) {
+            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+        }
+        $harga_total = $result->value + $get_total;
+
+        $return = [
+            "ongkir" => $result->value,
+            "etd" => $result->etd,
+            "harga_total" => $harga_total
+        ];
+
+        return $return;
+    }
+    
     public function tagihanOrder(){
         return view('homepage.tagihan.tagihan');
     }
 
-    public function buktiPembayaran(){
-        return view('homepage.tagihan.bukti_pembayaran');
+    public function buktiPembayaran($params){
+        return view('homepage.tagihan.bukti_pembayaran', compact('params'));
     }
 }
