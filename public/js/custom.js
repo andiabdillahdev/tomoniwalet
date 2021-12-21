@@ -6,17 +6,16 @@ $(function(){
             url: host + "/" + url,
             dataType: "html",
             success: function(response) {
-                if (other != undefined) {
-                    $("#modalTabelTitle").html(title);
-                    $("#modal-body-table").html(response);
-                    $("#exampleModalTable").modal('show');
-                    dataTableDetailModal('owner/produk/getall','tb_detail_persediaan','produk');
-              
-                } else {
-                    $("#exampleModalLabel").html(title);
-                    $("#modal-body").html(response);
-                    $("#exampleModal").modal('show');
-                }
+                $("#modalTabelTitle").html(title);
+                $("#modal-body-table").html(response);
+                $("#exampleModalTable").modal('show');
+                dataTableDetailModal('owner/produk/getall','tb_detail_persediaan','produk');
+
+                // else {
+                //     $("#exampleModalLabel").html(title);
+                //     $("#modal-body").html(response);
+                //     $("#exampleModal").modal('show');
+                // }
                     
             },
             error: function() {
