@@ -179,7 +179,8 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     // Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
     // Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
 
-
+    // Pesanan Diproses
+    Route::get('v/kelola-pesanan/{page}', 'module\pesanan\pesananController@view');
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {

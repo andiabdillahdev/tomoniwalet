@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class pesananController extends Controller
 {
-    //
+    public function view($page) {
+        return view('panel.owner.kelola_pesanan.'.$page);
+    }
 }
