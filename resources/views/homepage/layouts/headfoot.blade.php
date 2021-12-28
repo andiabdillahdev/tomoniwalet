@@ -24,6 +24,10 @@ $transaksi = $transaksi
     <link rel="stylesheet" href="{{ asset('vendors/OwlCarousel/dist/assets/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendors/toastr/toastr.min.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/js/select.dataTables.min.css') }}">
+
     <title>Tomoniwalet</title>
 </head>
 
@@ -88,15 +92,19 @@ $transaksi = $transaksi
                                 @endif
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Profil Saya</a></li>
+                                <li><a class="dropdown-item" href="{{ route('homepage.profil') }}">Profil Saya</a>
+                                </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ route('homepage.tagihan') }}">
                                         Tagihan
                                         @if ($transaksi && count($transaksi) > 0)
                                             <span class="top-5 translate-middle badge rounded-pill bg-danger"
-                                                style="font-size: 10px;">1</span>;
+                                                style="font-size: 10px;">{{ count($transaksi) }}</span>
                                         @endif
                                     </a>
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('homepage.riwayat') }}">Riwayat
+                                        Pesanan</a>
                                 </li>
                                 <li><a class="dropdown-item" href="{{ route('homepage.page_logout') }}">Logout</a>
                                 </li>
@@ -200,6 +208,11 @@ $transaksi = $transaksi
     <script src="{{ asset('vendors/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+
+    <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.select.min.js') }}"></script>
+
     <script src="{{ asset('js/page.js') }}"></script>
     @stack('page_script')
     <script>

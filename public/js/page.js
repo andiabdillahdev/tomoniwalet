@@ -319,6 +319,25 @@ function homepage() {
 
         return result;
     }
+
+    this.profil = function (data) {
+        $.ajax({
+            type: "POST",
+            url: host + "/edit-profil",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            data: data,
+            success: function (res) {
+                notif(res.type, res.message);
+                if (res.type == 'success') {
+                    setTimeout(function () {
+                        location.reload();
+                    }, 500);
+                }
+            }
+        });
+    }
 }
 
 
