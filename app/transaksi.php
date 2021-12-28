@@ -12,4 +12,9 @@ class transaksi extends Model
     {
         return $this->hasMany(transaksi_detail::class, 'transaksi_header_id', 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

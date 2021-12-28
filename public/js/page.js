@@ -301,7 +301,7 @@ function homepage() {
                     text: 'Pemesanan berhasil. Silahkan selesaikan pembayaran sesuai dengan intruksi yang diberikan!',
                     confirmButtonText: 'Transaksi Sekarang',
                 }).then(function () {
-                    location.href = host + "/transaksi/" + res;
+                    location.href = host + "/tagihan-order";
                 });
             }
         });
@@ -322,6 +322,25 @@ function homepage() {
         });
 
         return result;
+    }
+
+    this.profil = function (data) {
+        $.ajax({
+            type: "POST",
+            url: host + "/edit-profil",
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+            },
+            data: data,
+            success: function (res) {
+                notif(res.type, res.message);
+                if (res.type == 'success') {
+                    setTimeout(function () {
+                        location.reload();
+                    }, 500);
+                }
+            }
+        });
     }
 }
 

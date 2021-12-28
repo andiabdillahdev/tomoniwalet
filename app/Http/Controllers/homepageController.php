@@ -15,31 +15,38 @@ use Hash;
 
 class homepageController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('homepage.index');
     }
 
-    public function tentang(){
+    public function tentang()
+    {
         return view('homepage.tentang');
     }
 
-    public function belanja_list(){
+    public function belanja_list()
+    {
         return view('homepage.belanja.index');
     }
 
-    public function produk_detail($params){
+    public function produk_detail($params)
+    {
         return view('homepage.belanja.detail');
     }
 
-    public function page_login(){
+    public function page_login()
+    {
         return view('homepage.login');
     }
 
-    public function page_register(){
+    public function page_register()
+    {
         return view('homepage.register');
     }
 
-    public function page_login_post(Request $request){
+    public function page_login_post(Request $request)
+    {
         $this->validate($request, [
             'email' => 'required',
             'password' => 'required'
@@ -64,7 +71,8 @@ class homepageController extends Controller
         return redirect()->back()->withInput($request->only('email', 'password'))->withErrors(['error' => ['Email atau password yang anda masukkan salah!']]);
     }
 
-    public function page_register_post(Request $request){
+    public function page_register_post(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required',
             'password' => 'required',
@@ -72,13 +80,13 @@ class homepageController extends Controller
             'confirm_password' => 'required_with:password|same:password|min:8'
         ]);
 
-        
+
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role = '3';
-        $user->password =  Hash::make($request->password);
+        $user->password =  bcrypt($request->password);
         $user->save();
 
         if ($user) {
@@ -86,14 +94,15 @@ class homepageController extends Controller
                 'status_code' => 200,
                 'message' => 'Registrasi Berhasil'
             ]);
-        }else{
+        } else {
             return response()->json([
                 'message' => 'Registrasi Gagal di Proses'
-            ],422); 
+            ], 422);
         }
     }
 
-    public function page_logout(Request $request){
+    public function page_logout(Request $request)
+    {
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
@@ -101,7 +110,8 @@ class homepageController extends Controller
         return redirect('/');
     }
 
-    public function kontak(){
+    public function kontak()
+    {
         return view('homepage.kontak');
     }
 
@@ -114,22 +124,23 @@ class homepageController extends Controller
                 'status_code' => 200,
                 'message' => 'Pesan Anda berhasil dikirim'
             ]);
-        } else{
+        } else {
             return response()->json([
                 'message' => 'Terjadi Kesalahan. Gagal di Proses'
-            ],422); 
+            ], 422);
         }
     }
 
-    public function keranjang(){
+    public function keranjang()
+    {
         return view('homepage.keranjang');
     }
-    
+
     public function storecart(Request $request)
     {
         $cek = keranjang::where('user_id', $request->user_id)->where('produk_id', $request->produk_id)->where('status', 'invalid')->first();
         if ($cek) {
-            $cek->kuantitas = $cek->kuantitas+1;
+            $cek->kuantitas = $cek->kuantitas + 1;
             $cek->save();
         } else {
             keranjang::create($request->all());
@@ -147,16 +158,16 @@ class homepageController extends Controller
         $data->kuantitas = $request->kuantitas;
         $data->save();
 
-        $total = 'Rp'.number_format($data->produk->harga * $data->kuantitas);
+        $total = 'Rp' . number_format($data->produk->harga * $data->kuantitas);
 
         $get_total = 0;
         $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
 
         foreach ($get_keranjang as $dta) {
-            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+            $get_total = $get_total + $dta->produk->harga * $dta->kuantitas;
         }
 
-        $harga_total = 'Rp'.number_format($get_total);
+        $harga_total = 'Rp' . number_format($get_total);
 
         return response()->json([
             'total' => $total,
@@ -173,10 +184,10 @@ class homepageController extends Controller
         $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
 
         foreach ($get_keranjang as $dta) {
-            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+            $get_total = $get_total + $dta->produk->harga * $dta->kuantitas;
         }
 
-        $harga_total = 'Rp'.number_format($get_total);
+        $harga_total = 'Rp' . number_format($get_total);
 
         return response()->json([
             'total_keranjang' => count($get_keranjang),
@@ -184,23 +195,25 @@ class homepageController extends Controller
         ]);
     }
 
-    public function getongkirview(Request $request) {
+    public function getongkirview(Request $request)
+    {
         $ongkir = $this->getongkir($request);
         $estimasi = str_replace(' HARI', '', $ongkir['etd']);
 
         return response()->json([
-            'ongkir' => "Rp".number_format($ongkir['ongkir']),
-            'estimasi' => $estimasi." Hari",
-            'harga_total' => "Rp".number_format($ongkir["harga_total"]),
+            'ongkir' => "Rp" . number_format($ongkir['ongkir']),
+            'estimasi' => $estimasi . " Hari",
+            'harga_total' => "Rp" . number_format($ongkir["harga_total"]),
         ]);
     }
 
-    public function checkout(Request $request) {
+    public function checkout(Request $request)
+    {
         $data = $request->all();
         $ongkir = $this->getongkir($request);
         $trs = transaksi::orderBy('id', 'desc')->first();
         $last_id = $trs ? $trs->id : '0';
-        $data['kode'] = "TML-".sprintf('%03s', $last_id).date('-d-Y');
+        $data['kode'] = "TML-" . sprintf('%03s', $last_id) . date('-d-Y');
         $data["tanggal"] = date('Y-m-d');
         $data["biaya_ongkir"] = $ongkir["ongkir"];
         $data["total_harga"] = $ongkir["harga_total"];
@@ -226,11 +239,13 @@ class homepageController extends Controller
         return $crt->id;
     }
 
-    public function transaksi_view($id) {
+    public function transaksi_view($id)
+    {
         dd($id);
     }
 
-    protected function getongkir($request) {
+    protected function getongkir($request)
+    {
         $berat = 0;
         foreach ($request->keranjang_id as $krj) {
             $krj = keranjang::where('id', $krj)->first();
@@ -247,7 +262,7 @@ class homepageController extends Controller
             CURLOPT_TIMEOUT => 30,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "origin=245&destination=".$request->kota."&weight=".$berat."&courier=".$request->jasa_kirim,
+            CURLOPT_POSTFIELDS => "origin=245&destination=" . $request->kota . "&weight=" . $berat . "&courier=" . $request->jasa_kirim,
             CURLOPT_HTTPHEADER => [
                 "content-type: application/x-www-form-urlencoded",
                 "key: 35fbb9c26760769e9a5874c20ad90004"
@@ -265,7 +280,7 @@ class homepageController extends Controller
         $get_total = 0;
         $get_keranjang = keranjang::where('user_id', $request->user_id)->where('status', 'invalid')->get();
         foreach ($get_keranjang as $dta) {
-            $get_total = $get_total + $dta->produk->harga*$dta->kuantitas;
+            $get_total = $get_total + $dta->produk->harga * $dta->kuantitas;
         }
         $harga_total = $result->value + $get_total;
 
@@ -277,12 +292,93 @@ class homepageController extends Controller
 
         return $return;
     }
-    
-    public function tagihanOrder(){
+
+    public function tagihanOrder()
+    {
         return view('homepage.tagihan.tagihan');
     }
 
-    public function buktiPembayaran($params){
-        return view('homepage.tagihan.bukti_pembayaran', compact('params'));
+    public function buktiPembayaran($params)
+    {
+        $id = null;
+        $kode = null;
+        $total_harga = null;
+        $trs = transaksi::where('kode', $params)->first();
+        if ($trs) {
+            $id = $trs->id;
+            $kode = $trs->kode;
+            $total_harga = $trs->total_harga;
+        }
+        return view('homepage.tagihan.bukti_pembayaran', compact('id', 'kode', 'total_harga'));
+    }
+
+    public function upload_foto_bayar(Request $request)
+    {
+        $file = $request->file('foto_pembayaran');
+        $nama_file = $request->kode . '-' . date('m-d-his') . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/bukti_pembayaran'), $nama_file);
+
+        $trs = transaksi::where('id', $request->id)->first();
+        $trs->foto_pembayaran = $nama_file;
+        $trs->status = 'upload';
+        $trs->save();
+
+        return back()->with('success', true);
+    }
+
+    public function riwayatPesanan()
+    {
+        return view('homepage.riwayat');
+    }
+
+    public function getDetailPesanan(Request $request)
+    {
+        $data = transaksi::where('id', $request->id)->first();
+        $data['tanggal'] = date('d/m/Y', strtotime($data->tanggal));
+        $data['nama'] = $data->user->name;
+        $data['jasa_kirim'] = strtoupper($data->jasa_kirim);
+        $data['biaya_ongkir'] = 'Rp' . number_format($data->biaya_ongkir);
+        $data['total_harga'] = 'Rp' . number_format($data->total_harga);
+
+        $item = [];
+        foreach ($data->item as $itm) {
+            // var_dump($itm->detail->produk->kode);
+            $item[] = [
+                "kode_barang" => $itm->detail->produk->kode,
+                "nama_barang" => $itm->detail->produk->nama,
+                "kuantitas" => $itm->detail->kuantitas,
+                "harga" => 'Rp' . number_format($itm->detail->produk->harga),
+                "total" => 'Rp' . number_format($itm->detail->produk->harga * $itm->detail->kuantitas),
+                "berat" => $itm->detail->produk->berat . ' gram',
+            ];
+        }
+        $data['item_barang'] = $item;
+        return $data;
+    }
+
+    public function profil()
+    {
+        return view('homepage.profil');
+    }
+
+    public function editProfil(Request $request)
+    {
+        $cek_email = User::where('email', $request->email)->where('id', '!=', $request->id)->first();
+        if ($cek_email) {
+            return response()->json([
+                'type' => 'warning',
+                'message' => 'Email sudah terdaftar',
+            ]);
+        }
+
+        $updt = User::where('id', $request->id)->first();
+        $updt->name = $request->name;
+        $updt->email = $request->email;
+        $updt->save();
+
+        return response()->json([
+            'type' => 'success',
+            'message' => 'Profil berhasil diupdate',
+        ]);
     }
 }

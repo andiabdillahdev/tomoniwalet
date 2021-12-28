@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +33,16 @@ Route::post('/get-ongkir-view', 'homepageController@getongkirview');
 Route::post('/checkout', 'homepageController@checkout');
 Route::get('/transaksi/{id}', 'homepageController@transaksi_view');
 Route::post('/transaksi', 'homepageController@transaksi');
+Route::post('/upload-foto-bayar', 'homepageController@upload_foto_bayar');
 
 Route::get('/tagihan-order', 'homepageController@tagihanOrder')->name('homepage.tagihan');
 Route::get('/tagihan/bukti-pembayaran/{params}', 'homepageController@buktiPembayaran')->name('homepage.tagihan.buktipembayaran');
+
+Route::get('/riwayat-pesanan', 'homepageController@riwayatPesanan')->name('homepage.riwayat');
+Route::get('/get-detail-pesanan', 'homepageController@getDetailPesanan');
+
+Route::get('/profil', 'homepageController@profil')->name('homepage.profil');
+Route::post('/edit-profil', 'homepageController@editProfil');
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
 Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru')->name('homepage.getProdukTerbaru');
@@ -80,18 +88,18 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('pengaturan-website/jumbotron', 'module\pengaturanWebsiteController@jumbotron')->name('owner.pengaturan_website.jumbotron');
     Route::post('pengaturan-website/jumbotronStore/{params}', 'module\pengaturanWebsiteController@jumbotronStore')->name('owner.pengaturan_website.jumbotronStore');
     Route::post('pengaturan-website/hero-kategori', 'module\pengaturanWebsiteController@hero_kategori')->name('owner.pengaturan_website.hero_kategori');
-    
+
 
     // Testimonial
-    Route::get('pengaturan-website/testimonial', 'module\pengaturanWebsiteController@testimonial')->name('owner.pengaturan_website.testimonial');   
+    Route::get('pengaturan-website/testimonial', 'module\pengaturanWebsiteController@testimonial')->name('owner.pengaturan_website.testimonial');
     Route::get('pengaturan-website/form_testimonial', 'module\pengaturanWebsiteController@form_testimonial')->name('owner.pengaturan_website.form_testimonial');
-    Route::post('pengaturan-website/post_testimonial', 'module\pengaturanWebsiteController@post_testimonial')->name('owner.pengaturan_website.post_testimonial'); 
-    Route::post('pengaturan-website/update_testimonial/{params}', 'module\pengaturanWebsiteController@update_testimonial')->name('owner.pengaturan_website.update_testimonial');  
-    Route::get('pengaturan-website/getAllTestimonial', 'module\pengaturanWebsiteController@getAllTestimonial')->name('owner.pengaturan_website.getAllTestimonial'); 
-    Route::get('pengaturan-website/edit-testimoni/{params}', 'module\pengaturanWebsiteController@editTestimoni')->name('owner.pengaturan_website.editTestimoni'); 
-    Route::delete('pengaturan-website/delete-testimoni/{params}', 'module\pengaturanWebsiteController@deleteTestimoni')->name('owner.pengaturan_website.deleteTestimoni'); 
+    Route::post('pengaturan-website/post_testimonial', 'module\pengaturanWebsiteController@post_testimonial')->name('owner.pengaturan_website.post_testimonial');
+    Route::post('pengaturan-website/update_testimonial/{params}', 'module\pengaturanWebsiteController@update_testimonial')->name('owner.pengaturan_website.update_testimonial');
+    Route::get('pengaturan-website/getAllTestimonial', 'module\pengaturanWebsiteController@getAllTestimonial')->name('owner.pengaturan_website.getAllTestimonial');
+    Route::get('pengaturan-website/edit-testimoni/{params}', 'module\pengaturanWebsiteController@editTestimoni')->name('owner.pengaturan_website.editTestimoni');
+    Route::delete('pengaturan-website/delete-testimoni/{params}', 'module\pengaturanWebsiteController@deleteTestimoni')->name('owner.pengaturan_website.deleteTestimoni');
     // 
-    
+
     // Supplier
     Route::get('supplier/getall', 'module\masterdata\supplierController@getAll')->name('owner.masterdata.supplier.getAll');
     Route::get('supplier', 'module\masterdata\supplierController@index')->name('owner.masterdata.supplier');
@@ -111,7 +119,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::post('satuan/update/{id}', 'module\masterdata\satuanController@update')->name('owner.masterdata.satuan.update');
     Route::delete('satuan/destroy/{id}', 'module\masterdata\satuanController@destroy')->name('owner.masterdata.satuan.destroy');
     //
-    
+
     // Produk
     Route::get('produk/getall', 'module\produk\produkController@getAll')->name('owner.produk.getAll');
     Route::get('produk', 'module\produk\produkController@index')->name('owner.produk.index');
@@ -136,16 +144,16 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('pesanan-pembelian/purchase_order/{paramss}', 'module\persediaan\pesananpembelianController@purchase_order')->name('owner.persediaan.pesanan_pembelian.purchase_order');
 
 
-      // Barang Masuk 
-      Route::get('barang-masuk', 'module\persediaan\barangmasukController@index')->name('owner.persediaan.barangmasuk.index');
-      Route::get('barang-masuk/create', 'module\persediaan\barangmasukController@create')->name('owner.persediaan.barangmasuk.create');
-      Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
-      Route::post('barang-masuk/store', 'module\persediaan\barangmasukController@store')->name('owner.persediaan.barangmasuk.store');
-      Route::post('barang-masuk/update/{params}', 'module\persediaan\barangmasukController@update')->name('owner.persediaan.barangmasuk.update');
-      Route::get('barang-masuk/getAll', 'module\persediaan\barangmasukController@getAll')->name('owner.persediaan.barangmasuk.getAll');
-      Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
-      Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
-      Route::get('barang-masuk/bysupplier', 'module\persediaan\barangmasukController@bysupplier')->name('owner.persediaan.barangmasuk.bysupplier');
+    // Barang Masuk 
+    Route::get('barang-masuk', 'module\persediaan\barangmasukController@index')->name('owner.persediaan.barangmasuk.index');
+    Route::get('barang-masuk/create', 'module\persediaan\barangmasukController@create')->name('owner.persediaan.barangmasuk.create');
+    Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
+    Route::post('barang-masuk/store', 'module\persediaan\barangmasukController@store')->name('owner.persediaan.barangmasuk.store');
+    Route::post('barang-masuk/update/{params}', 'module\persediaan\barangmasukController@update')->name('owner.persediaan.barangmasuk.update');
+    Route::get('barang-masuk/getAll', 'module\persediaan\barangmasukController@getAll')->name('owner.persediaan.barangmasuk.getAll');
+    Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
+    Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
+    Route::get('barang-masuk/bysupplier', 'module\persediaan\barangmasukController@bysupplier')->name('owner.persediaan.barangmasuk.bysupplier');
 
     //   Stok
     Route::get('stok', 'module\persediaan\stokController@index')->name('owner.persediaan.stok.index');
@@ -200,7 +208,13 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     // Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
     // Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
 
-
+    // Kelola Pesanan
+    Route::get('v/kelola-pesanan/{page}', 'module\pesanan\pesananController@view');
+    Route::get('pesanan/getall', 'module\pesanan\pesananController@getAll');
+    Route::get('pesanan/getallfinish', 'module\pesanan\pesananController@getAllFinish');
+    Route::get('pesanan/getdetail', 'module\pesanan\pesananController@getDetail');
+    Route::get('pesanan/getfotobukti', 'module\pesanan\pesananController@getFotoBukti');
+    Route::post('pesanan/proses', 'module\pesanan\pesananController@proses');
 });
 
 Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {

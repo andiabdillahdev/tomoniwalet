@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/checkbox.css') }}">
   <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/owl.carousel.min.css') }}">
 </head>
+
 <body>
   <div class="container-scroller">
     <!-- partial:partials/_navbar.html -->
@@ -164,84 +165,245 @@
                 <li class="nav-item"> <a class="nav-link" href="{{ route('owner.retur_penjualan') }}">Return Penjualan</a></li>
               </ul>
             </div>
-          </li>
-         
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">
-            <i class="icon-head menu-icon"></i>
-              <span class="menu-title">User Management</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- partial -->
-      <div class="main-panel">
-        
-        @yield('content')
-        <!-- <router-view></router-view> -->
-        
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
-          </div>
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
-          </div>
-        </footer> 
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+
+                <ul class="navbar-nav navbar-nav-right">
+
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <img src="{{ asset('admin/images/faces/face28.jpg') }}" alt="profile" />
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                            aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="ti-power-off text-primary"></i>
+                                Logout
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
         <!-- partial -->
-      </div>
-      <!-- main-panel ends -->
-    </div>   
-    <!-- page-body-wrapper ends -->
-  </div>
-  <!-- container-scroller -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_settings-panel.html -->
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+
+            <!-- partial -->
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="icon-grid menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#master-data" aria-expanded="false"
+                            aria-controls="master-data">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Master Data</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="master-data">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.masterdata.supplier') }}">Supplier</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.masterdata.kategori') }}">Kategori</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.masterdata.satuan') }}">Satuan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#kelola-pesanan" aria-expanded="false"
+                            aria-controls="kelola-pesanan">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Kelola Pesanan</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="kelola-pesanan">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('owner/v/kelola-pesanan/diproses') }}">Proses Diproses</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('owner/v/kelola-pesanan/selesai') }}">Pesanan Selesai</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#landing-page" aria-expanded="false"
+                            aria-controls="landing-page">
+                            <i class="icon-columns menu-icon"></i>
+                            <span class="menu-title">Pengaturan Website</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="landing-page">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.pengaturan_website.jumbotron') }}">Jumbotron</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.pengaturan_website.testimonial') }}">Testimonial</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="pages/ui-features/dropdowns.html">Tentang</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="pages/ui-features/typography.html">Media Sosial</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="pages/ui-features/typography.html">Cara Pemesanan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('owner.produk.index') }}">
+                            <i class="icon-grid menu-icon"></i>
+                            <span class="menu-title">Produk</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('owner.retail_penjualan') }}">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Penjualan Retail</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#transaksi" aria-expanded="false"
+                            aria-controls="transaksi">
+                            <i class="icon-layout menu-icon"></i>
+                            <span class="menu-title">Persediaan</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="transaksi">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.persediaan.pesanan_pembelian.index') }}">Pesanan
+                                        Pembelian</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.persediaan.pengiriman.index') }}">Pengiriman
+                                        Pesanan</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.persediaan.barangmasuk.index') }}">Barang Masuk</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.persediaan.barangkeluar.index') }}">Barang Keluar</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.persediaan.stok.index') }}">Stok</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#return-transaksi" aria-expanded="false"
+                            aria-controls="return-transaksi">
+                            <i class="icon-bar-graph menu-icon"></i>
+                            <span class="menu-title">Return Transaksi</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="return-transaksi">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="pages/ui-features/buttons.html">Return Pembelian</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="pages/ui-features/dropdowns.html">Return Penjualan</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">
+                            <i class="icon-head menu-icon"></i>
+                            <span class="menu-title">User Management</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+
+                @yield('content')
+                <!-- <router-view></router-view> -->
+
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.
+                            Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin
+                                template</a> from BootstrapDash. All rights reserved.</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
+                            with <i class="ti-heart text-danger ml-1"></i></span>
+                    </div>
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a
+                                href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
+                    </div>
+                </footer>
+                <!-- partial -->
             </div>
-            <div class="modal-body" id="modal-body">
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+                </div>
 
             </div>
-
         </div>
     </div>
-</div>
 
-<div class="modal fade bd-example-modal-lg" id="exampleModalTable" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTabelTitle">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="modal-body-table">
+    <div class="modal fade bd-example-modal-lg" id="exampleModalTable" tabindex="-1" role="dialog"
+        aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTabelTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body-table">
 
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-  <!-- plugins:js -->
-  <script src="{{ asset('admin/vendors/js/vendor.bundle.base.js') }}"></script>
-  <!-- endinject -->
-  <!-- Plugin js for this page -->
-  <script src="{{ asset('admin/vendors/chart.js/Chart.min.js') }}"></script>
-  <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
-  <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
-  <script src="{{ asset('admin/js/dataTables.select.min.js') }}"></script>
+    <!-- plugins:js -->
+    <script src="{{ asset('admin/vendors/js/vendor.bundle.base.js') }}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{{ asset('admin/vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.select.min.js') }}"></script>
 
   <!-- End plugin js for this page -->
   <!-- inject:js -->
@@ -266,4 +428,3 @@
 </body>
 
 </html>
-
