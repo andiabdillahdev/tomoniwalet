@@ -1,0 +1,103 @@
+
+
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+$font-family-sans-serif-2: 'Poppins', sans-serif;
+$font-family-serif: 'Source Serif Pro', serif;
+
+
+
+body {
+	font-family: $font-family-sans-serif;
+	background-color: #fff;
+}
+p {
+	color: darken(#ccc, 10%);
+	font-weight: 300;
+}
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: $font-family-sans-serif;
+}
+a {
+	transition: .3s all ease;
+	&, &:hover {
+		text-decoration: none!important;
+	}
+}
+.content {
+	padding: 7rem 0;
+}
+h2 {
+	font-size: 20px;
+}
+
+
+.custom-control {
+  
+
+  &.teleport-switch{
+    --color: #4cd964;
+    padding-left: 0;
+
+    .teleport-switch-control-input{
+      display: none;
+      &:checked~.teleport-switch-control-indicator{
+        border-color: var(--color);
+
+        &::after{
+          left: -14px;
+        }
+
+        &::before{
+          right: 2px;
+          background-color: var(--color);
+        }
+      }
+      &:disabled~.teleport-switch-control-indicator{
+        opacity: .4;
+      }
+    }
+    .teleport-switch-control-indicator{
+      display: inline-block;
+      position: relative;
+      margin: 0 10px;
+      top: 4px;
+      width: 32px;
+      height: 20px;
+      background: #fff;
+      border-radius: 16px;
+      transition: .3s;
+      border: 2px solid #ccc;
+      overflow: hidden;
+
+      &::after{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        transition: .3s;
+        top: 2px;
+        left: 2px;
+        background: #ccc;
+      }
+
+      &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        transition: .3s;
+        top: 2px;
+        right: -14px;
+        background: #ccc;
+      }
+    }
+  }
+}

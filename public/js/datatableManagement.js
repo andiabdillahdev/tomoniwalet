@@ -196,7 +196,7 @@ $(function () {
         columns: [
             { data: "id" },
             { data: "nama" },
-            { data: "keterangan" },
+            { data: "nilai" },
             { data: null },
         ],
         columnDefs: [
@@ -374,11 +374,122 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/pesanan-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pesanan-pembelian/destroy/${data.id}','tb_pesanan_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<a class="btn btn-info mr-2" target="_blank" href="${host}/owner/pesanan-pembelian/purchase_order/${data.id}"><i class="fa fa-eye"></i> Nota</a><a role="button"  href="${host}/owner/pesanan-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pesanan-pembelian/destroy/${data.id}','tb_pesanan_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
     });
+
+    tb_retur_pembelian = $("#tb_retur_pembelian").DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/retur-pembelian/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "kode" },
+            { data: "tanggal" },    
+            { data: "supplier" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                width: "250px",
+                sClass: "text-center",
+                render: function (data) {
+                    return `<a role="button"  href="${host}/owner/retur-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pesanan-pembelian/destroy/${data.id}','tb_pesanan_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
+                },
+            },
+        ],
+    });
+
+    tb_retur_penjualan = $("#tb_retur_pembelian").DataTable({
+        bLengthChange: true,
+        bFilter: true,
+        bInfo: true,
+        bAutoWidth: true,
+        searching: true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: host + "/owner/retur-penjualan/getAll",
+            async: true,
+            error: function (res) {},
+        },
+        deferRender: true,
+        responsive: !0,
+        colReorder: !0,
+        pagingType: "full_numbers",
+        stateSave: !1,
+        language: {
+            zeroRecords: "Belum ada data...",
+            processing: '<span class="text-danger">Mengambil Data....</span>',
+        },
+        columns: [
+            { data: "id" },
+            { data: "kode" },
+            { data: "tanggal" },    
+            { data: "supplier" },
+            { data: null },
+        ],
+        columnDefs: [
+            {
+                defaultContent: "-",
+                targets: "_all",
+            },
+            {
+                targets: 0,
+                className: "dt-left",
+                orderable: false,
+                searchable: false,
+                visible: false,
+            },
+            {
+                targets: -1,
+                title: "Actions",
+                orderable: false,
+                searchable: false,
+                width: "250px",
+                sClass: "text-center",
+                render: function (data) {
+                    return `<a role="button"  href="${host}/owner/retur-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pesanan-pembelian/destroy/${data.id}','tb_pesanan_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
+                },
+            },
+        ],
+    });
+
 
     tb_pengiriman_pesanan = $("#tb_pengiriman_pesanan").DataTable({
         bLengthChange: true,
@@ -441,7 +552,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/pengiriman-pesanan/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pengiriman-pesanan/destroy/${data.id}','tb_pengiriman_pesanan')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<a role="button" target="_blank" href="${host}/owner/pengiriman-pesanan/delivery-order/${data.id}" class="btn btn-info mr-2"><i class="fa fa-eye"></i> Nota</a><a role="button"  href="${host}/owner/pengiriman-pesanan/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pengiriman-pesanan/destroy/${data.id}','tb_pengiriman_pesanan')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
@@ -605,7 +716,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<a role="button"  href="${host}/owner/barang-masuk/edit/${data.id}" class="btn btn-info mr-2" ><i class="fa fa-edit"></i> Riwayat</a>`;
+                    return `<a role="button"  href="${host}/owner/stok/riwayat/${data.id}" class="btn btn-info mr-2" ><i class="fa fa-edit"></i> Riwayat</a>`;
                 },
             },
         ],

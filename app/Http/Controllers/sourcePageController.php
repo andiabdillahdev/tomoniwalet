@@ -8,7 +8,7 @@ use App\produk;
 use App\testimonial;
 use App\kategori;
 use App\keranjang;
-
+use App\stok;
 class sourcePageController extends Controller
 {
     public function getheroSection(){
@@ -60,6 +60,11 @@ class sourcePageController extends Controller
         }
         
         return response()->json($html);
+    }
+
+    public function getProdukTerlaris(){
+        $data = stok::with('produk')->orderBy('jumlah','desc')->paginate(4);
+        return $data;
     }
 
     public function getLocation(Request $request) {

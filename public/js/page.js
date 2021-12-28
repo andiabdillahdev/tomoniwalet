@@ -78,7 +78,7 @@ function homepage() {
     }
     // End Hero Section
     // Produk Terlaris
-    this.produk_terlaris = function () {
+    this.produk_terbaru = function () {
         let html = '';
         $.ajax({
             type: "GET",
@@ -113,6 +113,10 @@ function homepage() {
         });
     }
     // End Produk Terlaris
+
+    this.produk_terlaris = function () {
+        
+    }
 
     // Testimonial
     this.testimonial = function () {

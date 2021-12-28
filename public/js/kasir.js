@@ -133,14 +133,15 @@ $('#saveKasir').on('click',function () {
             'detail' : detail
         },
         success: function(res) {
-            console.log(res);
-            window.open(host+'/staff/kasir/nota/penjualan', '_blank');
-            // if (res.status_code == 200) {
-            //     notif("success", res.message);
-            //     setTimeout(function () {
-            //         window.location.href = host + "/" + redirect;
-            //     }, 1500);
-            // } 
+            console.log(res.data['id']);
+            
+            if (res.status_code == 200) {
+                notif("success", res.message);
+                window.open(host+'/staff/kasir/nota/penjualan/'+res.data['id'], '_blank');
+                setTimeout(function () {
+                    window.location.href = host + "/staff/kasir";
+                }, 1500);
+            } 
 
             
         },

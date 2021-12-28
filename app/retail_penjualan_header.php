@@ -13,6 +13,6 @@ class retail_penjualan_header extends Model
     }
 
     public function retail_penjualan_detail(){
-        return $this->hasMany('App\retail_penjualan_detail','id','id_retail_penjualan_header');
+        return $this->hasMany('App\retail_penjualan_detail','id_retail_penjualan_header','id');
     }
 }

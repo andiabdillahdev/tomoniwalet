@@ -37,11 +37,27 @@ class staffController extends Controller
         return $data;
     }
 
+    public function kode(){
+        $nomor = retail_penjualan_header::orderBy('id', 'desc')->first();
+        $kode = '';
+        if (!isset($nomor)) {
+            $kode = 'TMW-KASIR'.'-'.date('Y').'-1';
+        }else{
+
+            $getString = $nomor['kode'];
+            $getFirst = substr($getString,15);
+            $numbers = $getFirst+1;
+            $kode = 'TMW-KASIR'.'-'.date('Y').'-'.$numbers;
+
+        }
+        return $kode;
+    }
+
     public function store(Request $request){
         // return $request;
         $data = new retail_penjualan_header();
         $data->id_staff = Auth::user()->id;
-        $data->kode = 'tes';
+        $data->kode = $this->kode();
         $data->tanggal = date('Y-m-d');
         $data->total = str_replace(',', '', $request->header[0]['value']);
         $data->cash = str_replace(',', '', $request->header[1]['value']);
@@ -55,8 +71,8 @@ class staffController extends Controller
             $detail->kuantitas = $value[3];
             $detail->save();
 
-            $stok = stok::where('id_produk',$value[0])->first();
-            $data_stok = new stok();
+            $stok = stok::where('id_produk', $detail['id_produk'])->first();
+            
            if (isset($stok)) {
                $stok->jumlah = $stok->jumlah - $value[3];
                $stok->save();
@@ -68,7 +84,7 @@ class staffController extends Controller
             return response()->json([
                 'status_code' => 200,
                 'data' => $data,
-                'detail' => $detail
+                'message' => 'Data berhasil Proses'
             ]);
        }else{
            return response()->json([
@@ -89,8 +105,10 @@ class staffController extends Controller
         ->make(true);
     }
 
-    public function nota(){
-        return view('panel.staff.kasir.nota');
+    public function nota($params){
+        $data = retail_penjualan_header::with('retail_penjualan_detail')->where('id',$params)->first();
+        // return $data;
+        return view('panel.staff.kasir.nota',compact('data'));
     }
 
     public function getRiwayatdetail($params){

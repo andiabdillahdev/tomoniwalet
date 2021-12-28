@@ -27,6 +27,8 @@
   <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
   <!-- endinject -->
   <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
+  <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/checkbox.css') }}">
+  <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/owl.carousel.min.css') }}">
 </head>
 <body>
   <div class="container-scroller">
@@ -158,8 +160,8 @@
             </a>
             <div class="collapse" id="return-transaksi">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Return Pembelian</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Return Penjualan</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.retur_pembelian') }}">Return Pembelian</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.retur_penjualan') }}">Return Penjualan</a></li>
               </ul>
             </div>
           </li>
@@ -257,6 +259,7 @@
   <script src="{{ asset('admin/vendors/price-format/jquery.priceformat.min.js') }}"></script>
   <script src="{{ asset('js/datatableManagement.js') }}"></script>
   <script src="{{ asset('admin/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
+  <script src="{{ asset('vendors/checkbox-20/js/main.js') }}"></script>
   <script src="{{ asset('js/custom.js') }}"></script>
   @stack('scripts')
   <!-- End custom js for this page-->

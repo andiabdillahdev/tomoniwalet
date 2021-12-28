@@ -33,7 +33,7 @@
                                     </select> -->
                                     {{ Form::select('kategori_id',$kategori,null, ['title' => 'Pilih Kategori Produk','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
                                     <small class="text-danger error-notif" id="kategori_id"></small>
-                                </div>   
+                            </div>   
                             <div class="form-group">
                                     <label for="exampleInputEmail1">Nama</label>
                                     <input type="text" class="form-control" name="nama" id="exampleInputEmail1"

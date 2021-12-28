@@ -41,4 +41,9 @@ class User extends Authenticatable
     public function retail_penjualan_header(){
         return $this->hasMany('App\retail_penjualan_header', 'id_staff', 'id');
     }
+
+    public function pengiriman_pesanan_header(){
+        return $this->hasMany('App\pengiriman_pesanan_header', 'user_id', 'id');
+    }
+
 }

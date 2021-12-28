@@ -66,8 +66,8 @@
     <button class="btn-print" style="position: absolute; right: 1rem; top: rem;" onclick="window.print()">Print</button>
     <div class="text-center">
         <h6 style="margin-bottom: 5px;">Tomoniwalet</h6>
-        <p style="font-size:12px">Alamat : Tomoni, Kabupaten Luwu Timur, Sulawesi Selatan </p>
-        <p style="font-size:12px">Telp. 08xxxxxxx</p>
+        <p style="font-size:12px">Alamat : Jl Poros Trans Sulawesi,Kec Tomoni,Kabupaten Luwu Timur, Sulawesi Selatan </p>
+        <p style="font-size:12px">Telp. 085299103762/081289872855</p>
         <p class="text-center">===================================</p>
     </div>
     <br>
@@ -81,42 +81,36 @@
     <br>
     <table width="100%" style="border: 0;">
         
+            @foreach($data['retail_penjualan_detail'] as $key => $value)
+            @php
+                $total = 0;
+                $total = $value['kuantitas'] * $value['produk']['harga'];
+            @endphp
             <tr>
-                <td colspan="3">Nama Produk</td>
+                <td colspan="3">{{ $value['produk']['nama'] }}</td>
             </tr>
             <tr>
-                <td> 1 * 10.000</td>
+                <td> {{$value['kuantitas']}} * {{ number_format($value['produk']['harga']) }}</td>
                 <td></td>
-                <td class="text-right">20.000</td>
+                <td class="text-right">Rp. {{ number_format($total) }}</td>
             </tr>
+            @endforeach
         
     </table>
     <p class="text-center">===================================</p>
 
     <table width="100%" style="border: 0;">
         <tr>
-            <td>Total Harga:</td>
-            <td class="text-right">10.000</td>
-        </tr>
-        <tr>
-            <td>Total Item:</td>
-            <td class="text-right">10.000</td>
-        </tr>
-        <tr>
-            <td>Diskon:</td>
-            <td class="text-right">10.000</td>
-        </tr>
-        <tr>
-            <td>Total Bayar:</td>
-            <td class="text-right">10.000</td>
-        </tr>
-        <tr>
-            <td>Diterima:</td>
-            <td class="text-right">10.000</td>
+            <td>Kas:</td>
+            <td class="text-right">Rp. {{ number_format($data['cash']) }}</td>
         </tr>
         <tr>
             <td>Kembali:</td>
-            <td class="text-right">10.000</td>>
+            <td class="text-right">Rp. {{ number_format($data['kembalian']) }}</td>>
+        </tr>
+        <tr>
+            <td>Total:</td>
+            <td class="text-right">Rp. {{ number_format($data['total']) }}</td>>
         </tr>
     </table>
 

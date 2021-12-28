@@ -246,6 +246,7 @@
                 let loadData = new homepage();
 
                 loadData.hero_section();
+                loadData.produk_terbaru();
                 loadData.produk_terlaris();
                 loadData.testimonial();
 

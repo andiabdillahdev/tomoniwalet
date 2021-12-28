@@ -5,9 +5,11 @@ namespace App\Http\Controllers\module\persediaan;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\supplier;
+use App\satuan;
 use App\pesanan_pembelian_header;
 use App\pesanan_pembelian_detail;
 use DataTables;
+use PDF;
 class pesananpembelianController extends Controller
 {
     public function index(){
@@ -55,34 +57,15 @@ class pesananpembelianController extends Controller
 
     public function kode(){
         $nomor = pesanan_pembelian_header::orderBy('id', 'desc')->first();
+        $kode = '';
         if (!isset($nomor)) {
-            $kode = 'TMW-PO'.'-'.date('Y').'-0001';
+            $kode = 'TMW-PO'.'-'.date('Y').'-1';
         }else{
 
             $getString = $nomor['kode'];
-            $getFirst = substr($getString,13);
-
-            
-            $getcount = substr_count($getFirst, '0');
-            // return $getFirst;
-            $numbers = 0;
-            if ($getcount == 3) {
-                $no = '000';
-                $getFirst = substr($getFirst,3);
-            }elseif ($getcount == 2) {
-                $no = '00';
-                $getFirst = substr($getFirst,2);
-            }elseif ($getcount == 1) {
-                $no = '0';
-                $getFirst = substr($getFirst,1);
-            }else{
-                $no = ''; 
-            }
-            // $kode = $getFirst;
+            $getFirst = substr($getString,12);
             $numbers = $getFirst+1;
-
-            // $kode = 'TMW-PRD-'.substr($kategori['kode'],8).'-'.$no.''.$numbers;
-            $kode = 'TMW-PO'.'-'.date('Y').'-'.$no.''.$numbers;
+            $kode = 'TMW-PO'.'-'.date('Y').'-'.$numbers;
 
         }
         return $kode;
@@ -90,7 +73,6 @@ class pesananpembelianController extends Controller
 
     public function create(){
         $kode = $this->kode();
-        // return $kode;
         $supplier = $this->supplier();
         return view('panel.owner.persediaan.pesanan_pembelian.form',compact('supplier','kode'));
     }
@@ -119,8 +101,8 @@ class pesananpembelianController extends Controller
             $detail = new pesanan_pembelian_detail();
             $detail->id_pesanan_pembelian_header = $header->id;
             $detail->id_produk = $value[0];
-            $detail->jumlah = $value[2];
             $detail->satuan = $value[3];
+            $detail->jumlah = $value[2];
             $detail->harga = str_replace(',', '', $value[4]);
             $detail->total = str_replace(',', '', $value[5]);
             $detail->save();
@@ -203,6 +185,14 @@ class pesananpembelianController extends Controller
                'message' => 'Data Pesanan Pembelian Gagal di Proses'
            ]); 
        }
+    }
+
+    public function purchase_order($params){
+        $data = pesanan_pembelian_header::with('supplier')->where('id',$params)->first();
+        $detail = pesanan_pembelian_detail::with('produk')->where('id_pesanan_pembelian_header',$params)->get();
+        // return $data;
+        $pdf = PDF::loadView('panel.owner.persediaan.pesanan_pembelian.nota',compact('data','detail'))->setPaper('a4', 'potrait')->setWarnings(false);
+		return $pdf->stream();
     }
 
 }

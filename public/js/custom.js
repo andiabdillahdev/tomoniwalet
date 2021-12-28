@@ -53,7 +53,7 @@ $(function(){
                 url: host + "/" + url,
                 dataType: "html",
                 success: function(response) {
-                
+                    
                     $("#modalTabelTitle").html(title);
                     $("#modal-body-table").html(response);
                     $("#exampleModalTable").modal('show');

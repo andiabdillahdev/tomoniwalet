@@ -24,12 +24,13 @@ class satuanController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'nama' => 'required|unique:satuans,nama'
+            'nama' => 'required|unique:satuans,nama',
+            'nilai' => 'required|numeric'
         ]);
 
         $data = new satuan();
         $data->nama = $request->nama;
-        $data->keterangan = $request->keterangan;
+        $data->nilai = $request->nilai;
         $data->save();
 
         if ($data) {

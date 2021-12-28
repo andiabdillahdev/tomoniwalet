@@ -27,34 +27,15 @@ class barangmasukController extends Controller
 
     public function kode(){
         $nomor = pesanan_pembelian_header::orderBy('id', 'desc')->first();
+        $kode = '';
         if (!isset($nomor)) {
-            $kode = 'TMW-PO'.'-'.date('Y').'-0001';
+            $kode = 'TMW-BM'.'-'.date('Y').'-1';
         }else{
 
             $getString = $nomor['kode'];
-            $getFirst = substr($getString,13);
-
-            
-            $getcount = substr_count($getFirst, '0');
-            // return $getFirst;
-            $numbers = 0;
-            if ($getcount == 3) {
-                $no = '000';
-                $getFirst = substr($getFirst,3);
-            }elseif ($getcount == 2) {
-                $no = '00';
-                $getFirst = substr($getFirst,2);
-            }elseif ($getcount == 1) {
-                $no = '0';
-                $getFirst = substr($getFirst,1);
-            }else{
-                $no = ''; 
-            }
-            // $kode = $getFirst;
+            $getFirst = substr($getString,12);
             $numbers = $getFirst+1;
-
-            // $kode = 'TMW-PRD-'.substr($kategori['kode'],8).'-'.$no.''.$numbers;
-            $kode = 'TMW-PO'.'-'.date('Y').'-'.$no.''.$numbers;
+            $kode = 'TMW-PO'.'-'.date('Y').'-'.$numbers;
 
         }
         return $kode;
@@ -90,7 +71,11 @@ class barangmasukController extends Controller
         $data = new barangmasuk();
         $data->id_pesanan_pembelian_header = $request->barang;
         $data->kode  = $request->kode;
-        $data->tanggal = $request->tanggal;
+        if (isset($request->tanggal)) {
+            $data->tanggal = $request->tanggal;
+        }else{
+            $data->tanggal = date('Y-m-d');
+        }
         $data->keterangan = $request->keterangan;
         $data->save();
 
@@ -100,17 +85,9 @@ class barangmasukController extends Controller
         foreach ($getProduk as $key => $value) {
  
              $stok = stok::where('id_produk',$value->id_produk)->first();
-             $data_stok = new stok();
             if (isset($stok)) {
                 $stok->jumlah = $stok->jumlah + $value->jumlah;
-                // $data_stok->id_produk = $value->id_produk;
-                // $data_stok->jumlah = $value->jumlah;
                 $stok->save();
-            }else{
-                
-                $data_stok->id_produk = $value->id_produk;
-                $data_stok->jumlah = $value->jumlah;
-                $data_stok->save();
             }
         }
 

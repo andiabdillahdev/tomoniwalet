@@ -38,6 +38,7 @@ Route::get('/tagihan/bukti-pembayaran/{params}', 'homepageController@buktiPembay
 // Home page resource
 Route::get('/source/hero-section', 'sourcePageController@getheroSection')->name('homepage.getheroSection');
 Route::get('/source/get-produk-terbaru', 'sourcePageController@getProdukTerbaru')->name('homepage.getProdukTerbaru');
+Route::get('/source/get-produk-terlaris', 'sourcePageController@getProdukTerlaris')->name('homepage.getProdukTerlaris');
 Route::get('/source/get-testimonial', 'sourcePageController@getTestimonial')->name('homepage.getTestimonial');
 Route::get('/source/get-belanja', 'sourcePageController@getBelanja');
 Route::get('/source/get-kategori', 'sourcePageController@getKategori');
@@ -132,6 +133,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::post('pesanan-pembelian/update/{params}', 'module\persediaan\pesananpembelianController@update')->name('owner.persediaan.pesanan_pembelian.update');
     Route::delete('pesanan-pembelian/destroy/{params}', 'module\persediaan\pesananpembelianController@destroy')->name('owner.persediaan.pesanan_pembelian.destroy');
     Route::get('pesanan-pembelian/detail-pesanan', 'module\persediaan\pesananpembelianController@detail_pesanan')->name('owner.persediaan.pesanan_pembelian.detail_pesanan');
+    Route::get('pesanan-pembelian/purchase_order/{paramss}', 'module\persediaan\pesananpembelianController@purchase_order')->name('owner.persediaan.pesanan_pembelian.purchase_order');
 
 
       // Barang Masuk 
@@ -148,6 +150,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     //   Stok
     Route::get('stok', 'module\persediaan\stokController@index')->name('owner.persediaan.stok.index');
     Route::get('stok/getAll', 'module\persediaan\stokController@getAll')->name('owner.persediaan.stok.getAll');
+    Route::get('stok/riwayat/{params}', 'module\persediaan\stokController@riwayat')->name('owner.persediaan.stok.riwayat');
 
     // Pengiriman Pesanan
     Route::get('pengiriman-pesanan', 'module\persediaan\pengirimanPesananController@index')->name('owner.persediaan.pengiriman.index');
@@ -160,6 +163,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('pengiriman-pesanan/detail-pesanan', 'module\persediaan\pengirimanPesananController@detail_pesanan')->name('owner.persediaan.pengiriman.detail_pesanan');
     Route::post('pengiriman-pesanan/getDetail', 'module\persediaan\pengirimanPesananController@getDetail')->name('owner.persediaan.pengiriman.getDetail');
     Route::delete('pengiriman-pesanan/destroy/{params}', 'module\persediaan\pengirimanPesananController@destroy')->name('owner.persediaan.pengiriman.destroy');
+    Route::get('pengiriman-pesanan/delivery-order/{params}', 'module\persediaan\pengirimanPesananController@deliveryorder')->name('owner.persediaan.pengiriman.deliveryorder');
 
     // Barang keluar
     Route::get('barang-keluar', 'module\persediaan\barangkeluarController@index')->name('owner.persediaan.barangkeluar.index');
@@ -175,6 +179,24 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('retail-penjualan/getAll', 'module\retail_penjualan\retailPenjualanController@getAll')->name('owner.retail_penjualan.getAll');
     Route::get('retail-penjualan/detail_transaksi/{params}', 'module\retail_penjualan\retailPenjualanController@detail_transaksi')->name('owner.retail_penjualan.detail_transaksi');
 
+    // RETUR Pembelian
+    Route::get('retur-pembelian', 'module\retur\returPembelianController@index')->name('owner.retur_pembelian');
+    Route::get('retur-pembelian/getAll', 'module\retur\returPembelianController@getAll')->name('owner.retur_pembelian.getAll');
+    Route::get('retur-pembelian/create', 'module\retur\returPembelianController@create')->name('owner.retur_pembelian.create');
+    Route::get('retur-pembelian/edit/{params}', 'module\retur\returPembelianController@edit')->name('owner.retur_pembelian.edit');
+    Route::post('retur-pembelian/store', 'module\retur\returPembelianController@store')->name('owner.retur_pembelian.store');
+    Route::post('retur-pembelian/update/{params}', 'module\retur\returPembelianController@update')->name('owner.retur_pembelian.update'); 
+    Route::delete('retur-pembelian/destroy/{params}', 'module\retur\returPembelianController@destroy')->name('owner.retur_pembelian.destroy'); 
+
+      // RETUR Penjualan
+      Route::get('retur-penjualan', 'module\retur\returPenjualanController@index')->name('owner.retur_penjualan');
+      Route::get('retur-penjualan/getAll', 'module\retur\returPenjualanController@getAll')->name('owner.retur_penjualan.getAll');
+      Route::get('retur-penjualan/create', 'module\retur\returPenjualanController@create')->name('owner.retur_penjualan.create');
+      Route::get('retur-penjualan/edit/{params}', 'module\retur\returPenjualanController@edit')->name('owner.retur_penjualan.edit');
+      Route::post('retur-penjualan/store', 'module\retur\returPenjualanController@store')->name('owner.retur_penjualan.store');
+      Route::post('retur-penjualan/update/{params}', 'module\retur\returPenjualanController@update')->name('owner.retur_penjualan.update'); 
+      Route::delete('retur-penjualan/destroy/{params}', 'module\retur\returPenjualanController@destroy')->name('owner.retur_penjualan.destroy'); 
+
     // Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
     // Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
 
@@ -189,5 +211,5 @@ Route::group(['prefix' => 'staff', 'middleware' => 'staff'], function () {
     Route::get('kasir/riwayat', 'staffController@riwayat')->name('staff.riwayat');
     Route::get('kasir/riwayat/getAll', 'staffController@getRiwayat')->name('staff.getRiwayat');
     Route::get('kasir/riwayat/detail/{params}', 'staffController@getRiwayatdetail')->name('staff.getRiwayatdetail');
-    Route::get('kasir/nota/penjualan', 'staffController@nota')->name('staff.nota');
+    Route::get('kasir/nota/penjualan/{params}', 'staffController@nota')->name('staff.nota');
 });

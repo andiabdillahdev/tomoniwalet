@@ -8,13 +8,18 @@ use App\pengiriman_pesanan_header;
 use App\pengiriman_pesanan_detail;
 use DataTables;
 use App\stok;
+use App\User;
+use PDF;
 class pengirimanPesananController extends Controller
 {
 
     public function getAll(){
-        $data = pengiriman_pesanan_header::with('pengiriman_pesanan_detail')->get();
+        $data = pengiriman_pesanan_header::with('pengiriman_pesanan_detail','user')->get();
         // return $data;
         return DataTables::of($data)
+        ->editColumn('pelanggan', function ($list) {
+            return $list['user'] ? $list['user']['name']: NULL;
+        })
         ->rawColumns([])
         ->make(true);
     }
@@ -58,17 +63,27 @@ class pengirimanPesananController extends Controller
         return $kode;
     }
 
+    public function user_customer(){
+        $data = User::where('role',3)->get();
+        return collect($data)->pluck('email', 'id')->toArray();
+    }
+
     public function create(){
         $kode = $this->kode();
-        return view('panel.owner.persediaan.pengiriman_pesanan.create',compact('kode'));
+        $user_customer = $this->user_customer();
+        return view('panel.owner.persediaan.pengiriman_pesanan.create',compact('kode','user_customer'));
     }
 
     public function store(Request $request){
         // return $request;
         $header = new pengiriman_pesanan_header();
-        $header->pelanggan = $request['header'][0]['value'];
+        $header->user_id = $request['header'][0]['value'];
         $header->kode = $request['header'][1]['value'];
-        $header->tanggal = $request['header'][2]['value'];
+        if (isset($request['header'][2]['value'])) {
+            $header->tanggal = $request['header'][2]['value'];
+        }else{
+            $header->tanggal = date('Y-m-d');
+        }
         $header->lokasi_tujuan = $request['header'][3]['value'];
         $header->save();
 
@@ -178,5 +193,13 @@ class pengirimanPesananController extends Controller
                'message' => 'Data Pengiriman Pesanan Gagal di Proses'
            ]); 
        }
+    }
+
+    public function deliveryorder($params){
+        $data = pengiriman_pesanan_header::with('user')->where('id',$params)->first();
+        $detail = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$params)->get();
+        // return $data;
+        $pdf = PDF::loadView('panel.owner.persediaan.pengiriman_pesanan.nota',compact('data','detail'))->setPaper('a4', 'potrait')->setWarnings(false);
+		return $pdf->stream();
     }
 }

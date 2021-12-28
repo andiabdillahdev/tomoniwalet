@@ -29,7 +29,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nama</th>
-                                    <th>Keterangan</th>
+                                    <th>Nilai</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>

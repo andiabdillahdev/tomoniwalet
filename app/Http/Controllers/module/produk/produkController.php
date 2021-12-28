@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\produk;
 use App\gambar_detail;
 use App\kategori;
+use App\stok;
 use DataTables;
 
 class produkController extends Controller
@@ -101,6 +102,13 @@ class produkController extends Controller
                 $gambar->gambar = $name;
                 $gambar->save();
             }
+        }
+
+        if($data){
+            $stok = new stok();
+            $stok->id_produk = $data->id;
+            $stok->jumlah = 0;
+            $stok->save();
         }
 
         if ($data) {

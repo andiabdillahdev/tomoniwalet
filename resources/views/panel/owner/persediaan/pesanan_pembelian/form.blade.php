@@ -28,7 +28,7 @@
                                     <label for="kategori_">Supplier/Pemasok</label>
                                     {{ Form::select('supplier',$supplier,null, ['title' => 'Pilih Supplier','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
                                     <small class="text-danger error-notif" id="supplier"></small>
-                                </div>   
+                            </div>   
                             <div class="form-group">
                                     <label for="kode_">Kode</label>
                                     <input type="text" class="form-control" name="kode" id="kode_"

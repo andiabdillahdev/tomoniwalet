@@ -15,4 +15,8 @@ class supplier extends Model
         return $this->hasMany('App\pesanan_pembelian_header', 'id_supplier', 'id');
     }
 
+    public function returPembelian(){
+        return $this->hasMany('App\returPembelian', 'id_supplier', 'id');
+    }
+
 }
