@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\kontak;
 use App\keranjang;
+use App\produk;
 use App\transaksi;
 use App\transaksi_detail;
 
@@ -32,7 +33,8 @@ class homepageController extends Controller
 
     public function produk_detail($params)
     {
-        return view('homepage.belanja.detail');
+        $produk = produk::where('kode', $params)->first();
+        return view('homepage.belanja.detail', compact('produk'));
     }
 
     public function page_login()

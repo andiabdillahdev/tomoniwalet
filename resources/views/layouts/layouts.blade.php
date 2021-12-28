@@ -2,168 +2,41 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <meta name="host_url" content="{{ url('/') }}">
-  <title>Tomoniwalet | Panel</title>
-  <!-- plugins:css -->
-  <link rel="stylesheet" href="{{ asset('admin/vendors/feather/feather.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/ti-icons/css/themify-icons.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/css/vendor.bundle.base.css') }}">
-  <!-- endinject -->
-  <!-- Plugin css for this page -->
-  <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/ti-icons/css/themify-icons.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('admin/js/select.dataTables.min.css') }}">
-  <!-- End plugin css for this page -->
-  <!-- inject:css -->
-  <link rel="stylesheet" href="{{ asset('admin/css/vertical-layout-light/style.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/toastr/toastr.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/sweetalert2/sweetalert2.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/drag-drop-image-uploader/dist/image-uploader.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/vendors/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
-  <!-- endinject -->
-  <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
-  <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/checkbox.css') }}">
-  <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/owl.carousel.min.css') }}">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="host_url" content="{{ url('/') }}">
+    <title>Tomoniwalet | Panel</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{{ asset('admin/vendors/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/css/vendor.bundle.base.css') }}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin/js/select.dataTables.min.css') }}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{{ asset('admin/css/vertical-layout-light/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/sweetalert2/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/drag-drop-image-uploader/dist/image-uploader.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/bootstrap-select/dist/css/bootstrap-select.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
+    <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/checkbox.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/owl.carousel.min.css') }}">
 </head>
 
 <body>
-  <div class="container-scroller">
-    <!-- partial:partials/_navbar.html -->
-    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <h5> <b><span class="text-primary">Tomoniwalet</span></b> | Panel </h5>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-          <span class="icon-menu"></span>
-        </button>
-        
-        <ul class="navbar-nav navbar-nav-right">
-         
-          <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="{{ asset('admin/images/faces/face28.jpg') }}" alt="profile"/>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="ti-power-off text-primary"></i>
-                Logout
-              </a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-              </form>
-            </div>
-          </li>
-          
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-          <span class="icon-menu"></span>
-        </button>
-      </div>
-    </nav>
-    <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- partial:partials/_settings-panel.html -->
-      
-      
-      <!-- partial -->
-      <!-- partial:partials/_sidebar.html -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#master-data" aria-expanded="false" aria-controls="master-data">
-              <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Master Data</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="master-data">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.masterdata.supplier') }}">Supplier</a></li>
-                <li class="nav-item"> <a class="nav-link"  href="{{ route('owner.masterdata.kategori') }}">Kategori</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.masterdata.satuan') }}">Satuan</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#kelola-pesanan" aria-expanded="false" aria-controls="kelola-pesanan">
-            <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Kelola Pesanan</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="kelola-pesanan">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Pesanan Masuk</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Proses Di Proses</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Pesanan Selesai</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#landing-page" aria-expanded="false" aria-controls="landing-page">
-            <i class="icon-columns menu-icon"></i>
-              <span class="menu-title">Pengaturan Website</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="landing-page">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.pengaturan_website.jumbotron') }}">Jumbotron</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.pengaturan_website.testimonial') }}">Testimonial</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Tentang</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Media Sosial</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Cara Pemesanan</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('owner.produk.index') }}">
-              <i class="icon-grid menu-icon"></i>
-              <span class="menu-title">Produk</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('owner.retail_penjualan') }}">
-              <i class="icon-paper menu-icon"></i>
-              <span class="menu-title">Penjualan Retail</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#transaksi" aria-expanded="false" aria-controls="transaksi">
-            <i class="icon-layout menu-icon"></i>
-              <span class="menu-title">Persediaan</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="transaksi">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.pesanan_pembelian.index') }}">Pesanan Pembelian</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.pengiriman.index') }}">Pengiriman Pesanan</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.barangmasuk.index') }}">Barang Masuk</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.barangkeluar.index') }}">Barang Keluar</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.persediaan.stok.index') }}">Stok</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#return-transaksi" aria-expanded="false" aria-controls="return-transaksi">
-              <i class="icon-bar-graph menu-icon"></i>
-              <span class="menu-title">Return Transaksi</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="return-transaksi">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.retur_pembelian') }}">Return Pembelian</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{{ route('owner.retur_penjualan') }}">Return Penjualan</a></li>
-              </ul>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <h5> <b><span class="text-primary">Tomoniwalet</span></b> | Panel </h5>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -207,7 +80,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="{{ url('/owner/dashboard') }}">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
@@ -317,9 +190,9 @@
                         <div class="collapse" id="return-transaksi">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/buttons.html">Return Pembelian</a></li>
+                                        href="{{ route('owner.retur_pembelian') }}">Return Pembelian</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/dropdowns.html">Return Penjualan</a></li>
+                                        href="{{ route('owner.retur_penjualan') }}">Return Penjualan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -405,26 +278,26 @@
     <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('admin/js/dataTables.select.min.js') }}"></script>
 
-  <!-- End plugin js for this page -->
-  <!-- inject:js -->
-  <script src="{{ asset('admin/js/off-canvas.js') }}"></script>
-  <script src="{{ asset('admin/js/hoverable-collapse.js') }}"></script>
-  <script src="{{ asset('admin/js/template.js') }}"></script>
-  <script src="{{ asset('admin/js/settings.js') }}"></script>
-  <!-- endinject -->
-  <!-- Custom js for this page-->
-  <script src="{{ asset('admin/js/dashboard.js') }}"></script>
-  <script src="{{ asset('admin/js/Chart.roundedBarCharts.js') }}"></script>
-  <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
-  <script src="{{ asset('admin/vendors/drag-drop-image-uploader/dist/image-uploader.min.js') }}"></script>
-  <script src="{{ asset('admin/vendors/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-  <script src="{{ asset('admin/vendors/price-format/jquery.priceformat.min.js') }}"></script>
-  <script src="{{ asset('js/datatableManagement.js') }}"></script>
-  <script src="{{ asset('admin/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
-  <script src="{{ asset('vendors/checkbox-20/js/main.js') }}"></script>
-  <script src="{{ asset('js/custom.js') }}"></script>
-  @stack('scripts')
-  <!-- End custom js for this page-->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{{ asset('admin/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('admin/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('admin/js/template.js') }}"></script>
+    <script src="{{ asset('admin/js/settings.js') }}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="{{ asset('admin/js/dashboard.js') }}"></script>
+    <script src="{{ asset('admin/js/Chart.roundedBarCharts.js') }}"></script>
+    <script src="{{ asset('admin/vendors/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/drag-drop-image-uploader/dist/image-uploader.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('admin/vendors/price-format/jquery.priceformat.min.js') }}"></script>
+    <script src="{{ asset('js/datatableManagement.js') }}"></script>
+    <script src="{{ asset('admin/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('vendors/checkbox-20/js/main.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
+    @stack('scripts')
+    <!-- End custom js for this page-->
 </body>
 
 </html>

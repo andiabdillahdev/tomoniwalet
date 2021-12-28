@@ -90,14 +90,14 @@ function homepage() {
                     $.each(response['data'], function (indexInArray, valueOfElement) {
                         html += `<div class="col-lg-3">
                         <div class="card-tml content-card">
-                        <img src="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" alt="" srcset="">
+                        <img src="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" style="width: 100%;" alt="" srcset="">
                         <div class="d-flex justify-content-center">
                         <span>${valueOfElement.kategori['nama']}</span>
                         </div>
                         <h1>${valueOfElement.nama}</h1>
                         <p>Rp ${valueOfElement.harga.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</p>
                         <div class="d-flex justify-content-center">
-                        <button class="btn button-sm button-primary">Lihat</button>
+                        <a href="` + host + `/produk/detail/` + valueOfElement.kode + `" class="btn button-sm button-primary">Lihat</a>
                         </div>
                         </div>
                         </div>`;
@@ -171,8 +171,9 @@ function homepage() {
                 $.each(response, function (key, val) {
                     html += `
                     <div class="col-lg-3 mb-3">
+                    <a href="`+host+`/produk/detail/`+ val.kode +`">
                     <div class="card-tml content-card">
-                    <img src="${host}/uploads/produk/${val.foto}" alt="" srcset="" height="200" width="220">
+                    <img src="${host}/uploads/produk/${val.foto}" alt="" style="width: 100%;" height="200">
                     <div class="d-flex justify-content-center">
                     <span>${val.nama_kategori}</span>
                     </div>
@@ -182,6 +183,7 @@ function homepage() {
                     <button class="btn button-sm button-primary add-cart" produk-id="${val.id}">Tambah ke Cart</button>
                     </div>
                     </div>
+                    </a>
                     </div>
                     `;
                 });
