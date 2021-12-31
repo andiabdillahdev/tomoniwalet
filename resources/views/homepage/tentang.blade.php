@@ -1,5 +1,8 @@
 @extends('homepage.layouts.headfoot')
 @section('konten_page')
+    @php
+    $testi = new App\testimonial();
+    @endphp
     <div class="wrapper-content">
         <!-- PRODUK TERLARIS -->
 
@@ -31,32 +34,22 @@
                 <h3>Lihat apa yang mereka katakan tentang kami</h3>
             </div>
             <div class="container owl-carousel">
-                <div class="testimonial-content text-center">
-                    <div class="d-flex justify-content-center">
-                        <img src="{{ asset('assets/img/testi.png') }}" alt="" srcset="">
-                    </div>
+                @foreach ($testi->all() as $tst)
+                    <div class="testimonial-content text-center">
+                        <div class="d-flex justify-content-center">
+                            <img src="{{ asset('uploads/testimonial/' . $tst->image) }}" alt="" srcset="">
+                        </div>
 
-                    <h1>Rival Harfah S.kom</h1>
-                    <span>Juragan Walet Makassar</span>
-                    <div class="d-flex justify-content-center">
-                        <div class="hr_line"></div>
+                        <h1>{{ $tst->nama }}</h1>
+                        {{-- <span>Juragan Walet Makassar</span> --}}
+                        <div class="d-flex justify-content-center">
+                            <div class="hr_line"></div>
+                        </div>
+                        <p>“{{ $tst->text }} “</p>
                     </div>
-                    <p>“is simply dummy text of the printing and typesetting industry. Lorem Ipsum “</p>
-                </div>
-                <div class="testimonial-content text-center">
-                    <div class="d-flex justify-content-center">
-                        <img src="{{ asset('assets/img/testi2.png') }}" alt="" srcset="">
-                    </div>
-                    <h1>Andi Abdillah</h1>
-                    <span>Web Developer</span>
-                    <div class="d-flex justify-content-center">
-                        <div class="hr_line"></div>
-                    </div>
-                    <p>“is simply dummy text of the printing and typesetting industry. Lorem Ipsum “</p>
-                </div>
+                @endforeach
             </div>
         </section>
-
     </div>
 @endsection
 @push('page_script')

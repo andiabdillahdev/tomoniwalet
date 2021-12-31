@@ -7,12 +7,12 @@
             <div class="container">
                 <div class="d-flex justify-content-between">
                     <div class="sub-header-item-1">
-                        <span>Semua Produk</span>
+                        <span id="kat-view">Semua Produk</span>
                     </div>
                     <div class="d-flex sub-header-item-2">
 
                         <select class="form-control form-select-sub-header kategoriContent" style="margin-right: 8px;">
-                            <option value="">Pilih Kategori Produk</option>
+                            <option value="all">Semua Produk</option>
                         </select>
 
                         <select class="form-control form-select-sub-header">
@@ -82,6 +82,18 @@
                 } else {
                     var produk_id = $(this).attr('produk-id');
                     loadData.add_cart(user_id, produk_id, 1);
+                }
+            });
+
+            $('.kategoriContent').change(function(e) {
+                e.preventDefault();
+
+                var value = $(this).val();
+
+                if (value == 'all') {
+                    loadData.belanja();
+                } else {
+                    loadData.belanja(value);
                 }
             });
 
