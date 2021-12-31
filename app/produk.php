@@ -24,6 +24,10 @@ class produk extends Model
         return $this->hasMany('App\returPembelianDetail', 'id_produk', 'id');
     }
 
+    public function returPenjualanDetail(){
+        return $this->hasMany('App\returPenjualanDetail', 'id_produk', 'id');
+    }
+
     public function pengiriman_pesanan_detail(){
         return $this->hasMany('App\pengiriman_pesanan_detail', 'id_produk', 'id');
     }

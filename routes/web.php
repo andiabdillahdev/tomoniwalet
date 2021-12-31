@@ -209,7 +209,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     // Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');
 
     // Kelola Pesanan
-    Route::get('v/kelola-pesanan/{page}', 'module\pesanan\pesananController@view');
+    Route::get('pesanan/kelola-pesanan/{page}', 'module\pesanan\pesananController@view');
     Route::get('pesanan/getall', 'module\pesanan\pesananController@getAll');
     Route::get('pesanan/getallfinish', 'module\pesanan\pesananController@getAllFinish');
     Route::get('pesanan/getdetail', 'module\pesanan\pesananController@getDetail');

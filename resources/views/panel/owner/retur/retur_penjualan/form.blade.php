@@ -23,7 +23,7 @@
                     <div class="d-flex justify-content-center">
 
                         <div class="col-lg-10">
-                            <form id="form_retur_pembelian" class="forms-sample">
+                            <form id="form_retur_penjualan" class="forms-sample">
 
                             <div class="mb-4">
                             <span class="text-muted small">Pilih Jenis Retur Penjualan</span>
@@ -37,7 +37,7 @@
 
                             <div class="form-group" id="pelanggan_website">
                                     <label for="kategori_">Pelanggan via Website</label>
-                                    {{ Form::select('supplier',$user,null, ['title' => 'Pilih Pelanggan','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
+                                    {{ Form::select('user_id',$user,null, ['title' => 'Pilih Pelanggan','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
                                     <small class="text-danger error-notif" id="supplier"></small>
                             </div>   
 
@@ -74,12 +74,9 @@
                                     
                                 </tbody>
                             </table>
-                            
-
-                             
 
                                 <button type="button" class="btn btn-primary mr-2"
-                                    onclick="store_with_table('form_retur_pembelian','owner/retur-pembelian/store','owner/retur-pembelian')">Submit</button>
+                                    onclick="store_with_table('form_retur_penjualan','owner/retur-penjualan/store','owner/retur-penjualan')">Submit</button>
                                 <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
                             </form>
                         </div>
@@ -101,7 +98,13 @@
             $('#pelanggan_kasir').hide();
 
             changeForm = (element) =>{
-                console.log(element);
+                if ($(element).is(':checked')) {
+                    $('#pelanggan_kasir').show();
+                    $('#pelanggan_website').hide();
+                }else{
+                    $('#pelanggan_website').show();
+                    $('#pelanggan_kasir').hide();
+                }
             }
 
         })

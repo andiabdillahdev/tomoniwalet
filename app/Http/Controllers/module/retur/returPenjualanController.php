@@ -7,16 +7,36 @@ use Illuminate\Http\Request;
 use App\returPenjualanHeader;
 use App\returPenjualanDetail;
 use App\User;
-
+use DataTables;
 class returPenjualanController extends Controller
 {
+
+    public function kode(){
+        $nomor = returPenjualanHeader::orderBy('id', 'desc')->first();
+        $kode = '';
+        if (!isset($nomor)) {
+            $kode = 'TMW-RTR-02'.'-'.date('Y').'-1';
+        }else{
+
+            $getString = $nomor['kode'];
+            $getFirst = substr($getString,16);
+            $numbers = $getFirst+1;
+            $kode = 'TMW-RTR-02'.'-'.date('Y').'-'.$numbers;
+
+        }
+        return $kode;
+    }
 
     public function getAll(){
         $data = returPenjualanHeader::all();
         // return $data;
         return DataTables::of($data)
-        ->editColumn('supplier', function ($list) {
-            return $list['supplier'] ? $list['supplier']['nama']: NULL;
+        ->editColumn('pelanggan', function ($data) {
+            if ($data['user_id'] != null) {
+                return $data['user']['name'].' | '.$data['user']['email'];
+            } else {
+                return $data['customer'];
+            }
         })
         ->rawColumns([])
         ->make(true);
@@ -37,16 +57,21 @@ class returPenjualanController extends Controller
     }
 
     public function store(Request $request){
+        // return $request;
         $header = new returPenjualanHeader();
-        $header->id_supplier = $request['header'][0]['value'];
+        if ($request['header'][0]['value'] != null) {
+            $header->user_id = $request['header'][0]['value'];
+        }else{
+            $header->customer = $request['header'][1]['value'];
+        }
         $header->kode = $this->kode();
-        $header->tanggal = $request['header'][1]['value'];
+        $header->tanggal = $request['header'][2]['value'];
         $header->save();
 
        
         foreach ($request['detail'] as $key => $value) {
             $detail = new returPenjualanDetail();
-            $detail->id_retur_pembelian_header  = $header->id;
+            $detail->id_retur_penjualan_header = $header->id;
             $detail->id_produk = $value[0];
             $detail->satuan = $value[3];
             $detail->jumlah = $value[2];
@@ -58,34 +83,42 @@ class returPenjualanController extends Controller
         if ($header) {
             return response()->json([
                 'status_code' => 200,
-                'message' => 'Data Retur Pembelian berhasil di Tambah'
+                'message' => 'Data Retur Penjualan berhasil di Tambah'
             ]);
         }else{
             return response()->json([
                 'status_code' => 422,
-                'message' => 'Data Retur Pembelian Gagal di Proses'
+                'message' => 'Data Retur Penjualan Gagal di Proses'
             ]); 
         }
     }
 
 
     public function edit($params){
-        return view('panel.owner.retur.retur_penjualan.edit');
+        $data = returPenjualanHeader::with('returPenjualanDetail')->where('id',$params)->first();
+        $user = $this->user();
+        // return $data;
+        return view('panel.owner.retur.retur_penjualan.edit',compact('data','user'));
     }
 
   
     public function update(Request $request,$id){
-        $delete_detail = returPenjualanDetail::where('id_retur_pembelian_header',$id)->delete();
+        $delete_detail = returPenjualanDetail::where('id_retur_penjualan_header',$id)->delete();
 
         $header = returPenjualanHeader::where('id',$id)->first();
-        $header->id_supplier = $request['header'][0]['value'];
-        $header->tanggal = $request['header'][1]['value'];
+        if ($request['header'][0]['value'] != null) {
+            $header->user_id = $request['header'][0]['value'];
+        }else{
+            $header->customer = $request['header'][1]['value'];
+        }
+        $header->kode = $this->kode();
+        $header->tanggal = $request['header'][2]['value'];
         $header->save();
 
        
         foreach ($request['detail'] as $key => $value) {
             $detail = new returPenjualanDetail();
-            $detail->id_retur_pembelian_header  = $header->id;
+            $detail->id_retur_penjualan_header  = $header->id;
             $detail->id_produk = $value[0];
             $detail->satuan = $value[3];
             $detail->jumlah = $value[2];
@@ -97,17 +130,17 @@ class returPenjualanController extends Controller
         if ($header) {
             return response()->json([
                 'status_code' => 200,
-                'message' => 'Data Retur Pembelian berhasil di Update'
+                'message' => 'Data Retur Penjualan berhasil di Update'
             ]);
         }else{
             return response()->json([
                 'status_code' => 422,
-                'message' => 'Data Retur Pembelian Gagal di Proses'
+                'message' => 'Data Retur Penjualan Gagal di Proses'
             ]); 
         }
     }
 
-    public function destroy(){
+    public function destroy($id){
         $data = returPenjualanHeader::where('id',$id)->delete();
 
         if ($data) {

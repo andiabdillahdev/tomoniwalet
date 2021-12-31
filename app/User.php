@@ -46,4 +46,8 @@ class User extends Authenticatable
         return $this->hasMany('App\pengiriman_pesanan_header', 'user_id', 'id');
     }
 
+    public function returPenjualanHeader(){
+        return $this->hasMany('App\returPenjualanHeader', 'user_id', 'id');
+    }
+
 }

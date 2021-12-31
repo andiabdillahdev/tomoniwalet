@@ -133,12 +133,12 @@
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('owner.pengaturan_website.testimonial') }}">Testimonial</a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link"
+                                <!-- <li class="nav-item"> <a class="nav-link"
                                         href="pages/ui-features/dropdowns.html">Tentang</a></li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="pages/ui-features/typography.html">Media Sosial</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/typography.html">Cara Pemesanan</a></li>
+                                        href="pages/ui-features/typography.html">Cara Pemesanan</a></li> -->
                             </ul>
                         </div>
                     </li>
@@ -197,12 +197,12 @@
                         </div>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="index.html">
                             <i class="icon-head menu-icon"></i>
                             <span class="menu-title">User Management</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
             <!-- partial -->

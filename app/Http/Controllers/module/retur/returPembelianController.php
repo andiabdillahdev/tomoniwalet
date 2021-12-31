@@ -12,16 +12,16 @@ class returPembelianController extends Controller
 {
 
     public function kode(){
-        $nomor = returPembelian::orderBy('id', 'desc')->first();
+        $nomor = returPenjualanHeader::orderBy('id', 'desc')->first();
         $kode = '';
         if (!isset($nomor)) {
-            $kode = 'TMW-RTR-01-'.'-'.date('Y').'-1';
+            $kode = 'TMW-RTR-01'.'-'.date('Y').'-1';
         }else{
 
             $getString = $nomor['kode'];
-            $getFirst = substr($getString,12);
+            $getFirst = substr($getString,16);
             $numbers = $getFirst+1;
-            $kode = 'TMW-PO'.'-'.date('Y').'-'.$numbers;
+            $kode = 'TMW-RTR-01'.'-'.date('Y').'-'.$numbers;
 
         }
         return $kode;

@@ -16,8 +16,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Kode</th>
-                                    <th>Supplier</th>
                                     <th>Tanggal</th>
+                                    <th>Pelanggan</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
