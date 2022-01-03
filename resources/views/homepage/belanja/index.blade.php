@@ -102,10 +102,11 @@
                 e.preventDefault();
 
                 var value = $(this).val();
-                loadData.belanja('price', value);
 
                 if (value == '') {
                     loadData.belanja('kat');
+                } else {
+                    loadData.belanja('price', value);
                 }
             });
 
