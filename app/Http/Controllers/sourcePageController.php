@@ -35,11 +35,27 @@ class sourcePageController extends Controller
 
     public function getBelanja(Request $request)
     {
-        $data = produk::where('status', 'Aktif')->get();
-        $kat = 'Semua Produk';
-        if ($request->kat_id) {
-            $data = produk::where('status', 'Aktif')->where('kategori_id', $request->kat_id)->get();
-            $kat = kategori::where('id', $request->kat_id)->first()->nama;
+        if ($request->target == 'kat') {
+            $data = produk::where('status', 'Aktif')->get();
+            $title = 'Semua Produk';
+            if ($request->params) {
+                $data = produk::where('status', 'Aktif')->where('kategori_id', $request->params)->get();
+                $title = kategori::where('id', $request->params)->first()->nama;
+            }
+        } else if ($request->target == 'price') {
+            $jum = count(produk::where('status', 'Aktif')->get()) / 2;
+            if ($request->params == 'down') {
+                $data = produk::where('status', 'Aktif')->orderBy('harga', 'asc')->limit(ceil($jum))->get();
+                $title = 'Harga Terendah';
+            } else if ($request->params == 'up') {
+                $data = produk::where('status', 'Aktif')->orderBy('harga', 'desc')->limit(ceil($jum))->get();
+                $title = 'Harga Tertinggi';
+            } else if ($request->params == 'many') {
+                $data = produk::where('status', 'Aktif')->withCount(['keranjang' => function ($query) {
+                    $query->where('status', 'valid');
+                }])->orderBy('keranjang_count', 'desc')->get();
+                $title = 'Produk Paling Laku';
+            }
         }
 
         $result = [];
@@ -51,7 +67,7 @@ class sourcePageController extends Controller
         }
         return [
             'res' => $result,
-            'kat' => $kat
+            'title' => $title
         ];
     }
 
