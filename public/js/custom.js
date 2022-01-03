@@ -1,16 +1,17 @@
 $(function(){
     let host = $('meta[name="host_url"]').attr("content");
     overlayForm = (url, title,other) => {
-     console.log(other);
         $.ajax({
             url: host + "/" + url,
             dataType: "html",
             success: function(response) {
+               
                 $("#modalTabelTitle").html(title);
                 $("#modal-body-table").html(response);
                 $("#exampleModalTable").modal('show');
-                dataTableDetailModal('owner/produk/getall','tb_detail_persediaan','produk');
-
+                datatableModalInit('tb_detail_persediaan');
+                // dataTableDetailModal('owner/produk/getall','tb_detail_persediaan','produk');
+                $('.selectpicker').selectpicker();
                 // else {
                 //     $("#exampleModalLabel").html(title);
                 //     $("#modal-body").html(response);

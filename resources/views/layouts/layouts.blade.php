@@ -234,7 +234,7 @@
     <!-- container-scroller -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -252,7 +252,7 @@
         </div>
     </div>
 
-    <div class="modal fade bd-example-modal-lg" id="exampleModalTable" tabindex="-1" role="dialog"
+    <div class="modal fade bd-example-modal-lg" id="exampleModalTable" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

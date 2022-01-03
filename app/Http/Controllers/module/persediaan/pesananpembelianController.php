@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\supplier;
 use App\satuan;
+use App\kategori;
 use App\pesanan_pembelian_header;
 use App\pesanan_pembelian_detail;
 use DataTables;
@@ -77,8 +78,14 @@ class pesananpembelianController extends Controller
         return view('panel.owner.persediaan.pesanan_pembelian.form',compact('supplier','kode'));
     }
 
+    public function get_kategori() {
+	    $data = kategori::all();
+		return collect($data)->pluck('nama', 'id')->toArray();
+	}
+
     public function detail_pesanan(){
-        return view('panel.owner.persediaan.pesanan_pembelian.detail_pesanan');
+        $kategori = $this->get_kategori();
+        return view('panel.owner.persediaan.pesanan_pembelian.detail_pesanan',compact('kategori'));
     }
 
     public function store(Request $request){

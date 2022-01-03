@@ -128,6 +128,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::post('produk/store', 'module\produk\produkController@store')->name('owner.produk.store');
     Route::get('produk/edit/{id}', 'module\produk\produkController@edit')->name('owner.produk.edit');
     Route::post('produk/update/{params}', 'module\produk\produkController@update')->name('owner.produk.update');
+    Route::get('produk/getByKategori/{id}', 'module\produk\produkController@getByKategori')->name('owner.produk.getByKategori');
     // 
 
     // Pesanan Pembelian

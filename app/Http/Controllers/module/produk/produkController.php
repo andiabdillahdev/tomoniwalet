@@ -193,4 +193,14 @@ class produkController extends Controller
            ]); 
        }
     }
+
+    public function getByKategori($params){
+        $data = produk::with('kategori','gambar_detail')->where('kategori_id',$params)->get();
+        return DataTables::of($data)
+        ->editColumn('kategori', function ($list) {
+            return $list['kategori'] ? $list['kategori']['nama']: NULL;
+        })
+        ->rawColumns([])
+        ->make(true);
+    }
 }

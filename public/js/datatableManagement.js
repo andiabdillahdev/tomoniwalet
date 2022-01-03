@@ -901,9 +901,46 @@ $(function () {
         ],
     });
 
-    dataTableDetailModal = (url,table,type) =>{
+    datatableModalInit = (table) =>{
+        tabel = $(`#${table}`).DataTable({
+            dom: 't',
+            bLengthChange: true,
+            bFilter: true,
+            bInfo: true,
+            bAutoWidth: true,
+            searching: true,
+            language: {
+                zeroRecords: "Belum ada data...",
+                processing: '<span class="text-danger">Mengambil Data....</span>',
+            },
+            columnDefs: [
+                {
+                    defaultContent: "-",
+                    targets: "_all",
+                },
+                {
+                    targets: 0,
+                    className: "dt-left",
+                    orderable: false,
+                    searchable: false,
+                    visible: false,
+                }
+            ],
+        });
+    }
+
+    tesModal = () =>{
+        alert('sdfgsdf');
+    }
+
+    dataTableDetailModal = (url,table,type,element) =>{
+        
         let columns = {};
+        let url_ = url;
         if (type == 'produk') {
+            $(`#${table}`).DataTable().clear().draw();
+            $(`#${table}`).DataTable().destroy();
+            url_ = url + '/' + $(element).val()
             columns = {
                 data: [
                     { data: "id" },
@@ -942,7 +979,7 @@ $(function () {
             processing: true,
             serverSide: true,
             ajax: {
-                url: host + "/" + url,
+                url: host + "/" + url_,
                 async: true,
                 error: function (res) {},
             },

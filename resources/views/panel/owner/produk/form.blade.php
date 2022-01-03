@@ -26,11 +26,6 @@
                             <form id="form_produk" class="forms-sample">
                             <div class="form-group">
                                     <label for="kategori_">Kategori Produk</label>
-                                    <!-- <select class="form-control selectpicker" name="" id="">
-                                        <option value="dsfsdf">fsdf</option>
-                                        <option value="dsfsdf">fsdf</option>
-                                        <option value="dsfsdf">fsdf</option>
-                                    </select> -->
                                     {{ Form::select('kategori_id',$kategori,null, ['title' => 'Pilih Kategori Produk','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
                                     <small class="text-danger error-notif" id="kategori_id"></small>
                             </div>   
