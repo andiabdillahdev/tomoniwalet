@@ -7,18 +7,19 @@
             <div class="container">
                 <div class="d-flex justify-content-between">
                     <div class="sub-header-item-1">
-                        <span>Semua Produk</span>
+                        <span id="title-view">Semua Produk</span>
                     </div>
                     <div class="d-flex sub-header-item-2">
 
                         <select class="form-control form-select-sub-header kategoriContent" style="margin-right: 8px;">
-                            <option value="">Pilih Kategori Produk</option>
+                            <option value="all">Semua Produk</option>
                         </select>
 
-                        <select class="form-control form-select-sub-header">
-                            <option selected>Harga Terendah</option>
-                            <option selected>Harga Tertinggi</option>
-                            <option selected>Harga Paling Laku</option>
+                        <select class="form-control form-select-sub-header byPrice">
+                            <option value="">.::Kategori Harga::.</option>
+                            <option value="down">Harga Terendah</option>
+                            <option value="up">Harga Tertinggi</option>
+                            <option value="many">Produk Paling Laku</option>
                         </select>
 
                     </div>
@@ -71,7 +72,7 @@
             });
 
             let loadData = new homepage();
-            loadData.belanja();
+            loadData.belanja('kat');
             loadData.get_kategori();
 
             $(document).on('click', '.add-cart', function(event) {
@@ -82,6 +83,30 @@
                 } else {
                     var produk_id = $(this).attr('produk-id');
                     loadData.add_cart(user_id, produk_id, 1);
+                }
+            });
+
+            $('.kategoriContent').change(function(e) {
+                e.preventDefault();
+
+                var value = $(this).val();
+
+                if (value == 'all') {
+                    loadData.belanja('kat');
+                } else {
+                    loadData.belanja('kat', value);
+                }
+            });
+
+            $('.byPrice').change(function(e) {
+                e.preventDefault();
+
+                var value = $(this).val();
+
+                if (value == '') {
+                    loadData.belanja('kat');
+                } else {
+                    loadData.belanja('price', value);
                 }
             });
 

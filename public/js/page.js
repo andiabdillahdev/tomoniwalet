@@ -161,14 +161,18 @@ function homepage() {
     // End Testimoni
 
     // Belnja
-    this.belanja = function () {
+    this.belanja = function (target, params=null) {
         let html = '';
         $.ajax({
             type: "GET",
             url: host + "/source/get-belanja",
+            data: {
+                params: params,
+                target: target
+            },
             success: function (response) {
                 console.log(response);
-                $.each(response, function (key, val) {
+                $.each(response.res, function (key, val) {
                     html += `
                     <div class="col-lg-3 mb-3">
                     <a href="`+host+`/produk/detail/`+ val.kode +`">
@@ -188,7 +192,19 @@ function homepage() {
                     `;
                 });
 
-                $('#contentBelanja').html(html);
+                $('#title-view').text(response.title);
+
+                if (html == '') html = '<h4 class="text-center mt-5 text-secondary"><i>Tidak ada produk ditemukan</i></h4>';
+                
+                $('#contentBelanja').animate({
+                    opacity: 0,
+                    height: "toggle"
+                }, 500, function () {
+                    $(this).html(html).animate({
+                        opacity: 1,
+                        height: "toggle"
+                    }, 500)
+                });
 
             },
             error: function () {
