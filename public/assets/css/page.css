@@ -1071,6 +1071,50 @@ color: #000000;
     .nav-menu > ul{
         display: block;
     }
+
+    #hero-section h1{
+        font-size: 28px;
+    }
+
+    #hero-section p {
+        font-size: 14px;
+        line-height: 23px;
+        width: 100%;
+    }
+
+    .banner-hero {
+        padding-top: 6rem;
+    }
+    
+    #hero-section img {
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .card-kategori{
+        width: 82%;
+        position: relative;
+        left: 38px;
+        margin-top: 2rem;
+    }
+
+    .card-kategori img{
+        width: 64%;
+    }
+
+    .card-kategori h1{
+        font-size: 28px;
+        bottom: 8rem;
+    }
+
+    .button-light{
+        font-size: 14px;
+    }
+
+    .button{
+        padding: 6px 12px;
+    }
+
 }
 
 

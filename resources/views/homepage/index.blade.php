@@ -7,7 +7,7 @@
         <section id="hero-section">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-7 banner-hero">
+                    <div class="col-lg-7 col- banner-hero">
                         <h1></h1>
                         <p></p>
                         <button class="btn button button-primary"> <svg width="16" height="18" viewBox="0 0 16 18"
@@ -18,7 +18,7 @@
                             </svg>
                             Belanja Sekarang</button>
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-5 col-">
                         <img src="{{ asset('assets/img/img-banner.png') }}" id="img-banner-hero">
                     </div>
                 </div>
@@ -44,21 +44,23 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="card-kategori bg-blue-kid">
-                            <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">
                                 <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
                             </div>
                             <div class="custom-position">
                                 <h1>Kategori</h1>
+                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="card-kategori bg-blue-old">
-                            <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">
                                 <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
                             </div>
                             <div class="custom-position">
                                 <h1>Kategori</h1>
+                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
                             </div>
                         </div>
                     </div>
@@ -67,33 +69,35 @@
                 <div class="row mt-3">
                     <div class="col-lg-4">
                         <div class="card-kategori bg-blue-kid">
-                            <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">
                                 <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
                             </div>
                             <div class="custom-position">
                                 <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Selengkapnya</button>
+                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
                             </div>
 
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="card-kategori bg-blue-old">
-                            <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">
                                 <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
                             </div>
                             <div class="custom-position">
                                 <h1>Kategori</h1>
+                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="card-kategori bg-blue-kid">
-                            <div class="d-flex justify-content-end">
+                        <div class="d-flex justify-content-end">
                                 <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
                             </div>
                             <div class="custom-position">
                                 <h1>Kategori</h1>
+                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
                             </div>
                         </div>
                     </div>
