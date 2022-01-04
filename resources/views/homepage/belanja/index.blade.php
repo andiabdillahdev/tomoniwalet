@@ -1,8 +1,8 @@
 @extends('homepage.layouts.headfoot')
 @section('konten_page')
     @php
+    $get_kat = new App\kategori();
     if (isset($_GET['kat_id'])) {
-        $get_kat = new App\kategori();
         $kategori = $get_kat->where('kode', $_GET['kat_id'])->first();
         $kat_id = $kategori ? $kategori->id : null;
     }
@@ -119,7 +119,7 @@
                 }
             });
 
-            @if ($kat_id)
+            @if (isset($kat_id))
                 loadData.belanja('kat', '{{ $kat_id }}');
                 $(document).find('.kategoriContent').val('{{ $kat_id }}');
             @else
