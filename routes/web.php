@@ -168,7 +168,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::post('pengiriman-pesanan/store', 'module\persediaan\pengirimanPesananController@store')->name('owner.persediaan.pengiriman.store');
     Route::get('pengiriman-pesanan/edit/{params}', 'module\persediaan\pengirimanPesananController@edit')->name('owner.persediaan.pengiriman.edit');
     Route::post('pengiriman-pesanan/update/{params}', 'module\persediaan\pengirimanPesananController@update')->name('owner.persediaan.pengiriman.update');
-    Route::get('pengiriman-pesanan/belum-selesai', 'module\persediaan\pengirimanPesananController@belum_selesai')->name('owner.persediaan.pengiriman.belum_selesai');
+    Route::get('pengiriman-pesanan/belum-selesai/{params}', 'module\persediaan\pengirimanPesananController@belum_selesai')->name('owner.persediaan.pengiriman.belum_selesai');
     Route::get('pengiriman-pesanan/detail-pesanan', 'module\persediaan\pengirimanPesananController@detail_pesanan')->name('owner.persediaan.pengiriman.detail_pesanan');
     Route::post('pengiriman-pesanan/getDetail', 'module\persediaan\pengirimanPesananController@getDetail')->name('owner.persediaan.pengiriman.getDetail');
     Route::delete('pengiriman-pesanan/destroy/{params}', 'module\persediaan\pengirimanPesananController@destroy')->name('owner.persediaan.pengiriman.destroy');
@@ -178,6 +178,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('barang-keluar', 'module\persediaan\barangkeluarController@index')->name('owner.persediaan.barangkeluar.index');
     Route::get('barang-keluar/create', 'module\persediaan\barangkeluarController@create')->name('owner.persediaan.barangkeluar.create');
     Route::get('barang-keluar/detailPengiriman', 'module\persediaan\barangkeluarController@detailPengiriman')->name('owner.persediaan.barangmasuk.detailPengiriman');
+    Route::get('barang-keluar/detailRetur', 'module\persediaan\barangkeluarController@detailRetur')->name('owner.persediaan.barangmasuk.detailRetur');
     Route::get('barang-keluar/edit/{params}', 'module\persediaan\barangkeluarController@edit')->name('owner.persediaan.barangkeluar.edit');
     Route::post('barang-keluar/store', 'module\persediaan\barangkeluarController@store')->name('owner.persediaan.barangkeluar.store');
     Route::post('barang-keluar/update/{params}', 'module\persediaan\barangkeluarController@update')->name('owner.persediaan.barangkeluar.update');
@@ -193,18 +194,22 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('retur-pembelian/getAll', 'module\retur\returPembelianController@getAll')->name('owner.retur_pembelian.getAll');
     Route::get('retur-pembelian/create', 'module\retur\returPembelianController@create')->name('owner.retur_pembelian.create');
     Route::get('retur-pembelian/edit/{params}', 'module\retur\returPembelianController@edit')->name('owner.retur_pembelian.edit');
+    Route::get('retur-pembelian/belum-selesai/{params}', 'module\retur\returPembelianController@belumSelesai')->name('owner.retur_pembelian.belumSelesai');
     Route::post('retur-pembelian/store', 'module\retur\returPembelianController@store')->name('owner.retur_pembelian.store');
     Route::post('retur-pembelian/update/{params}', 'module\retur\returPembelianController@update')->name('owner.retur_pembelian.update'); 
     Route::delete('retur-pembelian/destroy/{params}', 'module\retur\returPembelianController@destroy')->name('owner.retur_pembelian.destroy'); 
+    Route::post('retur-pembelian/getDetail', 'module\retur\returPembelianController@getDetail')->name('owner.retur_pembelian.getDetail');
 
       // RETUR Penjualan
       Route::get('retur-penjualan', 'module\retur\returPenjualanController@index')->name('owner.retur_penjualan');
       Route::get('retur-penjualan/getAll', 'module\retur\returPenjualanController@getAll')->name('owner.retur_penjualan.getAll');
       Route::get('retur-penjualan/create', 'module\retur\returPenjualanController@create')->name('owner.retur_penjualan.create');
       Route::get('retur-penjualan/edit/{params}', 'module\retur\returPenjualanController@edit')->name('owner.retur_penjualan.edit');
+      Route::get('retur-penjualan/belum-selesai/{params}', 'module\retur\returPenjualanController@belumSelesai')->name('owner.retur_penjualan.belumSelesai');
       Route::post('retur-penjualan/store', 'module\retur\returPenjualanController@store')->name('owner.retur_penjualan.store');
       Route::post('retur-penjualan/update/{params}', 'module\retur\returPenjualanController@update')->name('owner.retur_penjualan.update'); 
       Route::delete('retur-penjualan/destroy/{params}', 'module\retur\returPenjualanController@destroy')->name('owner.retur_penjualan.destroy'); 
+      Route::post('retur-penjualan/getDetail', 'module\retur\returPenjualanController@getDetail')->name('owner.retur_penjualan.getDetail');
 
     // Route::get('barang-masuk/edit/{params}', 'module\persediaan\barangmasukController@edit')->name('owner.persediaan.barangmasuk.edit');
     // Route::delete('barang-masuk/destroy/{params}', 'module\persediaan\barangmasukController@destroy')->name('owner.persediaan.barangmasuk.destroy');

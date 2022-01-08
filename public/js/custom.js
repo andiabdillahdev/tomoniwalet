@@ -26,10 +26,10 @@ $(function(){
 
     };
 
-    overlayTransaksiVendor = (elementsupplier,url,title,mode) =>{
-        console.log(url);
+    overlayTransaksiVendor = (element,url,title,mode,submode) =>{
+        console.log(element);
         if (mode != 'barang_keluar') {
-            let supplier = $(`#${elementsupplier}`).val();
+            let supplier = $(`#${element}`).val();
             if(supplier !== ''){
                 $.ajax({
                     url: host + "/" + url,
@@ -50,21 +50,33 @@ $(function(){
                 notif("warning", 'Supplier / Pemasok Belum di pilih');
             }
         }else{
-            $.ajax({
-                url: host + "/" + url,
-                dataType: "html",
-                success: function(response) {
-                    
-                    $("#modalTabelTitle").html(title);
-                    $("#modal-body-table").html(response);
-                    $("#exampleModalTable").modal('show');
-                    dataTableDetailModal(`owner/pengiriman-pesanan/belum-selesai`,'tb_detail_persanan_barang','pengiriman_pesanan');
+            let params = $(`#${element}`).val();
+            if (params != '') {
+                $.ajax({
+                    url: host + "/" + url,
+                    dataType: "html",
+                    success: function(response) {
+                        console.log(url)
+                        console.log(response)
+                        $("#modalTabelTitle").html(title);
+                        $("#modal-body-table").html(response);
+                        $("#exampleModalTable").modal('show');
+                        if (submode == 'pengiriman') {
+                            dataTableDetailModal(`owner/pengiriman-pesanan/belum-selesai/${params}`,'tb_detail_persanan_barang','pengiriman_pesanan');
+                        }else{
+                            dataTableDetailModal(`owner/retur-pembelian/belum-selesai/${params}`,'tb_detail_persanan_barang','retur_pembelian');
+                        }
                         
-                },
-                error: function() {
-                    notif("warning", 'Gagal');
-                }
-            });
+                            
+                    },
+                    error: function() {
+                        notif("warning", 'Gagal');
+                    }
+                });
+            } else {
+                notif("warning", 'Silahkan Pilih Pelanggan Terlebih Dahulu');
+            }
+            
         }
 
     }

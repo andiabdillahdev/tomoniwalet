@@ -9,6 +9,8 @@ use DataTables;
 use App\pesanan_pembelian_header;
 use App\pesanan_pembelian_detail;
 use App\retail_penjualan_detail;
+use App\returPembelian;
+use App\returPembelianDetail;
 class stokController extends Controller
 {
 
@@ -30,6 +32,8 @@ class stokController extends Controller
     public function riwayat($params){
         $stok = stok::where('id',$params)->first();
         $barang_keluar = [];
+        $out1 = [];
+        $out2 = [];
         
         // Barang masuk
         $pesanan_pembelian = pesanan_pembelian_detail::with('pesanan_pembelian_header')->where('id_produk',$stok['id_produk'])->get();
@@ -37,16 +41,26 @@ class stokController extends Controller
         
         // Barang Keluar
             $kasir = retail_penjualan_detail::with('retail_penjualan_header')->where('id_produk',$stok['id_produk'])->get();
+            $retur_pembelian = returPembelianDetail::with('returPembelian')->where('id_produk',$stok['id_produk'])->get();
             foreach ($kasir as $key => $value) {
-                $barang_keluar[$key] = [
+                $out1[$key] = [
                     'tanggal' => $value['retail_penjualan_header']['tanggal'],
                     'jenis_tagihan' => 'Retail / Kasir',
                     'mode' => 'kasir',
                     'id' => $value['id_retail_penjualan_header']
                 ];
             }
-            // return $kasir;
-        // 
+           
+            foreach ($retur_pembelian as $x => $y) {
+                $out2[$x] = [
+                    'tanggal' => $y['returPembelian']['tanggal'],
+                    'jenis_tagihan' => 'Retur Pembelian',
+                    'mode' => 'retur',
+                    'id' => $y['id_retur_pembelian_header']
+                ];
+            }
+
+            $barang_keluar = array_merge($out1, $out2);            
         return view('panel.owner.persediaan.stok.riwayat',compact('stok','pesanan_pembelian','barang_keluar'));
     }
 }

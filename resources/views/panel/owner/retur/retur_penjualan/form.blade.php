@@ -26,25 +26,26 @@
                             <form id="form_retur_penjualan" class="forms-sample">
 
                             <div class="mb-4">
-                            <span class="text-muted small">Pilih Jenis Retur Penjualan</span>
-                            <label class="custom-control teleport-switch">
-                                <span class="teleport-switch-control-description">Transaksi Website</span>
-                                <input type="checkbox" class="teleport-switch-control-input" onchange="changeForm(this)">
-                                <span class="teleport-switch-control-indicator"></span>
-                                <span class="teleport-switch-control-description">Transaksi Kasir</span>
-                            </label>
+                                <span class="text-muted small">Pilih Jenis Retur Penjualan</span>
+                                <label class="custom-control teleport-switch">
+                                    <span class="teleport-switch-control-description">Transaksi Website</span>
+                                    <input type="checkbox" class="teleport-switch-control-input"
+                                        onchange="changeForm(this)">
+                                    <span class="teleport-switch-control-indicator"></span>
+                                    <span class="teleport-switch-control-description">Transaksi Kasir</span>
+                                </label>
                             </div>
 
                             <div class="form-group" id="pelanggan_website">
-                                    <label for="kategori_">Pelanggan via Website</label>
-                                    {{ Form::select('user_id',$user,null, ['title' => 'Pilih Pelanggan','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
-                                    <small class="text-danger error-notif" id="supplier"></small>
-                            </div>   
+                                <label for="kategori_">Pelanggan via Website</label>
+                                {{ Form::select('user_id',$user,null, ['title' => 'Pilih Pelanggan','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'kategori_']) }}
+                                <small class="text-danger error-notif" id="supplier"></small>
+                            </div>
 
                             <div class="form-group" id="pelanggan_kasir">
-                                    <label for="customer_">Pelanggan via kasir</label>
-                                    <input type="text" class="form-control" name="customer" id="customer_">
-                                    <small class="text-danger error-notif" id="customer"></small>
+                                <label for="customer_">Pelanggan via kasir</label>
+                                <input type="text" class="form-control" name="customer" id="customer_">
+                                <small class="text-danger error-notif" id="customer"></small>
                             </div>
                          
                             <div class="form-group">

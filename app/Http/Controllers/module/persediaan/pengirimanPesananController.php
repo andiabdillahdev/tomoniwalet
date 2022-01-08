@@ -154,9 +154,12 @@ class pengirimanPesananController extends Controller
 
     }
 
-    public function belum_selesai(){
-        $data = pengiriman_pesanan_header::with('pengiriman_pesanan_detail')->where('status','Belum Selesai')->get();
+    public function belum_selesai($params){
+        $data = pengiriman_pesanan_header::with('pengiriman_pesanan_detail','user')->where('user_id',$params)->where('status','Belum Selesai')->get();
         return DataTables::of($data)
+        ->editColumn('pelanggan', function ($list) {
+            return $list['user'] ? $list['user']['name']: NULL;
+        })
         ->rawColumns([])
         ->make(true);
     }
@@ -173,7 +176,8 @@ class pengirimanPesananController extends Controller
         $result = [
             'pelanggan' => $pelanggan['pelanggan'],
             'header_id' => $request->id_header,
-            'detail' => $data
+            'detail' => $data,
+            'type' => 'pengiriman'
         ];
         
         return $result;

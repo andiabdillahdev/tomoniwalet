@@ -12,7 +12,7 @@ class returPembelianController extends Controller
 {
 
     public function kode(){
-        $nomor = returPenjualanHeader::orderBy('id', 'desc')->first();
+        $nomor = returPembelian::orderBy('id', 'desc')->first();
         $kode = '';
         if (!isset($nomor)) {
             $kode = 'TMW-RTR-01'.'-'.date('Y').'-1';
@@ -124,6 +124,31 @@ class returPembelianController extends Controller
                 'message' => 'Data Retur Pembelian Gagal di Proses'
             ]); 
         }
+    }
+
+    public function belumSelesai($params){
+        $data = returPembelian::with('supplier')->where('id_supplier',$params)->get();
+        return DataTables::of($data)
+        ->editColumn('supplier', function ($data) {
+            return $data['supplier'] ? $data['supplier']['nama']: NULL;
+        })
+        ->rawColumns([])
+        ->make(true);
+    }
+
+    public function getDetail(Request $request){
+        $result = [];
+        $pelanggan = returPembelian::where('id',$request->id_header)->first();
+        $data = returPembelianDetail::where('id_retur_pembelian_header',$request->id_header)->get();
+        
+        $result = [
+            'pelanggan' => $pelanggan['supplier'],
+            'header_id' => $request->id_header,
+            'detail' => $data,
+            'type' => 'retur'
+        ];
+        
+        return $result;
     }
 
     public function destroy($id){

@@ -24,14 +24,40 @@
 
                         <div class="col-lg-10">
                         <p class="card-description">FORM PILIH PENGIRIMAN PESANAN</p>
-                        <div class="form-group mt-3">
-                                <label for="supplier_">Pelanggan</label>
-                                <input type="text" id="pelanggan" class="form-control" readonly>
-                        </div> 
-                        
-                        <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('supplier_','owner/barang-keluar/detailPengiriman','Pilih Pengiriman Pesanan','barang_keluar')">Tambah Produk/Barang</button>
+                      
+                        <div class="mb-4">
+                                <span class="text-muted small">Pilih Jenis Barang Keluar</span>
+                                <label class="custom-control teleport-switch">
+                                    <span class="teleport-switch-control-description">Pengiriman Pesanan </span>
+                                    <input type="checkbox" class="teleport-switch-control-input"
+                                        onchange="changeForm(this)">
+                                    <span class="teleport-switch-control-indicator"></span>
+                                    <span class="teleport-switch-control-description">Retur Pembelian</span>
+                                </label>
                             </div>
+
+                            <div class="form-group" id="retur_pembelian_">
+                                <label for="kategori_">Pilih Pelanggan</label>
+                                {{ Form::select('user_id',$user,null, ['title' => 'Pilih Pelanggan','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'pelanggan_']) }}
+                                <small class="text-danger error-notif" id="supplier"></small>
+                            </div>
+
+                            <div class="form-group" id="pengiriman_pesanan_">
+                                <label for="customer_">Pilih Pemasok</label>
+                                {{ Form::select('pemasok_id',$supplier,null, ['title' => 'Pilih Pemasok','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'pemasok_']) }}
+                            </div>
+
+                        <div class="d-flex justify-content-start">
+
+                            <div id="button_retur_">
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('pelanggan_','owner/barang-keluar/detailPengiriman','Pilih Pengiriman Pesanan','barang_keluar','pengiriman')">Tambah Produk/Barang Pengiriman</button>
+                            </div>
+
+                            <div id="button_pengiriman_">
+                                <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('pemasok_','owner/barang-keluar/detailRetur','Pilih Pemasok','barang_keluar','retur')">Tambah Produk/Barang Retur</button>
+                            </div>
+
+                        </div>
 
 
                             <table id="tb_general_persediaan" class="table mb-5">
@@ -85,6 +111,7 @@
                             </div>
 
                             <input type="hidden" id="id_header_transaksi" name="barang">
+                            <input type="hidden" id="id_header_retur" name="id_header_retur">
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_page('form_pengiriman_pesanan','owner/barang-keluar/store','owner/barang-keluar')">Submit</button>
@@ -106,6 +133,22 @@
         $(function () {
             $('.selectpicker').selectpicker();
             currency('currency_format');
+            $('#pengiriman_pesanan_').hide();
+            $('#button_pengiriman_').hide();
+
+        changeForm = (element) =>{
+            if ($(element).is(':checked')) {
+                $('#pengiriman_pesanan_').show();
+                $('#button_pengiriman_').show();
+                $('#retur_pembelian_').hide();
+                $('#button_retur_').hide();
+            }else{
+                $('#retur_pembelian_').show();
+                $('#button_retur_').show();
+                $('#pengiriman_pesanan_').hide();
+                $('#button_pengiriman_').hide();
+            }
+        }
 
         })
     </script>

@@ -140,6 +140,31 @@ class returPenjualanController extends Controller
         }
     }
 
+    public function belumSelesai($params){
+        $data = returPenjualanHeader::with('returPenjualanDetail','user')->where('id',$params)->get();
+        return DataTables::of($data)
+        ->editColumn('pelanggan', function ($list) {
+            return $list['user'] ? $list['user']['name']: NULL;
+        })
+        ->rawColumns([])
+        ->make(true);
+    }
+
+    public function getDetail(Request $request){
+        $result = [];
+        $pelanggan = returPenjualanHeader::where('id',$request->id_header)->first();
+        $data = returPenjualanDetail::where('id_retur_penjualan_header',$request->id_header)->get();
+        
+        $result = [
+            'pelanggan' => $pelanggan['pelanggan'],
+            'header_id' => $request->id_header,
+            'detail' => $data,
+            'type' => 'retur'
+        ];
+        
+        return $result;
+    }
+
     public function destroy($id){
         $data = returPenjualanHeader::where('id',$id)->delete();
 

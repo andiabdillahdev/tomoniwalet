@@ -662,7 +662,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/barang-keluar/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-keluar/destroy/${data.id}','tb_barang_keluar')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-keluar/destroy/${data.id}','tb_barang_keluar')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
@@ -936,11 +936,12 @@ $(function () {
     dataTableDetailModal = (url,table,type,element) =>{
         
         let columns = {};
+        let columnsDefs = {};
         let url_ = url;
         if (type == 'produk') {
             $(`#${table}`).DataTable().clear().draw();
             $(`#${table}`).DataTable().destroy();
-            url_ = url + '/' + $(element).val()
+            url_ = url + '/' + $(element).val();
             columns = {
                 data: [
                     { data: "id" },
@@ -949,6 +950,23 @@ $(function () {
                     { data: "nama" },
                 ],   
             }
+
+            columnsDefs = {
+               data: [
+                    {
+                        defaultContent: "-",
+                        targets: "_all",
+                    },
+                    {
+                        targets: 0,
+                        className: "dt-left",
+                        orderable: false,
+                        searchable: false,
+                        visible: false,
+                    }
+                ],
+            }
+
         } else if(type == 'pesanan_pembelian') {
             columns = {
                 data: [
@@ -958,6 +976,22 @@ $(function () {
                     { data: "tanggal" },
                 ],   
             }
+
+            columnsDefs = {
+                data: [
+                     {
+                         defaultContent: "-",
+                         targets: "_all",
+                     },
+                     {
+                         targets: 0,
+                         className: "dt-left",
+                         orderable: false,
+                         searchable: false,
+                         visible: false,
+                     }
+                 ],
+             }
         } else if(type == 'pengiriman_pesanan'){
             columns = {
                 data: [
@@ -967,6 +1001,47 @@ $(function () {
                     { data: "tanggal" },
                 ],   
             }
+
+            columnsDefs = {
+                data: [
+                     {
+                         defaultContent: "-",
+                         targets: "_all",
+                     },
+                     {
+                         targets: 0,
+                         className: "dt-left",
+                         orderable: false,
+                         searchable: false,
+                         visible: false,
+                     }
+                 ],
+             }
+        }else if(type == 'retur_pembelian'){
+            columns = {
+                data: [
+                    { data: "id" },
+                    { data: "kode" },
+                    { data: "supplier" },
+                    { data: "tanggal" },
+                ],   
+            }
+
+            columnsDefs = {
+                data: [
+                     {
+                         defaultContent: "-",
+                         targets: "_all",
+                     },
+                     {
+                         targets: 0,
+                         className: "dt-left",
+                         orderable: false,
+                         searchable: false,
+                         visible: false,
+                     }
+                 ],
+             }
         }
 
         tabel = $(`#${table}`).DataTable({
@@ -996,19 +1071,7 @@ $(function () {
                 processing: '<span class="text-danger">Mengambil Data....</span>',
             },
             columns  : columns.data,
-            columnDefs: [
-                {
-                    defaultContent: "-",
-                    targets: "_all",
-                },
-                {
-                    targets: 0,
-                    className: "dt-left",
-                    orderable: false,
-                    searchable: false,
-                    visible: false,
-                }
-            ],
+            columnDefs: columnsDefs.data
         });
     }
 
@@ -1054,7 +1117,15 @@ $(function () {
                 },
                 success: function(res) {
                     console.log(res);
-                    $('#id_header_transaksi').val(res.header_id);
+                    if (res.type == 'pengiriman') {
+                        $('#id_header_transaksi').val(res.header_id);
+                        $('#id_header_retur').val('');
+                    } else {
+                        $('#id_header_retur').val(res.header_id);
+                        $('#id_header_transaksi').val('');
+                    }
+                   
+                   
                     $('#tb_general_persediaan').DataTable().clear().draw();
                     $.each(res.detail, function (indexInArray, valueOfElement) {
                         $('#tb_general_persediaan').DataTable().row.add([

@@ -6,9 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\pengiriman_pesanan_header;
 use App\pengiriman_pesanan_detail;
+use App\returPenjualanHeader;
+use App\returPembelianDetail;
 use App\barangkeluar;
+use App\supplier;
 use App\stok;
 use DataTables;
+use App\User;
 class barangkeluarController extends Controller
 {
 
@@ -58,13 +62,29 @@ class barangkeluarController extends Controller
         return view('panel.owner.persediaan.barang_keluar.index');
     }
 
+    public function user_customer(){
+        $data = User::where('role',3)->get();
+        return collect($data)->pluck('email', 'id')->toArray();
+    }
+
+    public function supplier(){
+        $data = supplier::all();
+        return collect($data)->pluck('nama', 'id')->toArray();
+    }
+
     public function create(){
         $kode = $this->kode();
-        return view('panel.owner.persediaan.barang_keluar.create',compact('kode'));
+        $user = $this->user_customer();
+        $supplier = $this->supplier();
+        return view('panel.owner.persediaan.barang_keluar.create',compact('kode','user','supplier'));
     }
 
     public function detailPengiriman(){
         return view('panel.owner.persediaan.barang_keluar.detail_pesanan');
+    }
+
+    public function detailRetur(){
+        return view('panel.owner.persediaan.barang_keluar.detail_retur');
     }
 
     public function store(Request $request){
@@ -73,37 +93,45 @@ class barangkeluarController extends Controller
             'kode' => 'required',
             'tanggal' => 'required',
             'keterangan' => 'required',
-            'barang'=>'required'
         ]);
 
         $data = new barangkeluar();
         $data->id_pengiriman_pesanan_header = $request->barang;
+        $data->id_return_pembelian = $request->id_header_retur;
         $data->kode  = $request->kode;
         $data->tanggal = $request->tanggal;
         $data->keterangan = $request->keterangan;
         $data->save();
 
-         // Cek Produk di Stok Tersedia
-         $getProduk = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$data['id_pengiriman_pesanan_header'])->get();
+        if ($request->barang == null || $request->barang == '' ) {
+            $getProduk = returPembelianDetail::where('id_retur_pembelian_header',$data['id_return_pembelian'])->get();
 
-         foreach ($getProduk as $key => $value) {
-  
-              $stok = stok::where('id_produk',$value->id_produk)->first();
-              $data_stok = new stok();
-             if (isset($stok)) {
-                 $stok->jumlah = $stok->jumlah - $value->jumlah;
-                 // $data_stok->id_produk = $value->id_produk;
-                 // $data_stok->jumlah = $value->jumlah;
-                 $stok->save();
-             }
-         }
- 
-         // dd($stok);
-         // 
- 
-         $header = pengiriman_pesanan_header::where('id',$request->barang)->first();
-         $header->status = 'Selesai';
-         $header->save();
+            foreach ($getProduk as $key => $value) {
+                $stok = stok::where('id_produk',$value->id_produk)->first();
+                $data_stok = new stok();
+               if (isset($stok)) {
+                   $stok->jumlah = $stok->jumlah - $value->jumlah;
+                   $stok->save();
+               }
+            }
+        }else{
+            // Cek Produk di Stok Tersedia
+            $getProduk = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$data['id_pengiriman_pesanan_header'])->get();
+
+            $header = pengiriman_pesanan_header::where('id',$request->barang)->first();
+            $header->status = 'Selesai';
+            $header->save();
+
+            foreach ($getProduk as $key => $value) {
+                $stok = stok::where('id_produk',$value->id_produk)->first();
+                $data_stok = new stok();
+               if (isset($stok)) {
+                   $stok->jumlah = $stok->jumlah - $value->jumlah;
+                   $stok->save();
+               }
+            }
+
+        }
  
          if ($data) {
              return response()->json([
