@@ -1,5 +1,12 @@
 @extends('homepage.layouts.headfoot')
 @section('konten_page')
+    @php
+    $get_kat = new App\kategori();
+    if (isset($_GET['kat_id'])) {
+        $kategori = $get_kat->where('kode', $_GET['kat_id'])->first();
+        $kat_id = $kategori ? $kategori->id : null;
+    }
+    @endphp
     <div class="wrapper-content">
         <!-- PRODUK TERLARIS -->
 
@@ -13,6 +20,9 @@
 
                         <select class="form-control form-select-sub-header kategoriContent" style="margin-right: 8px;">
                             <option value="all">Semua Produk</option>
+                            @foreach ($get_kat->all() as $kat)
+                                <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
+                            @endforeach
                         </select>
 
                         <select class="form-control form-select-sub-header byPrice">
@@ -72,8 +82,7 @@
             });
 
             let loadData = new homepage();
-            loadData.belanja('kat');
-            loadData.get_kategori();
+            // loadData.get_kategori();
 
             $(document).on('click', '.add-cart', function(event) {
                 event.preventDefault();
@@ -109,6 +118,13 @@
                     loadData.belanja('price', value);
                 }
             });
+
+            @if (isset($kat_id))
+                loadData.belanja('kat', '{{ $kat_id }}');
+                $(document).find('.kategoriContent').val('{{ $kat_id }}');
+            @else
+                loadData.belanja('kat');
+            @endif
 
         });
     </script>

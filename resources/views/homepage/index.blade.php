@@ -2,6 +2,7 @@
 @section('konten_page')
     @php
     $testi = new App\testimonial();
+    $kategori = new App\kategori_hero();
     @endphp
     <div class="wrapper-content">
         <section id="hero-section">
@@ -29,78 +30,23 @@
 
         <section id="kategori_area">
             <div class="container">
-                <div class="row mt-3">
-                    <div class="col-lg-4">
-                        <div class="card-kategori bg-blue-old">
-                            <div class="d-flex justify-content-end">
-                                <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
-                            </div>
-                            <div class="custom-position">
-                                <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
-                            </div>
+                <div class="row">
+                    @foreach ($kategori->all() as $i => $kat)
+                        <div class="col-lg-4 mt-3">
+                            <div class="card-kategori {{ $i % 2 == 1 ? 'bg-blue-old' : 'bg-blue-kid' }}">
+                                <div class="d-flex justify-content-end">
+                                    <img src="{{ asset('uploads/page/gambar_kategori/' . $kat->gambar_kategori) }}" alt=""
+                                        srcset="" height="200">
+                                </div>
+                                <div class="custom-position">
+                                    <h1>{{ $kat->kategori->nama }}</h1>
+                                    <a href="{{ url('belanja/list?kat_id=' . $kat->kategori->kode) }}"
+                                        class="btn button button-light custom-position-button">Lihat Produk</a>
+                                </div>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-kategori bg-blue-kid">
-                        <div class="d-flex justify-content-end">
-                                <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
-                            </div>
-                            <div class="custom-position">
-                                <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-kategori bg-blue-old">
-                        <div class="d-flex justify-content-end">
-                                <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
-                            </div>
-                            <div class="custom-position">
-                                <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-3">
-                    <div class="col-lg-4">
-                        <div class="card-kategori bg-blue-kid">
-                        <div class="d-flex justify-content-end">
-                                <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
-                            </div>
-                            <div class="custom-position">
-                                <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-kategori bg-blue-old">
-                        <div class="d-flex justify-content-end">
-                                <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
-                            </div>
-                            <div class="custom-position">
-                                <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="card-kategori bg-blue-kid">
-                        <div class="d-flex justify-content-end">
-                                <img src="{{ asset('assets/img/img-kategori1.png') }}" alt="" srcset="">
-                            </div>
-                            <div class="custom-position">
-                                <h1>Kategori</h1>
-                                <button class="btn button button-light custom-position-button">Lihat Produk</button>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
 
             </div>

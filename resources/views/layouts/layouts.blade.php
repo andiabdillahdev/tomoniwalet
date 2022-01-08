@@ -113,9 +113,11 @@
                         <div class="collapse" id="kelola-pesanan">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{ url('owner/v/kelola-pesanan/diproses') }}">Proses Diproses</a></li>
+                                        href="{{ url('owner/pesanan/kelola-pesanan/diproses') }}">Proses Diproses</a>
+                                </li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="{{ url('owner/v/kelola-pesanan/selesai') }}">Pesanan Selesai</a></li>
+                                        href="{{ url('owner/pesanan/kelola-pesanan/selesai') }}">Pesanan Selesai</a>
+                                </li>
                             </ul>
                         </div>
                     </li>
@@ -234,8 +236,7 @@
     <!-- container-scroller -->
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
