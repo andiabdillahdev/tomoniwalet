@@ -8,7 +8,7 @@
                 @if (!$produk)
                     <h2 class="text-center"><i>Data tidak ditemukan</i></h2>
                 @else
-                    <div id="detail_produk" class="row">
+                    <div id="detail_produk_detail" class="row">
                         <div class="col-lg-4">
                             <div class="box-img">
                                 <img src="{{ asset('uploads/produk/' . $produk->gambar_detail[0]->gambar) }}" alt=""
@@ -17,7 +17,6 @@
                         </div>
                         <div class="col-lg-8">
                             <h1 class="mb-0">{{ $produk->nama }}</h1>
-                            <i><b>#{{ $produk->kode }}</b></i>
                             <h5 class="mt-2"><b>Rp.{{ number_format($produk->harga) }}</b></h5>
                             <hr>
                             <p>{{ $produk->deskripsi }}</p>
@@ -41,6 +40,8 @@
                 @endif
             </div>
         </section>
+
+        
 
     </div>
 @endsection

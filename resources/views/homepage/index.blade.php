@@ -83,7 +83,7 @@
             <div class="container">
                 <div class="row card-area">
                     <div class="col-lg-3">
-                        <div class="card-tml content-card">
+                        <div class="card-tml content-card mt-4">
                             <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
                             <div class="d-flex justify-content-center">
                                 <span>Kategori Produk</span>
@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="card-tml content-card">
+                        <div class="card-tml content-card mt-4">
                             <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
                             <div class="d-flex justify-content-center">
                                 <span>Kategori Produk</span>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="card-tml content-card">
+                        <div class="card-tml content-card mt-4">
                             <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
                             <div class="d-flex justify-content-center">
                                 <span>Kategori Produk</span>
@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        <div class="card-tml content-card">
+                        <div class="card-tml content-card mt-4">
                             <img src="{{ asset('assets/img/produk.png') }}" alt="" srcset="">
                             <div class="d-flex justify-content-center">
                                 <span>Kategori Produk</span>

@@ -20,7 +20,7 @@
                                 industry's standard dummy text ever since the 1500s, when an unknown printer </p>
                         </div>
                         <div class="col-lg-6">
-
+                            <img src="{{ asset('assets/img/logo_tomoni_tentang.png') }}" alt="" srcset="">
                         </div>
                     </div>
                 </div>

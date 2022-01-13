@@ -16,6 +16,21 @@
                     <div class="sub-header-item-1">
                         <span id="title-view">Semua Produk</span>
                     </div>
+                    <div class="sub-header-menu">
+                        <span id="title-view">Speaker</span>
+                    </div>
+                    <div class="sub-header-menu">
+                        <span id="title-view">Kabel</span>
+                    </div>
+                    <div class="sub-header-menu">
+                        <span id="title-view">Tweeter</span>
+                    </div>
+                    <div class="sub-header-menu">
+                        <span id="title-view">Ampli Betavo</span>
+                    </div>
+                    <div id="mobile-kategori-menu">
+                        <span id="title-view">Kategori</span>
+                    </div>
                     <div class="d-flex sub-header-item-2">
 
                         <select class="form-control form-select-sub-header kategoriContent" style="margin-right: 8px;">

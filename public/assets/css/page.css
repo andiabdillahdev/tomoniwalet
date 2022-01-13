@@ -380,7 +380,12 @@ position: relative;
 }
 
 #detail_produk{
-    /* background: #F6F8F9; */
+    background: #F6F8F9;
+    border-radius: 8px 0px 0px 8px;
+    padding-top: 2rem;
+}
+
+#detail_produk_detail{
     border-radius: 8px 0px 0px 8px;
     padding-top: 2rem;
 }
@@ -416,7 +421,7 @@ position: relative;
     outline: none;
 }
 
-#detail_produk span{
+#detail_produk_detail span{
     margin-left: 8rem;
     font-family: 'Mulish', sans-serif;
     font-style: normal;
@@ -573,6 +578,22 @@ line-height: 20px;
 color: #23A7E0;
 }
 
+.sub-header-menu{
+    font-family: 'Mulish', sans-serif;
+font-style: normal;
+font-weight: bold;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height */
+
+
+color: #333333;
+}
+
+#mobile-kategori-menu{
+    display: none;
+}
+
 .note_item_detail p{
     font-family: 'Mulish',sans-serif;
     font-style: normal;
@@ -609,8 +630,9 @@ color: #23A7E0;
     border-radius: 4px;
     font-family: 'Mulish', sans-serif;
     font-size: 12px;
-    padding: 3px 5px;
+    padding: 4px 5px;
     width: 4rem;
+    background: none;
 }
 
 #list-item-keranjang input:focus{
@@ -634,13 +656,23 @@ color: #23A7E0;
 
 .plus_grid{
     position: relative;
-    left: -35px;
+    left: -34px;
+}
+
+.row-item-keranjang{
+    margin-bottom: 2rem;
+    margin-top: 2rem;
 }
 
 .minus_grid{
     position: relative;
-    left: 68px;
-    bottom: 26px;
+    left: 66px;
+    bottom: 28px;
+}
+
+.icon-input{
+    position: relative;
+    bottom: 3px;
 }
 
 
@@ -814,18 +846,17 @@ margin-top: 8px;
     background: #FFFFFF;
     border: 1px solid #A3A2A2;
     box-sizing: border-box;
-    padding: 12px 10px 12px 10px;
-    /* height: 388px;
-    width : 388px; */
+    padding: 12px 20px 12px 54px;
 }
 
-#detail_produk img{
+#detail_produk_detail img{
     position: relative;
     bottom: 5px;
-    width: 100%;
+    width: 215px;
+    height: 200px;
 }
 
-#detail_produk h1{
+#detail_produk_detail h1{
     font-family: 'Mulish', sans-serif;
     font-style: normal;
     font-weight: 800;
@@ -1019,6 +1050,17 @@ color: #000000;
     text-decoration: none;
 }
 
+.content-card img{
+    width: 114px;
+    height: 100px;
+    margin-left: 3rem;
+}
+
+#tentang img{
+    width: 72%;
+    margin-left: 7rem;
+}
+
 @media screen and (max-width: 768px){
 
 }
@@ -1113,6 +1155,119 @@ color: #000000;
 
     .button{
         padding: 6px 12px;
+    }
+
+    .row-item-keranjang {
+        margin-bottom: 10rem;
+    }
+
+    .kuantiti{
+        position: relative;
+        right: 16rem;
+        top: 8rem;
+    }
+
+    .sub_total_keranjang{
+        position: relative;
+        left: -13rem;
+        top: 141px;
+    }
+
+    #detail-note{
+        position: relative;
+        right: 5rem;
+    }
+
+    #kuantiti-note{
+        display: none;
+    }
+
+    #total-note{
+        display: none;
+    }
+
+    .del-keranjang{
+        position: relative;
+        right: 20rem;
+        top: 130px;
+    }
+
+    .title-produk-list{
+        margin-top: 3rem;
+    }
+
+    #user_auth{
+        position: relative;
+        left: 11rem;
+    }
+
+    .content-card img{
+        margin-left: 5rem;
+    }
+
+    .input-group-detail-produk{
+        position: relative;
+        left: -6rem;
+    }
+
+    #detail_produk_detail span {
+        margin-left: 7rem;
+    }
+
+    .input-number-increment{
+        position: relative;
+        left: 117px;
+        bottom: 40px;
+    }
+
+    .btn-position-custom{
+      position: absolute;
+      left: 1rem;
+      bottom: 6px;
+    }
+
+    .row-group {
+        margin-bottom: 30px;
+    }
+
+    #tentang img{
+        width: 100%;
+        margin-left: 0;
+    }
+    #tentang h1{
+        font-size: 36px;
+    }
+
+    .sub-header-menu{
+        display: none;
+    }
+
+    .sub-header-item-1 span{
+        font-size: 12px;
+    }
+
+    .sub-header{
+        margin-top: 8rem;
+    }
+
+    .form-select-sub-header{
+        font-size: 8px;
+        padding: 2px 6px;
+        width: 75px;
+    }
+
+    #mobile-kategori-menu{
+        font-family: 'Mulish', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 12px;
+        line-height: 20px;
+        /* identical to box height */
+        
+        
+        color: #333333;
+        display: block;
+        margin-top:4px;
     }
 
 }

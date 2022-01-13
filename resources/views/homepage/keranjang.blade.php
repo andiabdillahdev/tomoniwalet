@@ -15,16 +15,17 @@ $total = 0;
                 <div class="row">
                     <div class="col-lg-8" id="detail_produk">
                         <div class="d-flex">
-                            <span>Detail Produk</span>
-                            <span>Kuantiti</span>
-                            <span>Total</span>
+                            <span id="detail-note">Detail Produk</span>
+                            <span id="kuantiti-note">Kuantiti</span>
+                            <span id="total-note">Total</span>
                         </div>
                         <div id="list-item-keranjang">
                             @foreach ($keranjang as $res)
-                            <div class="d-flex">
+                            <div class="d-flex row-item-keranjang">
                                 <input type="hidden" name="keranjang_id[]" class="keranjang-id" value="{{ $res->id }}">
                                 <div class="item_detail">
-                                    <img src="{{ asset('uploads/produk/'.$res->produk->gambar_detail[0]->gambar) }}" alt="" style="height: 80px; width: 80px; margin-left: 25px;">
+                                    <img src="{{ asset('uploads/produk/'.$res->produk->gambar_detail[0]->gambar) }}"
+                                        alt="" style="height: 80px; width: 80px; margin-left: 25px;">
                                     <div class="note_item_detail">
                                         <ul>
                                             <li>{{ $res->produk->nama }}</li>
@@ -35,17 +36,30 @@ $total = 0;
 
                                 <div class="kuantiti">
                                     <div class="custom_pos">
-                                        <a href="#" class="text-dark btn-action" data-action="minus" produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
+                                        <a href="#" class="text-dark btn-action" data-action="minus"
+                                            produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
                                             <div class="group-auto plus_grid">
-                                                <i class="fas fa-minus"></i>
+                                                <svg width="14" height="3" class="icon-input" viewBox="0 0 14 3"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M13 1.5H1" stroke="black" stroke-width="2"
+                                                        stroke-linecap="round" />
+                                                </svg>
+
                                             </div>
                                         </a>
                                     </div>
-                                    <input type="text" class="form-control val-kuantitas" value="{{ $res->kuantitas }}" readonly="">
+                                    <input type="text" class="form-control val-kuantitas" value="{{ $res->kuantitas }}"
+                                        readonly="">
                                     <div class="custom_pos">
-                                        <a href="#" class="text-dark btn-action" data-action="plus" produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
+                                        <a href="#" class="text-dark btn-action" data-action="plus"
+                                            produk-id="{{ $res->produk_id }}" data-id="{{ $res->id }}">
                                             <div class="group-auto minus_grid">
-                                                <i class="fas fa-plus"></i>
+                                                <svg width="13" height="13" class="icon-input" viewBox="0 0 13 13"
+                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M7 6.5H1M7 12.5V6.5V12.5ZM7 6.5V0.5V6.5ZM7 6.5H13H7Z"
+                                                        stroke="black" stroke-width="2" stroke-linecap="round" />
+                                                </svg>
+
                                             </div>
                                         </a>
                                     </div>

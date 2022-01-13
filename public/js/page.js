@@ -89,8 +89,8 @@ function homepage() {
                 if (response['data']['length'] > 0) {
                     $.each(response['data'], function (indexInArray, valueOfElement) {
                         html += `<div class="col-lg-3">
-                        <div class="card-tml content-card">
-                        <img src="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" style="width: 100%;" alt="" srcset="">
+                        <div class="card-tml content-card mt-4">
+                        <img src="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" alt="${valueOfElement.nama}" srcset="">
                         <div class="d-flex justify-content-center">
                         <span>${valueOfElement.kategori['nama']}</span>
                         </div>
@@ -177,7 +177,7 @@ function homepage() {
                     <div class="col-lg-3 mb-3">
                     <a href="`+host+`/produk/detail/`+ val.kode +`">
                     <div class="card-tml content-card">
-                    <img src="${host}/uploads/produk/${val.foto}" alt="" style="width: 100%;" height="200">
+                    <img src="${host}/uploads/produk/${val.foto}" alt="${val.nama}">
                     <div class="d-flex justify-content-center">
                     <span>${val.nama_kategori}</span>
                     </div>
