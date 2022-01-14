@@ -1,5 +1,14 @@
 @extends('homepage.layouts.headfoot')
 @section('konten_page')
+    @php
+    $all_produk = new App\produk();
+    if ($produk) {
+        $all_produk = $all_produk
+            ->where('kategori_id', $produk->kategori_id)
+            ->limit(8)
+            ->get();
+    }
+    @endphp
     <div class="wrapper-content">
         <!-- PRODUK TERLARIS -->
 
@@ -41,7 +50,41 @@
             </div>
         </section>
 
-        
+        <section class="section-list-belanja">
+            <div class="container">
+
+                <div class="title-produk-list mb-0 text-dark text-center">
+                    Produk Lainnya
+                </div>
+                <div class="text-center mb-5">
+                    <span>Rekomendasi produk untuk anda</span>
+                </div>
+
+                <div class="row card-area" id="contentBelanja">
+                    @foreach ($all_produk as $val)
+                        <div class="col-lg-3 mb-3">
+                            <a href="{{ url('produk/detail/' . $val->kode) }}">
+                                <div class="card-tml content-card">
+                                    <img src="{{ asset('uploads/produk/' . $val->gambar_detail[0]->gambar) }}" alt="">
+                                    <div class="d-flex justify-content-center">
+                                        <span>{{ $val->nama_kategori }}</span>
+                                    </div>
+                                    <h1>{{ $val->nama }}</h1>
+                                    <p>{{ $val->harga }}</p>
+                                    <div class="d-flex justify-content-center">
+                                        <button class="btn button-sm button-primary add-cart"
+                                            produk-id="{{ $val->id }}">Tambah ke
+                                            Cart</button>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+
 
     </div>
 @endsection
