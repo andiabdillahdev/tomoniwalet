@@ -16,26 +16,21 @@
                     <div class="sub-header-item-1">
                         <span id="title-view">Semua Produk</span>
                     </div>
+                    
+                    @foreach($kategori_limit as $x => $y)
                     <div class="sub-header-menu">
-                        <span id="title-view">Speaker</span>
+                        <span id="title-view"><a data-value="{{$y['id']}}">{{$y['nama']}}</a></span>
                     </div>
-                    <div class="sub-header-menu">
-                        <span id="title-view">Kabel</span>
-                    </div>
-                    <div class="sub-header-menu">
-                        <span id="title-view">Tweeter</span>
-                    </div>
-                    <div class="sub-header-menu">
-                        <span id="title-view">Ampli Betavo</span>
-                    </div>
-                    <div id="mobile-kategori-menu">
+                    @endforeach
+                
+                    <div id="mobile-kategori-menu" class="kategori_menu_toogle">
                         <span id="title-view">Kategori</span>
                     </div>
                     <div class="d-flex sub-header-item-2">
 
                         <select class="form-control form-select-sub-header kategoriContent" style="margin-right: 8px;">
-                            <option value="all">Semua Produk</option>
-                            @foreach ($get_kat->all() as $kat)
+                            <option value="all">Kategori Lainnya</option>
+                            @foreach ($kategori_limit_other as $kat)
                                 <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
                             @endforeach
                         </select>
@@ -50,6 +45,25 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div id="menu-mobile-group">
+            
+            @foreach($kategori_mobile as $key =>$value)
+            <div class="d-flex justify-content-between item-list-mobile" data-value="{{$value['id']}}">
+                <p>{{$value['nama']}}</p>
+                <span>{{$value['jumlah']}} Produk <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.03057 4.97568L0.00408579 0.682487L0.0572779 9.34258L6.03057 4.97568Z" fill="#C4C4C4" fill-opacity="0.65"/></svg></span>
+            </div>
+            @endforeach
+        
+        <!-- <div class="d-flex justify-content-between item-list-mobile">
+                <p>Tweeter Kobble</p>
+                <span>12 Produk <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.03057 4.97568L0.00408579 0.682487L0.0572779 9.34258L6.03057 4.97568Z" fill="#C4C4C4" fill-opacity="0.65"/></svg></span>
+            </div>
+            <div class="d-flex justify-content-between item-list-mobile">
+                <p>Ampli Betavo</p>
+                <span>12 Produk <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.03057 4.97568L0.00408579 0.682487L0.0572779 9.34258L6.03057 4.97568Z" fill="#C4C4C4" fill-opacity="0.65"/></svg></span>
+            </div> -->
         </div>
 
         <section class="section-list-belanja">
@@ -110,6 +124,28 @@
                 }
             });
 
+            $('.sub-header-menu a').on('click',function (e) {
+                e.preventDefault();
+                var value = $(this).attr('data-value');
+
+                if (value == 'all') {
+                    loadData.belanja('kat');
+                } else {
+                    loadData.belanja('kat', value);
+                }
+            })
+
+            $('.item-list-mobile').on('click',function () {
+                $('#menu-mobile-group').slideToggle(500);
+                var value = $(this).attr('data-value');
+
+                    if (value == 'all') {
+                        loadData.belanja('kat');
+                    } else {
+                        loadData.belanja('kat', value);
+                    }
+            })
+
             $('.kategoriContent').change(function(e) {
                 e.preventDefault();
 
@@ -140,6 +176,10 @@
             @else
                 loadData.belanja('kat');
             @endif
+
+            $('.kategori_menu_toogle').on('click',function () {
+                $('#menu-mobile-group').slideToggle(500);
+            })
 
         });
     </script>

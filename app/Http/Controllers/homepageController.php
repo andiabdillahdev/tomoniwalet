@@ -11,7 +11,7 @@ use App\keranjang;
 use App\produk;
 use App\transaksi;
 use App\transaksi_detail;
-
+use App\kategori;
 use Hash;
 
 class homepageController extends Controller
@@ -28,7 +28,22 @@ class homepageController extends Controller
 
     public function belanja_list()
     {
-        return view('homepage.belanja.index');
+        $kategori_mobile = [];
+        $kategori = kategori::all();
+        $count_take = count($kategori)- 4;
+        $kategori_limit = kategori::skip(0)->take(4)->get();
+        $kategori_limit_other = kategori::skip(5)->take($count_take)->get();
+        foreach ($kategori as $key => $value) {
+            $produk = produk::where('kategori_id',$value->id)->get();
+            if (count($produk)>0) {
+                $kategori_mobile[$key] = [
+                    'id' => $value->id,
+                    'nama' => $value->nama,
+                    'jumlah' => count($produk)
+                ];
+            }
+        }
+        return view('homepage.belanja.index',compact('kategori_mobile','kategori_limit','kategori_limit_other'));
     }
 
     public function produk_detail($params)

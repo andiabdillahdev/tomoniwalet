@@ -64,11 +64,13 @@ class kategoriController extends Controller
         if ($data) {
              return response()->json([
                  'status_code' => 200,
+                 'status'=>  true,
                  'message' => 'Data Kategori berhasil di Tambah'
              ]);
         }else{
             return response()->json([
                 'status_code' => 422,
+                'status'=>  false,
                 'message' => 'Data Kategori Gagal di Proses'
             ]); 
         }
