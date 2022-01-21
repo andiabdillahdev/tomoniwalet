@@ -194,7 +194,7 @@ function homepage() {
 
                 $('#title-view').text(response.title);
 
-                if (html == '') html = '<h4 class="text-center mt-5 text-secondary"><i>Tidak ada produk ditemukan</i></h4>';
+                if (html == '') html = '<p class="text-center mt-5 text-secondary">Tidak ada produk ditemukan</p>';
                 
                 $('#contentBelanja').animate({
                     opacity: 0,

@@ -42,7 +42,7 @@
             <td>Gambar</td>
             <td>
                 @foreach($data['gambar_detail'] as $value)
-                    <img src="{{ asset('uploads/produk/'.$value['gambar']) }}" style="width:100px;height:100px">
+                    <img src="{{ asset('uploads/produk/'.$value['gambar']) }}">
                 @endforeach
             </td>
         </tr>

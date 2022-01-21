@@ -113,18 +113,23 @@ class pengirimanPesananController extends Controller
     }
 
     public function edit($id){
+        $user_customer = $this->user_customer();
         $data = pengiriman_pesanan_header::with('pengiriman_pesanan_detail')->where('id',$id)->first();
         // return $data;
-        return view('panel.owner.persediaan.pengiriman_pesanan.edit',compact('data'));
+        return view('panel.owner.persediaan.pengiriman_pesanan.edit',compact('data','user_customer'));
     }
 
     public function update(Request $request,$id){
         $delete_detail = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$id)->delete();
 
         $header = pengiriman_pesanan_header::where('id',$id)->first();
-        $header->pelanggan = $request['header'][0]['value'];
+        $header->user_id = $request['header'][0]['value'];
         $header->kode = $request['header'][1]['value'];
-        $header->tanggal = $request['header'][2]['value'];
+        if (isset($request['header'][2]['value'])) {
+            $header->tanggal = $request['header'][2]['value'];
+        }else{
+            $header->tanggal = date('Y-m-d');
+        }
         $header->lokasi_tujuan = $request['header'][3]['value'];
         $header->save();
 

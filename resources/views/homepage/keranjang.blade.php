@@ -25,7 +25,7 @@ $total = 0;
                                 <input type="hidden" name="keranjang_id[]" class="keranjang-id" value="{{ $res->id }}">
                                 <div class="item_detail">
                                     <img src="{{ asset('uploads/produk/'.$res->produk->gambar_detail[0]->gambar) }}"
-                                        alt="" style="height: 80px; width: 80px; margin-left: 25px;">
+                                        alt="" style="height: 86; width: 150px;">
                                     <div class="note_item_detail">
                                         <ul>
                                             <li>{{ $res->produk->nama }}</li>
@@ -77,7 +77,7 @@ $total = 0;
                             @endforeach
 
                             @if(!isset($res))
-                            <h5 class="text-center mt-5"><i>Belum ada keranjang ditmbahkan</i></h5>
+                            <p class="text-center mt-5 text-secondary">Belum ada keranjang ditmbahkan</p>
                             <input type="hidden" class="keranjang-id" value="">
                             @endif
                         </div>

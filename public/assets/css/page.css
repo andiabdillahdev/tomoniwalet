@@ -1052,9 +1052,9 @@ color: #000000;
 }
 
 .content-card img{
-    width: 114px;
+    /* width: 114px;
     height: 100px;
-    margin-left: 3rem;
+    margin-left: 3rem; */
 }
 
 #tentang img{
@@ -1207,7 +1207,7 @@ color: #000000;
     }
 
     .content-card img{
-        margin-left: 5rem;
+        margin-left: 45px;
     }
 
     .input-group-detail-produk{

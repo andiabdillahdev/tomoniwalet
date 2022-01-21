@@ -96,7 +96,7 @@ $transaksi = $transaksi
                         @endforeach
 
                         @empty($dta)
-                            <h4 class="text-center"><i>Belum ada tagihan</i></h4>
+                            <p class="text-center text-secondary">Belum ada tagihan</p>
                         @endempty
 
                     </div>

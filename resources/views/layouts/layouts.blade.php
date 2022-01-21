@@ -98,8 +98,8 @@
                                         href="{{ route('owner.masterdata.supplier') }}">Supplier</a></li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('owner.masterdata.kategori') }}">Kategori</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="{{ route('owner.masterdata.satuan') }}">Satuan</a></li>
+                                <!-- <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('owner.masterdata.satuan') }}">Satuan</a></li> -->
                             </ul>
                         </div>
                     </li>

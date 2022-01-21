@@ -101,7 +101,7 @@ $(function(){
                 if (res.status_code == 200) {
                      notif("success", res.message);
                      $(`#${table}`).DataTable().ajax.reload();
-                     $('#exampleModal').modal('hide');
+                     $('#exampleModalTable').modal('hide');
                 } 
                
             },
@@ -265,6 +265,31 @@ $(function(){
           allowNegative: true
         });
     }
+
+    changeFoto = (params,area) =>{
+        console.log(params);
+        var foto_pembayaran = $(params).prop('files')[0];
+       var check = 0;
+   
+       var ext = ['image/jpeg', 'image/png', 'image/bmp'];
+   
+       $.each(ext, function(key, val) {
+           if (foto_pembayaran.type == val) check = check + 1;
+       });
+   
+       if (check == 1) {
+           var reader = new FileReader();
+           reader.onload = function(e) {
+               $(`#${area}`).html('<img src="' + e.target.result +
+                   '" style="height: 100%; width: 100%;">');
+           }
+           reader.readAsDataURL(params.files[0]);
+       } else {
+           alert('Format file tidak dibolehkan, pilih file lain');
+           $(params).val('');
+           return;
+       }
+   }
 
    
 

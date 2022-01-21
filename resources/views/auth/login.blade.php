@@ -5,7 +5,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Skydash Admin</title>
+  <title>Login Panel Tomoniwalet</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{ asset('admin/vendors/feather/feather.css') }}">
   <link rel="stylesheet" href="{{ asset('admin/vendors/ti-icons/css/themify-icons.css') }}">
@@ -26,9 +26,9 @@
         <div class="row w-100 mx-0">
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-              <div class="brand-logo">
-                <img src="admin/images/logo.svg" alt="logo">
-              </div>
+          
+                <img src="{{ asset('assets/img/logo.png') }}" class="mb-3" alt="logo">
+             
               <h4>Halo, mari kita mulai</h4>
               <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
               <form method="POST" class="pt-3" action="{{ route('login') }}">

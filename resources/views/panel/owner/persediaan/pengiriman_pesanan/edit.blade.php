@@ -26,7 +26,7 @@
                             <form id="form_pengiriman_pesanan" class="forms-sample">
                             <div class="form-group">
                                     <label for="pelanggan_">Pelanggan</label>
-                                    <input type="text" class="form-control" name="pelanggan" id="pelanggan_" value="{{$data['pelanggan']}}">
+                                    {{ Form::select('pelanggan',$user_customer,$data['user_id'], ['title' => 'Pilih Pelanggan','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'pelanggan_']) }}
                                     <small class="text-danger error-notif" id="pelanggan"></small>
                                 </div>   
                             <div class="form-group">

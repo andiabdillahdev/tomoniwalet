@@ -15,7 +15,7 @@
         </div>
 
         <div class="row">
-            <div class="col-lg-6 grid-margin stretch-card">
+        <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Hero Section</h4>
@@ -24,12 +24,21 @@
                             <form id="form-hero-section" class="forms-sample">
                                 <div class="form-group">
                                     <label for="gambar_hero_">Gambar Hero</label>
-                                    <div class="preview-image">
-                                        <img src="{{ asset('uploads/page/hero_section/' . $hero[0]['gambar_hero']) }}"
-                                            alt="" srcset="">
+                                    <div class="text-center">
+                                        <div class="mb-2" id="img-privew"
+                                            style="border: dashed 2px; width: 200px; height:200px;">
+                                            <br>
+                                            @if(isset($hero[0]))
+                                                 <img src="{{ asset('uploads/page/hero_section/' . $hero[0]['gambar_hero']) }}" style="height: 100%; width: 100%;">
+                                            @else
+                                            <p><strong>Preview Image</strong></p>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <input type="file" class="form-control form-control-sm" name="gambar_hero"
-                                        id="gambar_hero_" placeholder="Username">
+                                    <label class="btn btn-dark btn-sm" for="gambar_hero_"><i class="fa fa-upload"></i> Upload
+                                      Foto</label> <br>
+                                    <input type="file" onchange="changeFoto(this,'img-privew')" name="gambar_hero" style="display: none;" id="gambar_hero_">
+                                   
                                     <small class="text-danger error-notif" id="gambar_hero"></small>
                                 </div>
                                 <div class="form-group">
@@ -56,8 +65,8 @@
 
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 grid-margin stretch-card">
+            </div> 
+             <div class="col-lg-6 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Konten Kategori</h4>
@@ -67,8 +76,22 @@
                             @foreach ($kategori_hero as $key => $value)
                                 <div class="form-group">
                                     <label for="gambar_kategori_">Gambar Kategori {{ $key + 1 }} </label>
-                                    <input type="file" class="form-control form-control-sm" name="gambar_kategori[]"
-                                        id="gambar_kategori_">
+                                    <div class="text-center">
+                                        <div class="mb-2" id="img-privew{{$key}}"
+                                            style="border: dashed 2px; width: 200px; height:200px;">
+                                            <br>
+                                            @if(isset($hero[0]))
+                                                 <img src="{{ asset('uploads/page/gambar_kategori/' . $value['gambar_kategori']) }}" style="height: 100%; width: 100%;">
+                                            @else
+                                            <p><strong>Preview Image</strong></p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <label class="btn btn-dark btn-sm" for="gambar_kategori_{{$key}}"><i class="fa fa-upload"></i> Upload
+                                      Foto</label> <br>
+                                    <input type="file" onchange="changeFoto(this,'img-privew{{$key}}')" name="gambar_kategori[]" style="display: none;" id="gambar_kategori_{{$key}}">
+                                    <!-- <input type="file" class="form-control form-control-sm" name="gambar_kategori[]"
+                                        id="gambar_kategori_"> -->
                                     <small class="text-danger error-notif" id="gambar_kategori"></small>
                                 </div>
 
@@ -91,7 +114,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
 
     </div>
