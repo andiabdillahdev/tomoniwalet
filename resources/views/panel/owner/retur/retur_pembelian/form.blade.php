@@ -62,7 +62,7 @@
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_with_table('form_retur_pembelian','owner/retur-pembelian/store','owner/retur-pembelian')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.retur_pembelian') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

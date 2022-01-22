@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\pengiriman_pesanan_header;
 use App\pengiriman_pesanan_detail;
 use App\returPenjualanHeader;
+use App\returPembelian;
 use App\returPembelianDetail;
 use App\barangkeluar;
 use App\supplier;
@@ -148,10 +149,20 @@ class barangkeluarController extends Controller
     }
 
     public function edit($id){
-        $data = barangkeluar::with('pengiriman_pesanan_header')->where('id',$id)->first();
-        $detail = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$data['id_pengiriman_pesanan_header'])->get();
+        $type_transaksi = '';
+        $detail = '';
+        $data = barangkeluar::with('pengiriman_pesanan_header','retur_pembelian')->where('id',$id)->first();
+
+        // return $data;
+        if ($data['id_pengiriman_pesanan_header'] != null) {
+            $type_transaksi = 'PENGIRIMAN PESANAN';
+            $detail = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$data['id_pengiriman_pesanan_header'])->get();
+        }else{
+            $type_transaksi = 'RETUR PEMBELIAN';
+            $detail = returPembelianDetail::where('id_retur_pembelian_header',$data['id_return_pembelian'])->get();
+        }
         // return $detail;
-        return view('panel.owner.persediaan.barang_keluar.edit',compact('data','detail'));
+        return view('panel.owner.persediaan.barang_keluar.edit',compact('data','detail','type_transaksi'));
     }
 
     public function update(Request $request,$id){
@@ -187,5 +198,47 @@ class barangkeluarController extends Controller
                'message' => 'Data Barang Keluar Gagal di Proses'
            ]); 
        }
+    }
+
+    public function destroy($params){
+        $data = barangkeluar::where('id',$params)->first();
+        if ($data['id_return_pembelian'] != null) {
+            $retur = returPembelianDetail::where('id_retur_pembelian_header',$data['id_return_pembelian'])->get();
+            foreach ($retur as $key => $value) {
+                $stok = stok::where('id_produk',$value['id_produk'])->get();
+                foreach ($stok as $x => $y) {
+                    $argc = stok::where('id',$y['id'])->first();
+                    $argc->jumlah = $y['jumlah'] + $value['jumlah'];
+                    $argc->save();
+                }
+            }
+        }else{
+            $retur = pengiriman_pesanan_detail::where('id_pengiriman_pesanan_header',$data['id_pengiriman_pesanan_header'])->get();
+            foreach ($retur as $key => $value) {
+                $stok = stok::where('id_produk',$value['id_produk'])->get();
+                foreach ($stok as $x => $y) {
+                    $argc = stok::where('id',$y['id'])->first();
+                    $argc->jumlah = $y['jumlah'] + $value['jumlah'];
+                    $argc->save();
+                }
+            }
+            $header = pengiriman_pesanan_header::where('id',$data['id_pengiriman_pesanan_header'])->first();
+            $header->status = 'Belum Selesai';
+            $header->save();
+        }
+        $data->delete();
+       
+        if ($data) {
+             return response()->json([
+                 'status_code' => 200,
+                 'message' => 'Data Barang Keluar berhasil di Hapus'
+             ]);
+        }else{
+            return response()->json([
+                'status_code' => 422,
+                'message' => 'Data Barang Keluar Gagal di Proses'
+            ]); 
+        }
+
     }
 }

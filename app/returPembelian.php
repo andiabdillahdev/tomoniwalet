@@ -17,4 +17,10 @@ class returPembelian extends Model
         return $this->hasMany('App\returPembelianDetail', 'id_retur_pembelian_header', 'id');
     }
 
+    public function barangKeluar(){
+        return $this->hasMany('App\barangkeluar', 'id_return_pembelian', 'id');
+    }
+
+    // id_return_pembelian
+
 }

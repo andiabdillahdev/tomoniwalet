@@ -42,7 +42,8 @@
             <td>Gambar</td>
             <td>
                 @foreach($data['gambar_detail'] as $value)
-                    <img src="{{ asset('uploads/produk/'.$value['gambar']) }}">
+                <a href="{{ asset('uploads/produk/'.$value['gambar']) }}" data-lightbox="image-1" data-title="Gambar Produk"><img src="{{ asset('uploads/produk/'.$value['gambar']) }}"></a>
+                    
                 @endforeach
             </td>
         </tr>

@@ -89,7 +89,7 @@
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_page('form_pesanan_pembelian','owner/barang-masuk/store','owner/barang-masuk')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.persediaan.barangmasuk.index') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

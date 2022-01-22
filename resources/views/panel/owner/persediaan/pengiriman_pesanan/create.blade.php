@@ -70,7 +70,7 @@
                             
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_with_table('form_pengiriman_pesanan','owner/pengiriman-pesanan/store','owner/pengiriman-pesanan')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.persediaan.pengiriman.index') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

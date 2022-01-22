@@ -18,22 +18,18 @@
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Form Tambah Barang Masuk</h4>
+                    <h4 class="card-title">Data Barang Masuk</h4>
 
                     <div class="d-flex justify-content-center">
 
                         <div class="col-lg-10">
-                        <p class="card-description">FORM PILIH PESANAN PEMBELIAN</p>
+       
                         <div class="form-group mt-3">
                                     <label for="supplier_">Supplier/Pemasok</label>
-                                    {{ Form::select('supplier',$supplier,$data['pesanan_pembelian_header']['id_supplier'], ['title' => 'Pilih Supplier','class' => 'form-control selectpicker', 'data-size' => '7', 'data-live-search' => 'true', 'data-toggle'=>'ajax', 'id' => 'supplier_']) }}
+                                      <input type="text" class="form-control" name="kode" id="kode_"
+                                        placeholder="Nama" value="{{$supplier['nama']}}" readonly>
                                     <small class="text-danger error-notif" id="supplier"></small>
                         </div> 
-                        
-                        <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('supplier_','owner/barang-masuk/bysupplier','Pilih Pesanan Pembelian','barang_masuk')">Tambah Produk/Barang</button>
-                            </div>
-
 
                             <table id="tb_general_persediaan" class="table mb-5">
                                 <thead>
@@ -54,12 +50,8 @@
 
                             <hr>
 
-                            <p class="card-description">FORM BARANG MASUK</p>
-
                             <form id="form_pesanan_pembelian" class="forms-sample mt-3">
                             
-                           
-
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="kode_">Kode</label>
@@ -69,7 +61,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                      <label for="tanggal_">Tanggal</label>
-                                     <input type="date" class="form-control" value="{{$data['tanggal']}}" name="tanggal" id="tanggal_">
+                                     <input type="date" class="form-control" value="{{$data['tanggal']}}" name="tanggal" id="tanggal_" readonly>
                                     <small class="text-danger error-notif" id="tanggal"></small>
                                 </div>
                             </div>
@@ -79,17 +71,13 @@
                                 <div class="form-group col-md-6">
                                     <label for="keterangan_">Keterangan</label>
                                     <input type="text" class="form-control" value="{{$data['keterangan']}}" name="keterangan" id="keterangan_"
-                                        placeholder="Nama" >
+                                        placeholder="Nama" readonly>
                                     <small class="text-danger error-notif" id="keterangan"></small>
                                 </div>
                                 
                             </div>
 
-                            <input type="hidden" id="id_header_transaksi" value="{{$data['id_pesanan_pembelian_header']}}" name="barang">
-
-                                <button type="button" class="btn btn-primary mr-2"
-                                    onclick="store_page('form_pesanan_pembelian','owner/barang-masuk/update/{{$data['id']}}','owner/barang-masuk')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.persediaan.barangmasuk.index') }}" role="button" class="btn btn-light">Kembali</a>
                             </form>
                         </div>
 

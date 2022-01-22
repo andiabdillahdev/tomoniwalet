@@ -23,9 +23,9 @@
                     <div class="d-flex justify-content-center">
 
                         <div class="col-lg-10">
-                        <p class="card-description">FORM PILIH PENGIRIMAN PESANAN</p>
+                            <p class="card-description">FORM PILIH PENGIRIMAN PESANAN</p>
                       
-                        <div class="mb-4">
+                            <div class="mb-4">
                                 <span class="text-muted small">Pilih Jenis Barang Keluar</span>
                                 <label class="custom-control teleport-switch">
                                     <span class="teleport-switch-control-description">Pengiriman Pesanan </span>
@@ -115,7 +115,7 @@
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_page('form_pengiriman_pesanan','owner/barang-keluar/store','owner/barang-keluar')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.persediaan.barangkeluar.index') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

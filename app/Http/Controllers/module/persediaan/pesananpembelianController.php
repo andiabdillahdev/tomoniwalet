@@ -50,7 +50,8 @@ class pesananpembelianController extends Controller
         
         $result = [
             'header_id' => $request->id_header,
-            'detail' => $data
+            'detail' => $data,
+            'type'=>'pengiriman'
         ];
         
         return $result;

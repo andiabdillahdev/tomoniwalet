@@ -19,7 +19,7 @@
                                     <th>Kode</th>
                                     <th>Tanggal</th>
                                     <th>Pelanggan</th>
-                                    <th>Lokasi Tujuan</th>
+                                    <th>Status</th>
                                     <th>Total</th>
                                     <th>Aksi</th>
                                 </tr>

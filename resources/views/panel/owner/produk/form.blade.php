@@ -102,13 +102,22 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Gambar</label>
-                                    <div class="input-images"></div>
-                                    <small class="text-danger error-notif" id="nama"></small>
+                                    <div class="text-center">
+                                        <div class="mb-2" id="img-privew"
+                                            style="border: dashed 2px; width: 200px; height:200px;">
+                                            <br>        
+                                            <p><strong>Preview Image</strong></p>
+                                        </div>
+                                    </div>
+                                    <label class="btn btn-dark btn-sm" for="gambar_"><i class="fa fa-upload"></i> Upload
+                                      Foto</label> <br>
+                                    <input type="file" onchange="changeFoto(this,'img-privew')" name="gambar" style="display: none;" id="gambar_">
+                                    <small class="text-danger error-notif" id="gambar"></small>
                                 </div>
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_page('form_produk','owner/produk/store','owner/produk')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                <a href="{{ route('owner.produk.index') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

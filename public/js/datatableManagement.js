@@ -293,7 +293,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Detail</button><a role="button"  href="${host}/owner/produk/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/satuan/destroy/${data.id}','tb_satuan')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Detail</button><a role="button"  href="${host}/owner/produk/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/produk/destroy/${data.id}','tb_produk')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
@@ -345,15 +345,11 @@ $(function () {
             {
                 targets : 4,
                 render: function (data, type, row) {
-                    console.log(data);
-                    // if (data === 'Selesai') {
-                    //     return '<p class="font-weight-bold text-primary>Valid</p>';
-                    // }
-
-                    // if(data == 'Belum Selesai'){
-                    //     return '<p class="font-weight-bold text-primary">Valid</p>';
-                    // }
-                    
+                    if (data == 'Selesai') {
+                        return `<span class="badge bg-success">Selesai</span>`;
+                    }else{
+                        return `<span class="badge bg-warning">Belum Selesai</span>`;
+                    }
                 }
             },
             {
@@ -518,7 +514,7 @@ $(function () {
             { data: "kode" },
             { data: "tanggal" },
             { data: "pelanggan" },
-            { data : "lokasi_tujuan" },
+            { data : "status" },
             { data: null },
             { data: null },
         ],
@@ -533,6 +529,16 @@ $(function () {
                 orderable: false,
                 searchable: false,
                 visible: false,
+            },
+            {
+                targets : 4,
+                render: function (data, type, row) {
+                    if (data == 'Selesai') {
+                        return `<span class="badge bg-success">Selesai</span>`;
+                    }else{
+                        return `<span class="badge bg-warning">Belum Selesai</span>`;
+                    }
+                }
             },
             {
                 targets : 5,
@@ -607,7 +613,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><a role="button"  href="${host}/owner/barang-masuk/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-masuk/destroy/${data.id}','tb_barang_masuk')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<a role="button" href="${host}/owner/barang-masuk/edit/${data.id}" class="btn btn-info mr-2" ><i class="fa fa-eye"></i> Detail</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-masuk/destroy/${data.id}','tb_barang_masuk')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
@@ -662,7 +668,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<button class="btn btn-info mr-2" onclick="overlayForm('owner/produk/detail/${data.id}','Detail Produk')" ><i class="fa fa-eye"></i> Nota</button><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-keluar/destroy/${data.id}','tb_barang_keluar')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<a role="button" href="${host}/owner/barang-keluar/edit/${data.id}" class="btn btn-info mr-2" ><i class="fa fa-eye"></i> Detail</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/barang-keluar/destroy/${data.id}','tb_barang_keluar')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
@@ -1084,7 +1090,7 @@ $(function () {
                  data.id,
                  data.nama,
                  `<input type="number" class="form-control form-control-sm jumlah" value="0">`,
-                 `<input type="text" class="form-control form-control-sm" placeholder="Masukkan Satuan">`,
+                 `<input type="text" class="form-control form-control-sm" value="Unit" readonly>`,
                  `<input type="text" class="form-control form-control-sm currency_format harga" value="0">`,
                  `<input type="text" class="form-control form-control-sm currency_format" readonly>`,
                  `<i class="ti-trash delete-table"></i>`

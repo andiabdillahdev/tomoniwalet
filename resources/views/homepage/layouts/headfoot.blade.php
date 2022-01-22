@@ -27,6 +27,7 @@ $transaksi = $transaksi
 
     <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/js/select.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/lightbox/src/css/lightbox.css') }}">
 
     <title>Tomoniwalet</title>
 </head>
@@ -212,11 +213,16 @@ $transaksi = $transaksi
     <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('admin/js/dataTables.select.min.js') }}"></script>
-
+    <script src="{{ asset('vendors/lightbox/src/js/lightbox.js') }}"></script>
     <script src="{{ asset('js/page.js') }}"></script>
     @stack('page_script')
     <script>
         $(function() {
+            lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'fitImagesInViewport' : true
+            })
             let loadData = new homepage();
             @if (Auth::user())
                 loadData.get_count_cart("{{ Auth::user()->id }}");

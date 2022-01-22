@@ -90,7 +90,7 @@ function homepage() {
                     $.each(response['data'], function (indexInArray, valueOfElement) {
                         html += `<div class="col-lg-3">
                         <div class="card-tml content-card mt-4">
-                        <img src="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" alt="${valueOfElement.nama}" srcset="">
+                        <a href="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" data-lightbox="image-${indexInArray}" data-title="${valueOfElement.nama}"><img src="${host}/uploads/produk/${valueOfElement.gambar_detail[0]['gambar']}" alt="${valueOfElement.nama}" srcset=""></a>
                         <div class="d-flex justify-content-center">
                         <span>${valueOfElement.kategori['nama']}</span>
                         </div>
@@ -177,7 +177,7 @@ function homepage() {
                     <div class="col-lg-3 mb-3">
                     <a href="`+host+`/produk/detail/`+ val.kode +`">
                     <div class="card-tml content-card">
-                    <img src="${host}/uploads/produk/${val.foto}" alt="${val.nama}">
+                    <a href="${host}/uploads/produk/${val.foto}" data-lightbox="image-${key}" data-title="${val.nama}"><img src="${host}/uploads/produk/${val.foto}" alt="${val.nama}"></a>
                     <div class="d-flex justify-content-center">
                     <span>${val.nama_kategori}</span>
                     </div>

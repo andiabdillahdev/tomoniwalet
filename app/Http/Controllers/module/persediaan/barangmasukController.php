@@ -113,9 +113,9 @@ class barangmasukController extends Controller
 
     public function edit($id){
         $data = barangmasuk::with('pesanan_pembelian_header')->where('id',$id)->first();
-        $supplier = $this->supplier();
+        $supplier = supplier::where('id',$data['pesanan_pembelian_header']['id_supplier'])->first();
         $detail = pesanan_pembelian_detail::where('id_pesanan_pembelian_header',$data['id_pesanan_pembelian_header'])->get();
-        // return $detail;
+        // return $data;
         return view('panel.owner.persediaan.barang_masuk.edit',compact('data','supplier','detail'));
     }
 
@@ -152,5 +152,35 @@ class barangmasukController extends Controller
                'message' => 'Data Barang Masuk Gagal di Proses'
            ]); 
        }
+    }
+
+    public function destroy($params){
+        $data = barangmasuk::where('id',$params)->first();
+        $pesanan_pembelian = pesanan_pembelian_detail::where('id_pesanan_pembelian_header',$data['id_pesanan_pembelian_header'])->get();
+        foreach ($pesanan_pembelian as $key => $value) {
+            $stok = stok::where('id_produk',$value['id_produk'])->get();
+            foreach ($stok as $x => $y) {
+                $argc = stok::where('id',$y['id'])->first();
+                $argc->jumlah = $y['jumlah'] - $value['jumlah'];
+                $argc->save();
+            }
+        }
+        $header = pesanan_pembelian_header::where('id',$data['id_pesanan_pembelian_header'])->first();
+        $header->status = 'Belum Selesai';
+        $header->save();
+        $data->delete();
+
+       
+        if ($data) {
+             return response()->json([
+                 'status_code' => 200,
+                 'message' => 'Data Barang Keluar berhasil di Hapus'
+             ]);
+        }else{
+            return response()->json([
+                'status_code' => 422,
+                'message' => 'Data Barang Keluar Gagal di Proses'
+            ]); 
+        }
     }
 }

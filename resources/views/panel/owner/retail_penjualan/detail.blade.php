@@ -47,7 +47,9 @@
                         </div>
 
                         
-
+                        <div class="d-flex justify-content-end mt-3">
+                            <a href="{{ route('owner.retail_penjualan') }}" role="button" class="btn btn-sm btn-secondary">Kembali</a>
+                        </div>
                     </div>
 
                 </div>

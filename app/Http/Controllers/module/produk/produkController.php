@@ -73,7 +73,7 @@ class produkController extends Controller
             'garansi' => 'required',
             'deskripsi' => 'required',
             'status' => 'required',
-            'images' => 'required'
+            'gambar' => 'required'
         ]);
 
         $data = new produk();
@@ -87,19 +87,15 @@ class produkController extends Controller
         $data->status = $request->status;
         $data->save();
 
-        $images = [];
-        if ($request->hasFile('images')) {
-          
-            
-            $files = $request->file('images');
-            foreach ($files as $file) {
-                $name = $file->getClientOriginalName();
-                $file->move(public_path('uploads/produk'), $name);
-                $images = $name;
+        if (isset($request->gambar)) {
+            if ($request->hasFile('gambar')) {
+                $image = $request->file('gambar');
+                $filename = $image->getClientOriginalName();
+                $image->move(public_path('uploads/produk'), $filename);
 
                 $gambar = new gambar_detail();
                 $gambar->id_produk = $data->id;
-                $gambar->gambar = $name;
+                $gambar->gambar = $filename;
                 $gambar->save();
             }
         }
@@ -138,6 +134,7 @@ class produkController extends Controller
     public function edit($id){
         $kategori = $this->get_kategori();
         $data = produk::with('kategori','gambar_detail')->where('id',$id)->first();
+        // return $data;
         return view('panel.owner.produk.edit',compact('data','kategori'));
     }
 
@@ -161,23 +158,19 @@ class produkController extends Controller
         $data->status = $request->status;
         $data->save();
 
-        $images = [];
-        if (isset($request->images)) {
-            $gambar_delete = gambar_detail::where('id_produk',$data->id)->delete();
-            if ($gambar_delete) {
-                if ($request->hasFile('images')) {
-                    $files = $request->file('images');
-                    foreach ($files as $file) {
-                        $name = $file->getClientOriginalName();
-                        $file->move(public_path('uploads/produk'), $name);
-                        $images = $name;
-        
-                        $gambar = new gambar_detail();
-                        $gambar->id_produk = $data->id;
-                        $gambar->gambar = $name;
-                        $gambar->save();
-                    }
-                }
+        $gambar = gambar_detail::where('id_produk',$data->id)->first();
+        $gambar->delete();
+
+        if (isset($request->gambar)) {
+            if ($request->hasFile('gambar')) {
+                $image = $request->file('gambar');
+                $filename = $image->getClientOriginalName();
+                $image->move(public_path('uploads/produk'), $filename);
+
+                $gambar = new gambar_detail();
+                $gambar->id_produk = $data->id;
+                $gambar->gambar = $filename;
+                $gambar->save();
             }
         }
 
@@ -202,5 +195,22 @@ class produkController extends Controller
         })
         ->rawColumns([])
         ->make(true);
+    }
+
+    public function destroy($params){
+        $data = produk::where('id',$params)->first();
+        $data->delete();
+
+        if ($data) {
+            return response()->json([
+                'status_code' => 200,
+                'message' => 'Data Produk berhasil di Hapus'
+            ]);
+       }else{
+           return response()->json([
+               'status_code' => 422,
+               'message' => 'Data Produk Gagal di Proses'
+           ]); 
+       }
     }
 }

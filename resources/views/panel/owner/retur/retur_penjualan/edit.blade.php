@@ -77,7 +77,7 @@
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_with_table('form_retur_penjualan','owner/retur-penjualan/update/{{$data['id']}}','owner/retur-penjualan')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.retur_penjualan') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

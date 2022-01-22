@@ -68,7 +68,7 @@
 
                                 <button type="button" class="btn btn-primary mr-2"
                                     onclick="store_with_table('form_pesanan_pembelian','owner/pesanan-pembelian/update/{{$data['id']}}','owner/pesanan-pembelian')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                                    <a href="{{ route('owner.persediaan.pesanan_pembelian.index') }}" role="button" class="btn btn-light">Cancel</a>
                             </form>
                         </div>
 

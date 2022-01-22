@@ -29,6 +29,7 @@
     <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/checkbox.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/checkbox-20/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/lightbox/src/css/lightbox.css') }}">
 </head>
 
 <body>
@@ -79,13 +80,13 @@
             <!-- partial:partials/_sidebar.html -->
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
-                    <li class="nav-item">
+                    <li class="nav-item {{ (request()->is('owner/dashboard')) ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('/owner/dashboard') }}">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ (request()->is(['owner/supplier','owner/kategori'])) ? 'active' : '' }}">
                         <a class="nav-link" data-toggle="collapse" href="#master-data" aria-expanded="false"
                             aria-controls="master-data">
                             <i class="icon-layout menu-icon"></i>
@@ -96,14 +97,14 @@
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('owner.masterdata.supplier') }}">Supplier</a></li>
-                                <li class="nav-item"> <a class="nav-link"
+                                <li class="nav-item "> <a class="nav-link"
                                         href="{{ route('owner.masterdata.kategori') }}">Kategori</a></li>
                                 <!-- <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('owner.masterdata.satuan') }}">Satuan</a></li> -->
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ (request()->is(['owner/pesanan/kelola-pesanan/diproses','owner/pesanan/kelola-pesanan/selesai'])) ? 'active' : '' }}">
                         <a class="nav-link" data-toggle="collapse" href="#kelola-pesanan" aria-expanded="false"
                             aria-controls="kelola-pesanan">
                             <i class="icon-paper menu-icon"></i>
@@ -121,7 +122,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ (request()->is(['owner/pengaturan-website/jumbotron','owner/pengaturan-website/testimonial'])) ? 'active' : '' }}">
                         <a class="nav-link" data-toggle="collapse" href="#landing-page" aria-expanded="false"
                             aria-controls="landing-page">
                             <i class="icon-columns menu-icon"></i>
@@ -144,19 +145,19 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item  {{ (request()->is('owner/produk')) ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('owner.produk.index') }}">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Produk</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ (request()->is('owner/retail-penjualan')) ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('owner.retail_penjualan') }}">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Penjualan Retail</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ (request()->is(['owner/pesanan-pembelian','owner/pengiriman-pesanan'])) ? 'active' : '' }}">
                         <a class="nav-link" data-toggle="collapse" href="#transaksi" aria-expanded="false"
                             aria-controls="transaksi">
                             <i class="icon-layout menu-icon"></i>
@@ -283,7 +284,7 @@
     <!-- inject:js -->
     <script src="{{ asset('admin/js/off-canvas.js') }}"></script>
     <script src="{{ asset('admin/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('admin/js/template.js') }}"></script>
+    <!-- <script src="{{ asset('admin/js/template.js') }}"></script> -->
     <script src="{{ asset('admin/js/settings.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
@@ -296,8 +297,18 @@
     <script src="{{ asset('js/datatableManagement.js') }}"></script>
     <script src="{{ asset('admin/vendors/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('vendors/checkbox-20/js/main.js') }}"></script>
+    <script src="{{ asset('vendors/lightbox/src/js/lightbox.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
     @stack('scripts')
+    <script>
+        $(function() {
+            lightbox.option({
+            'resizeDuration': 200,
+            'wrapAround': true,
+            'fitImagesInViewport' : true
+            })
+        });
+    </script>
     <!-- End custom js for this page-->
 </body>
 

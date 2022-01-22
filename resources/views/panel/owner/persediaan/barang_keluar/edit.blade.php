@@ -23,17 +23,26 @@
                     <div class="d-flex justify-content-center">
 
                         <div class="col-lg-10">
-                        <p class="card-description">FORM PILIH PENGIRIMAN PESANAN</p>
-                        <div class="form-group mt-3">
-                                <label for="supplier_">Pelanggan</label>
-                                <input type="text" id="pelanggan" class="form-control" value="{{$data['pengiriman_pesanan_header']['pelanggan']}}" readonly>
-                        </div> 
-                        
-                        <div class="d-flex justify-content-start">
-                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="overlayTransaksiVendor('supplier_','owner/barang-keluar/detailPengiriman','Pilih Pengiriman Pesanan','barang_keluar')">Tambah Produk/Barang</button>
+                        <p class="card-description">Transaksi berasal dari {{$type_transaksi}}</p>
+
+                            @if($type_transaksi == 'PENGIRIMAN PESANAN')
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="kode_">Kode Pengiriman Pesanan</label>
+                                    <input type="text" class="form-control" name="kode" id="kode_"
+                                        placeholder="Nama" value="{{$data['pengiriman_pesanan_header']['kode']}}" readonly>
+                                </div>
                             </div>
-
-
+                            @else
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="kode_">Kode Retur Pembelian</label>
+                                    <input type="text" class="form-control" name="kode" id="kode_"
+                                        placeholder="Nama" value="{{$data['retur_pembelian']['kode']}}" readonly>
+                                </div>
+                            </div>
+                            @endif
+                         
                             <table id="tb_general_persediaan" class="table mb-5">
                                 <thead>
                                     <tr>
@@ -53,8 +62,6 @@
 
                             <hr>
 
-                            <p class="card-description">FORM BARANG MASUK</p>
-
                             <form id="form_pengiriman_pesanan" class="forms-sample mt-3">
                             
                            
@@ -63,12 +70,12 @@
                                 <div class="form-group col-md-6">
                                     <label for="kode_">Kode</label>
                                     <input type="text" class="form-control" name="kode" id="kode_"
-                                        placeholder="Nama" value="{{$data['kode']}}">
+                                        placeholder="Nama" value="{{$data['kode']}}" readonly>
                                     <small class="text-danger error-notif" id="kode"></small>
                                 </div>
                                 <div class="form-group col-md-6">
                                      <label for="tanggal_">Tanggal</label>
-                                     <input type="date" class="form-control" name="tanggal" value="{{$data['tanggal']}}" id="tanggal_">
+                                     <input type="date" class="form-control" name="tanggal" value="{{$data['tanggal']}}" id="tanggal_" readonly>
                                     <small class="text-danger error-notif" id="tanggal"></small>
                                 </div>
                             </div>
@@ -78,17 +85,14 @@
                                 <div class="form-group col-md-6">
                                     <label for="keterangan_">Keterangan</label>
                                     <input type="text" class="form-control" name="keterangan" value="{{$data['keterangan']}}" id="keterangan_"
-                                        placeholder="Nama" >
+                                        placeholder="Nama" readonly>
                                     <small class="text-danger error-notif" id="keterangan"></small>
                                 </div>
                                 
                             </div>
 
-                            <input type="hidden" id="id_header_transaksi" name="barang" value="{{$data['id_pengiriman_pesanan_header']}}">
-
-                                <button type="button" class="btn btn-primary mr-2"
-                                    onclick="store_page('form_pengiriman_pesanan','owner/barang-keluar/update/{{$data['id']}}','owner/barang-keluar')">Submit</button>
-                                <button type="button" data-dismiss="modal" class="btn btn-light">Cancel</button>
+                            
+                                    <a href="{{ route('owner.persediaan.barangkeluar.index') }}" role="button" class="btn btn-light">Kembali</a>
                             </form>
                         </div>
 

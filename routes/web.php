@@ -129,6 +129,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::get('produk/edit/{id}', 'module\produk\produkController@edit')->name('owner.produk.edit');
     Route::post('produk/update/{params}', 'module\produk\produkController@update')->name('owner.produk.update');
     Route::get('produk/getByKategori/{id}', 'module\produk\produkController@getByKategori')->name('owner.produk.getByKategori');
+    Route::delete('produk/destroy/{params}', 'module\produk\produkController@destroy')->name('owner.produk.destroy');
     // 
 
     // Pesanan Pembelian
@@ -183,6 +184,7 @@ Route::group(['prefix' => 'owner', 'middleware' => 'owner'], function () {
     Route::post('barang-keluar/store', 'module\persediaan\barangkeluarController@store')->name('owner.persediaan.barangkeluar.store');
     Route::post('barang-keluar/update/{params}', 'module\persediaan\barangkeluarController@update')->name('owner.persediaan.barangkeluar.update');
     Route::get('barang-keluar/getAll', 'module\persediaan\barangkeluarController@getAll')->name('owner.persediaan.barangkeluar.getAll');
+    Route::delete('barang-keluar/destroy/{params}', 'module\persediaan\barangkeluarController@destroy')->name('owner.persediaan.barangkeluar.destroy');
 
     // Retail Penjualan
     Route::get('retail-penjualan', 'module\retail_penjualan\retailPenjualanController@index')->name('owner.retail_penjualan');
