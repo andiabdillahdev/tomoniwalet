@@ -100,7 +100,11 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
+                                
+
+                                <div class="row mb-3">
+                                    <div class="col-lg-6">
+                                    <div class="form-group">
                                     <label for="exampleInputEmail1">Gambar</label>
                                     <div class="text-center">
                                         <div class="mb-2" id="img-privew"
@@ -113,6 +117,13 @@
                                       Foto</label> <br>
                                     <input type="file" onchange="changeFoto(this,'img-privew')" name="gambar" style="display: none;" id="gambar_">
                                     <small class="text-danger error-notif" id="gambar"></small>
+                                </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label for="stok_awal">Stok Awal</label>
+                                        <input type="text" class="form-control" name="stok_awal" id="stok_awal_">
+                                        <small class="text-danger error-notif" id="stok_awal"></small>
+                                    </div>
                                 </div>
 
                                 <button type="button" class="btn btn-primary mr-2"

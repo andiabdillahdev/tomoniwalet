@@ -157,7 +157,7 @@
                             <span class="menu-title">Penjualan Retail</span>
                         </a>
                     </li>
-                    <li class="nav-item {{ (request()->is(['owner/pesanan-pembelian','owner/pengiriman-pesanan'])) ? 'active' : '' }}">
+                    <li class="nav-item {{ (request()->is(['owner/pesanan-pembelian','owner/pengiriman-pesanan','owner/barang-masuk','owner/barang-keluar','owner/stok'])) ? 'active' : '' }}">
                         <a class="nav-link" data-toggle="collapse" href="#transaksi" aria-expanded="false"
                             aria-controls="transaksi">
                             <i class="icon-layout menu-icon"></i>

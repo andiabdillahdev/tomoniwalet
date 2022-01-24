@@ -85,6 +85,7 @@ class produkController extends Controller
         $data->garansi = $request->garansi;
         $data->deskripsi = $request->deskripsi;
         $data->status = $request->status;
+        $data->stok_awal = $request->stok_awal;
         $data->save();
 
         if (isset($request->gambar)) {
@@ -103,7 +104,7 @@ class produkController extends Controller
         if($data){
             $stok = new stok();
             $stok->id_produk = $data->id;
-            $stok->jumlah = 0;
+            $stok->jumlah = $data->stok_awal;
             $stok->save();
         }
 

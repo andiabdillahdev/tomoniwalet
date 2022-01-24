@@ -154,6 +154,8 @@ class returPembelianController extends Controller
     public function destroy($id){
         $data = returPembelian::where('id',$id)->delete();
 
+        // return $delete();
+
         if ($data) {
             return response()->json([
                 'status_code' => 200,

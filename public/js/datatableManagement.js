@@ -425,7 +425,7 @@ $(function () {
                 width: "250px",
                 sClass: "text-center",
                 render: function (data) {
-                    return `<a role="button"  href="${host}/owner/retur-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/pesanan-pembelian/destroy/${data.id}','tb_pesanan_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
+                    return `<a role="button"  href="${host}/owner/retur-pembelian/edit/${data.id}" class="btn btn-warning mr-2" ><i class="fa fa-edit"></i> Edit</a><button class="btn btn-danger mr-2" onclick="delete_data('owner/retur-pembelian/destroy/${data.id}','tb_retur_pembelian')"><i class="fa fa-trash"></i> Hapus</button>`;
                 },
             },
         ],
